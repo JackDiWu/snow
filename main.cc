@@ -2,7 +2,7 @@
  * @Author: Jack
  * @Date: 2023-10-29 11:52:56
  * @LastEditors: Jack
- * @LastEditTime: 2023-10-29 23:33:25
+ * @LastEditTime: 2023-10-29 23:43:03
  */
 #include "defs.h"
 
@@ -11,7 +11,7 @@ extern "C" {
     #include "lex.yy.h"
 }
 
-std::string text = "I am storm";
+std::string text = "I am storm 123 0x232 0.15234";
 
 void test_lex() {
     yyscan_t scan;
@@ -25,24 +25,22 @@ void test_lex() {
     do {
         token = yylex(nullptr, scan);
 
-        switch (token) {
-            default: {
-                printf("----------- %d %s\n", token, yyget_text(scan));
-                break;
-            }
-        }
-    }  while (!token);
+        printf("----------- %d %s\n", token, yyget_text(scan));
+    }  while (token >= TOKEN_UNKNOW);
 
     yylex_destroy(scan);
 }
 
-int main(int argc, const char **argv) {
-    // test_lex();
-    
+void test_parse() {
     auto parser = yy_init();
     
     yy_scan(parser, text.data(), text.size());
 
     yy_destroy(parser);
+}
+
+int main(int argc, const char **argv) {
+    test_lex();
+    // test_parse();
     return 0;
 }
