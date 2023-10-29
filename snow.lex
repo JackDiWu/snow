@@ -1,6 +1,6 @@
 %{
 
-#include "parse.yy.h"
+#include "snow.yy.h"
 
 %}
 

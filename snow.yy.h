@@ -69,10 +69,9 @@ typedef int YYSTYPE;
 #endif
 
 
-extern YYSTYPE yylval;
 
 
-int yyparse (void);
+int yyparse (void *scan);
 
 
 #endif /* !YY_YY_SNOW_YY_H_INCLUDED  */

@@ -434,7 +434,7 @@ static const flex_int16_t yy_chk[16] =
 #line 1 "snow.lex"
 #line 2 "snow.lex"
 
-#include "parse.yy.h"
+#include "snow.yy.h"
 
 #line 439 "lex.yy.c"
 #line 440 "lex.yy.c"
