@@ -431,15 +431,13 @@ static const flex_int16_t yy_chk[16] =
 #define yymore() yymore_used_but_not_detected
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
-#line 1 "snow.lex"
-#line 2 "snow.lex"
+#line 1 "snow.l"
+#line 2 "snow.l"
 
 #include "snow.yy.h"
 
-int yylex (YYSTYPE*, void*);
-
-#line 441 "lex.yy.c"
-#line 442 "lex.yy.c"
+#line 439 "lex.yy.c"
+#line 440 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -713,10 +711,10 @@ YY_DECL
 		}
 
 	{
-#line 13 "snow.lex"
+#line 11 "snow.l"
 
 
-#line 719 "lex.yy.c"
+#line 717 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -775,29 +773,29 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 15 "snow.lex"
+#line 13 "snow.l"
 { return TOKEN_WORD; }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 17 "snow.lex"
+#line 15 "snow.l"
 {}
 	YY_BREAK
 case YY_STATE_EOF(INITIAL):
-#line 19 "snow.lex"
+#line 17 "snow.l"
 { return TOKEN_EOF; }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 21 "snow.lex"
+#line 19 "snow.l"
 { return TOKEN_UNKNOW; }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 23 "snow.lex"
+#line 21 "snow.l"
 ECHO;
 	YY_BREAK
-#line 800 "lex.yy.c"
+#line 798 "lex.yy.c"
 
 	case YY_END_OF_BUFFER:
 		{
@@ -1976,5 +1974,5 @@ void yyfree (void * ptr , yyscan_t yyscanner)
 
 #define YYTABLES_NAME "yytables"
 
-#line 23 "snow.lex"
+#line 21 "snow.l"
 

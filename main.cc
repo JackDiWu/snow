@@ -2,7 +2,7 @@
  * @Author: Jack
  * @Date: 2023-10-29 11:52:56
  * @LastEditors: Jack
- * @LastEditTime: 2023-10-29 12:29:24
+ * @LastEditTime: 2023-10-29 13:21:31
  */
 #include "defs.h"
 
@@ -15,14 +15,24 @@ int main(int argc, const char **argv) {
 
     yy_scan_bytes(text.data(), text.size(), scan);
 
-    int token;
+    bool stop = false;
 
-    do {
-        token = yylex(scan);
+    while (!stop) {
+        int token = yylex(nullptr, scan);
 
-        printf("----------- %d %s\n", token, yyget_text(scan));
-        
-    } while(token != 0 && token != 1);
+        switch (token) {
+            case TOKEN_EOF: {
+                stop = true;
+                printf("EOF\n");
+                break;
+            }
+            
+            default: {
+                printf("----------- %d %s\n", token, yyget_text(scan));
+                break;
+            }
+        }
+    }
 
     yylex_destroy(scan);
     return 0;
