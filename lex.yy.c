@@ -14,6 +14,18 @@
 #define FLEX_BETA
 #endif
 
+#ifdef yyget_lval
+#define yyget_lval_ALREADY_DEFINED
+#else
+#define yyget_lval yyget_lval
+#endif
+
+#ifdef yyset_lval
+#define yyset_lval_ALREADY_DEFINED
+#else
+#define yyset_lval yyset_lval
+#endif
+
 /* First, we deal with  platform-specific or compiler-specific issues. */
 
 /* begin standard C headers. */
@@ -422,11 +434,10 @@ static const flex_int16_t yy_chk[16] =
 #line 1 "snow.lex"
 #line 2 "snow.lex"
 
-#define TOKEN_UNKNOW             0
-#define TOKEN_WORD               1
+#include "parse.yy.h"
 
-#line 428 "lex.yy.c"
-#line 429 "lex.yy.c"
+#line 439 "lex.yy.c"
+#line 440 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -474,10 +485,16 @@ struct yyguts_t
     int yy_more_flag;
     int yy_more_len;
 
+    YYSTYPE * yylval_r;
+
     }; /* end struct yyguts_t */
 
 static int yy_init_globals ( yyscan_t yyscanner );
 
+    /* This must go here because YYSTYPE and YYLTYPE are included
+     * from bison output in section 1.*/
+    #    define yylval yyg->yylval_r
+    
 int yylex_init (yyscan_t* scanner);
 
 int yylex_init_extra ( YY_EXTRA_TYPE user_defined, yyscan_t* scanner);
@@ -514,6 +531,10 @@ void yyset_lineno ( int _line_number , yyscan_t yyscanner );
 int yyget_column  ( yyscan_t yyscanner );
 
 void yyset_column ( int _column_no , yyscan_t yyscanner );
+
+YYSTYPE * yyget_lval ( yyscan_t yyscanner );
+
+void yyset_lval ( YYSTYPE * yylval_param , yyscan_t yyscanner );
 
 /* Macros after this point can all be overridden by user definitions in
  * section 1.
@@ -630,9 +651,11 @@ static int input ( yyscan_t yyscanner );
 #ifndef YY_DECL
 #define YY_DECL_IS_OURS 1
 
-extern int yylex (yyscan_t yyscanner);
+extern int yylex \
+               (YYSTYPE * yylval_param , yyscan_t yyscanner);
 
-#define YY_DECL int yylex (yyscan_t yyscanner)
+#define YY_DECL int yylex \
+               (YYSTYPE * yylval_param , yyscan_t yyscanner)
 #endif /* !YY_DECL */
 
 /* Code executed at the beginning of each rule, after yytext and yyleng
@@ -658,6 +681,8 @@ YY_DECL
 	char *yy_cp, *yy_bp;
 	int yy_act;
     struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
+
+    yylval = yylval_param;
 
 	if ( !yyg->yy_init )
 		{
@@ -686,10 +711,10 @@ YY_DECL
 		}
 
 	{
-#line 12 "snow.lex"
+#line 11 "snow.lex"
 
 
-#line 692 "lex.yy.c"
+#line 717 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -748,27 +773,29 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 14 "snow.lex"
+#line 13 "snow.lex"
 { return TOKEN_WORD; }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 16 "snow.lex"
+#line 15 "snow.lex"
 {}
+	YY_BREAK
+case YY_STATE_EOF(INITIAL):
+#line 17 "snow.lex"
+{ return TOKEN_EOF; }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 18 "snow.lex"
+#line 19 "snow.lex"
 { return TOKEN_UNKNOW; }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 20 "snow.lex"
+#line 21 "snow.lex"
 ECHO;
 	YY_BREAK
-#line 769 "lex.yy.c"
-case YY_STATE_EOF(INITIAL):
-	yyterminate();
+#line 798 "lex.yy.c"
 
 	case YY_END_OF_BUFFER:
 		{
@@ -1754,6 +1781,18 @@ void yyset_debug (int  _bdebug , yyscan_t yyscanner)
 
 /* Accessor methods for yylval and yylloc */
 
+YYSTYPE * yyget_lval  (yyscan_t yyscanner)
+{
+    struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
+    return yylval;
+}
+
+void yyset_lval (YYSTYPE *  yylval_param , yyscan_t yyscanner)
+{
+    struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
+    yylval = yylval_param;
+}
+
 /* User-visible API */
 
 /* yylex_init is special because it creates the scanner itself, so it is
@@ -1935,5 +1974,5 @@ void yyfree (void * ptr , yyscan_t yyscanner)
 
 #define YYTABLES_NAME "yytables"
 
-#line 20 "snow.lex"
+#line 21 "snow.lex"
 
