@@ -1281,5 +1281,5 @@ yyreturnlab:
 
 
 void yyerror (void *parser, char const *s) {
-    printf ("[%s %d:%d] %s\n", s, yyget_lineno(LEX_PARAM), yyget_column(LEX_PARAM), yyget_text(LEX_PARAM));
+    printf ("[%d:%d] %s '%s'\n", yyget_lineno(LEX_PARAM), yyget_column(LEX_PARAM), s, yyget_text(LEX_PARAM));
 }
