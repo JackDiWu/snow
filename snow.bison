@@ -1,8 +1,6 @@
 %{
 
-#define YYPARSE_PARAM scan
-
-#define YYLEX_PARAM scan
+#include "snow.yy.h"
 
 #include "lex.yy.h"
 
@@ -10,9 +8,7 @@
 
 %defines
 
-%output "parse.yy.c"
-
-%parse-param {void *scan}
+%output "snow.yy.c"
 
 %token TOKEN_UNKNOW TOKEN_EOF TOKEN_WORD
 
