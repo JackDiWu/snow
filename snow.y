@@ -6,8 +6,9 @@
 
 #include "lex.yy.h"
 
-void yyerror (void *parser, char const *s);
+#define LEX_PARAM    ((yyparse_t)parser)->scanner
 
+void yyerror (void *parser, char const *s);
 %}
 
 %defines
@@ -34,3 +35,7 @@ TOKEN_WORD { printf("- %s\n", yyget_text(LEX_PARAM)); }
 ;
 
 %%
+
+void yyerror (void *parser, char const *s) {
+    printf ("[%s %d:%d] %s\n", s, yyget_lineno(LEX_PARAM), yyget_column(LEX_PARAM), yyget_text(LEX_PARAM));
+}

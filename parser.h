@@ -12,10 +12,6 @@ typedef struct _yyparse_t {
     
 } *yyparse_t;
 
-
-#define LEX_PARAM       ((yyparse_t)parser)->scanner
-
-
 yyparse_t yy_init(void) ;
 
 void yy_destroy(yyparse_t parser);
