@@ -71,7 +71,7 @@ typedef int YYSTYPE;
 
 
 
-int yyparse (void *scan);
+int yyparse (void);
 
 
 #endif /* !YY_YY_SNOW_YY_H_INCLUDED  */
