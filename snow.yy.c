@@ -1267,5 +1267,5 @@ yyreturnlab:
 
 
 void yyerror (void *scanner, char const *s) {
-    printf ("%s\n", s);
+    printf ("[%s] %s\n", s, yyget_text(scanner));
 }

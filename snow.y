@@ -14,7 +14,7 @@ void yyerror (void *scanner, char const *s);
 
 %define api.pure
 
-%lex-param {yyscan_t *scanner}
+%lex-param {yyscan_t scanner}
 
 %parse-param {void *scanner}
 
@@ -28,5 +28,5 @@ TOKEN_UNKNOW | TOKEN_EOF | TOKEN_WORD                       {$$ = $1;}
 %%
 
 void yyerror (void *scanner, char const *s) {
-    printf ("%s\n", s);
+    printf ("[%s] %s\n", s, yyget_text(scanner));
 }

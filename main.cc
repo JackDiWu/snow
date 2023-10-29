@@ -2,13 +2,13 @@
  * @Author: Jack
  * @Date: 2023-10-29 11:52:56
  * @LastEditors: Jack
- * @LastEditTime: 2023-10-29 13:24:35
+ * @LastEditTime: 2023-10-29 13:34:11
  */
 #include "defs.h"
 
 std::string text = "int i = 1;";
 
-int main(int argc, const char **argv) {
+void test_lex() {
     yyscan_t scan;
 
     yylex_init(&scan);
@@ -32,6 +32,19 @@ int main(int argc, const char **argv) {
             }
         }
     }  while (token != TOKEN_EOF);
+
+    yylex_destroy(scan);
+}
+
+int main(int argc, const char **argv) {
+    test_lex();
+    
+    yyscan_t scan;
+
+    yylex_init(&scan);
+    yy_scan_bytes(text.data(), text.size(), scan);
+
+    yyparse(scan);
 
     yylex_destroy(scan);
     return 0;
