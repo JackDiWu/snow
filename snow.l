@@ -10,6 +10,8 @@
 
 #define lex_next_column()          yyset_column(yyget_column(yyscanner) + 1, yyscanner)
 
+#define lex_return(t)              return t
+
 %}
 
 %option reentrant noyywrap bison-bridge
@@ -18,12 +20,12 @@
 
 %%
 
-[_a-zA-Z][_a-zA-Z0-9]*       { lex_next_column(); return TOKEN_WORD; }
+[_a-zA-Z][_a-zA-Z0-9]*       { lex_next_column(); lex_return(TOKEN_WORD); }
 
 (\ |\t)                      {}
 
 (\r\n|\n)                    { lex_next_lineno(); lex_set_column(0); }
 
-.                            { return TOKEN_UNKNOW; }
+.                            { lex_return(TOKEN_UNKNOW); }
 
 %%

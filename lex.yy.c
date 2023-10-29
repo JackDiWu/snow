@@ -447,8 +447,10 @@ static const flex_int16_t yy_chk[19] =
 
 #define lex_next_column()          yyset_column(yyget_column(yyscanner) + 1, yyscanner)
 
-#line 450 "lex.yy.c"
-#line 451 "lex.yy.c"
+#define lex_return(t)              return t
+
+#line 452 "lex.yy.c"
+#line 453 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -722,10 +724,10 @@ YY_DECL
 		}
 
 	{
-#line 19 "snow.l"
+#line 21 "snow.l"
 
 
-#line 728 "lex.yy.c"
+#line 730 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -784,31 +786,31 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 21 "snow.l"
-{ lex_next_column(); return TOKEN_WORD; }
+#line 23 "snow.l"
+{ lex_next_column(); lex_return(TOKEN_WORD); }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 23 "snow.l"
+#line 25 "snow.l"
 {}
 	YY_BREAK
 case 3:
 /* rule 3 can match eol */
 YY_RULE_SETUP
-#line 25 "snow.l"
+#line 27 "snow.l"
 { lex_next_lineno(); lex_set_column(0); }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 27 "snow.l"
-{ return TOKEN_UNKNOW; }
+#line 29 "snow.l"
+{ lex_return(TOKEN_UNKNOW); }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 29 "snow.l"
+#line 31 "snow.l"
 ECHO;
 	YY_BREAK
-#line 811 "lex.yy.c"
+#line 813 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1989,5 +1991,5 @@ void yyfree (void * ptr , yyscan_t yyscanner)
 
 #define YYTABLES_NAME "yytables"
 
-#line 29 "snow.l"
+#line 31 "snow.l"
 
