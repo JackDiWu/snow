@@ -1,6 +1,6 @@
 %{
 
-#include "defs.h"
+#include "token.h"
 
 %}
 
