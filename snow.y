@@ -23,7 +23,7 @@ void yyerror (void *parser, char const *s);
 
 %parse-param {void *parser}
 
-%token TOKEN_UNKNOW TOKEN_WORD TOKEN_DEC TOKEN_HEX TOKEN_FLOAT
+%token TOKEN_UNKNOW TOKEN_WORD TOKEN_STRING TOKEN_DEC TOKEN_HEX TOKEN_FLOAT
 
 %%
 

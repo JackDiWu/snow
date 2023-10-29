@@ -2,7 +2,7 @@
  * @Author: Jack
  * @Date: 2023-10-29 11:52:56
  * @LastEditors: Jack
- * @LastEditTime: 2023-10-29 23:43:03
+ * @LastEditTime: 2023-10-29 23:49:07
  */
 #include "defs.h"
 
@@ -11,7 +11,7 @@ extern "C" {
     #include "lex.yy.h"
 }
 
-std::string text = "I am storm 123 0x232 0.15234";
+std::string text = "I am storm 123 0x232 0.15234 \"fjdksl1\\\"\\\"232k;;fkdsl;\"";
 
 void test_lexer() {
     yyscan_t scan;

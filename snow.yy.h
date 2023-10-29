@@ -56,9 +56,10 @@ extern int yydebug;
     YYUNDEF = 257,                 /* "invalid token"  */
     TOKEN_UNKNOW = 258,            /* TOKEN_UNKNOW  */
     TOKEN_WORD = 259,              /* TOKEN_WORD  */
-    TOKEN_DEC = 260,               /* TOKEN_DEC  */
-    TOKEN_HEX = 261,               /* TOKEN_HEX  */
-    TOKEN_FLOAT = 262              /* TOKEN_FLOAT  */
+    TOKEN_STRING = 260,            /* TOKEN_STRING  */
+    TOKEN_DEC = 261,               /* TOKEN_DEC  */
+    TOKEN_HEX = 262,               /* TOKEN_HEX  */
+    TOKEN_FLOAT = 263              /* TOKEN_FLOAT  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif

@@ -28,6 +28,8 @@
 
 [0-9]+\.[0-9]+               { lex_next_column(); lex_return(TOKEN_FLOAT); }
 
+\".*\"                       { lex_next_column(); lex_return(TOKEN_STRING); }
+
 (\ |\t)                      {}
 
 (\r\n|\n)                    { lex_next_lineno(); lex_set_column(0); }
