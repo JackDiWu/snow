@@ -14,7 +14,7 @@ void yyerror (void *scanner, char const *s);
 
 %define api.pure
 
-%lex-param {void *scanner}
+%lex-param {yyscan_t *scanner}
 
 %parse-param {void *scanner}
 
