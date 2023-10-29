@@ -443,9 +443,9 @@ static const flex_int16_t yy_chk[19] =
 
 #define lex_set_column(n)          yyset_column(n, yyscanner)
 
-#define lex_step_lineno()          yyset_lineno(yyget_lineno(yyscanner) + 1, yyscanner)
+#define lex_next_lineno()          yyset_lineno(yyget_lineno(yyscanner) + 1, yyscanner)
 
-#define lex_step_column()          yyset_column(yyget_column(yyscanner) + 1, yyscanner)
+#define lex_next_column()          yyset_column(yyget_column(yyscanner) + 1, yyscanner)
 
 #line 450 "lex.yy.c"
 #line 451 "lex.yy.c"
@@ -785,7 +785,7 @@ do_action:	/* This label is used only to access EOF actions. */
 case 1:
 YY_RULE_SETUP
 #line 21 "snow.l"
-{ lex_step_column(); return TOKEN_WORD; }
+{ lex_next_column(); return TOKEN_WORD; }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
@@ -796,7 +796,7 @@ case 3:
 /* rule 3 can match eol */
 YY_RULE_SETUP
 #line 25 "snow.l"
-{ lex_set_column(0); lex_step_lineno(); }
+{ lex_next_lineno(); lex_set_column(0); }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP

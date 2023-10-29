@@ -6,9 +6,9 @@
 
 #define lex_set_column(n)          yyset_column(n, yyscanner)
 
-#define lex_step_lineno()          yyset_lineno(yyget_lineno(yyscanner) + 1, yyscanner)
+#define lex_next_lineno()          yyset_lineno(yyget_lineno(yyscanner) + 1, yyscanner)
 
-#define lex_step_column()          yyset_column(yyget_column(yyscanner) + 1, yyscanner)
+#define lex_next_column()          yyset_column(yyget_column(yyscanner) + 1, yyscanner)
 
 %}
 
@@ -18,11 +18,11 @@
 
 %%
 
-[_a-zA-Z][_a-zA-Z0-9]*       { lex_step_column(); return TOKEN_WORD; }
+[_a-zA-Z][_a-zA-Z0-9]*       { lex_next_column(); return TOKEN_WORD; }
 
 (\ |\t)                      {}
 
-(\r\n|\n)                    { lex_set_column(0); lex_step_lineno(); }
+(\r\n|\n)                    { lex_next_lineno(); lex_set_column(0); }
 
 .                            { return TOKEN_UNKNOW; }
 
