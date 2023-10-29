@@ -14,7 +14,7 @@
 
 (\ |\t)                      {}
 
-<<EOF>>		                 { return TOKEN_EOF; }
+(\r\n|\n)                    { yyset_column(0, yyscanner); yyset_lineno(yyget_lineno(yyscanner) + 1, yyscanner); }
 
 .                            { return TOKEN_UNKNOW; }
 

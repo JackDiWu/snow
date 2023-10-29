@@ -2,18 +2,18 @@
  * @Author: Jack
  * @Date: 2023-10-29 11:52:56
  * @LastEditors: Jack
- * @LastEditTime: 2023-10-29 13:34:11
+ * @LastEditTime: 2023-10-29 14:15:33
  */
 #include "defs.h"
 
-std::string text = "int i = 1;";
+std::string text = "I am storm";
 
 void test_lex() {
     yyscan_t scan;
 
     yylex_init(&scan);
-
     yy_scan_bytes(text.data(), text.size(), scan);
+    yyset_lineno(1, scan);
 
     int token;
 
@@ -21,28 +21,26 @@ void test_lex() {
         token = yylex(nullptr, scan);
 
         switch (token) {
-            case TOKEN_EOF: {
-                printf("EOF\n");
-                break;
-            }
-            
             default: {
                 printf("----------- %d %s\n", token, yyget_text(scan));
                 break;
             }
         }
-    }  while (token != TOKEN_EOF);
+    }  while (!token);
 
     yylex_destroy(scan);
 }
 
 int main(int argc, const char **argv) {
-    test_lex();
+    // test_lex();
     
     yyscan_t scan;
 
     yylex_init(&scan);
     yy_scan_bytes(text.data(), text.size(), scan);
+
+    yyset_lineno(1, scan);
+    yyset_column(1, scan);
 
     yyparse(scan);
 

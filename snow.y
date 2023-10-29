@@ -18,15 +18,21 @@ void yyerror (void *scanner, char const *s);
 
 %parse-param {void *scanner}
 
-%token TOKEN_UNKNOW TOKEN_EOF TOKEN_WORD
+%token TOKEN_UNKNOW TOKEN_WORD
 
 %%
 
-primary:
-TOKEN_UNKNOW | TOKEN_EOF | TOKEN_WORD                       {$$ = $1;}
+word_list:
+word {}
+| word_list word {}
+;
+
+word:
+TOKEN_WORD { printf("- %s\n", yyget_text(scanner)); }
+;
 
 %%
 
 void yyerror (void *scanner, char const *s) {
-    printf ("[%s] %s\n", s, yyget_text(scanner));
+    printf ("[%s %d:%d] %s\n", s, yyget_lineno(scanner), yyget_column(scanner), yyget_text(scanner));
 }
