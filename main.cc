@@ -2,9 +2,14 @@
  * @Author: Jack
  * @Date: 2023-10-29 11:52:56
  * @LastEditors: Jack
- * @LastEditTime: 2023-10-29 14:15:33
+ * @LastEditTime: 2023-10-29 14:59:36
  */
 #include "defs.h"
+
+extern "C" {
+    #include "snow.yy.h"
+    #include "lex.yy.h"
+}
 
 std::string text = "I am storm";
 
@@ -34,16 +39,10 @@ void test_lex() {
 int main(int argc, const char **argv) {
     // test_lex();
     
-    yyscan_t scan;
+    auto parser = yy_init();
+    
+    yy_scan(parser, text.data(), text.size());
 
-    yylex_init(&scan);
-    yy_scan_bytes(text.data(), text.size(), scan);
-
-    yyset_lineno(1, scan);
-    yyset_column(1, scan);
-
-    yyparse(scan);
-
-    yylex_destroy(scan);
+    yy_destroy(parser);
     return 0;
 }
