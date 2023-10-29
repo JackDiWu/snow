@@ -2,6 +2,14 @@
 
 #include "snow.yy.h"
 
+#define lex_set_lineno(n)          yyset_lineno(n, yyscanner)
+
+#define lex_set_column(n)          yyset_column(n, yyscanner)
+
+#define lex_step_lineno()          yyset_lineno(yyget_lineno(yyscanner) + 1, yyscanner)
+
+#define lex_step_column()          yyset_column(yyget_column(yyscanner) + 1, yyscanner)
+
 %}
 
 %option reentrant noyywrap bison-bridge
@@ -10,11 +18,11 @@
 
 %%
 
-[_a-zA-Z][_a-zA-Z0-9]*       { return TOKEN_WORD; }
+[_a-zA-Z][_a-zA-Z0-9]*       { lex_step_column(); return TOKEN_WORD; }
 
 (\ |\t)                      {}
 
-(\r\n|\n)                    { yyset_column(0, yyscanner); yyset_lineno(yyget_lineno(yyscanner) + 1, yyscanner); }
+(\r\n|\n)                    { lex_set_column(0); lex_step_lineno(); }
 
 .                            { return TOKEN_UNKNOW; }
 

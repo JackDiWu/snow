@@ -439,8 +439,16 @@ static const flex_int16_t yy_chk[19] =
 
 #include "snow.yy.h"
 
-#line 442 "lex.yy.c"
-#line 443 "lex.yy.c"
+#define lex_set_lineno(n)          yyset_lineno(n, yyscanner)
+
+#define lex_set_column(n)          yyset_column(n, yyscanner)
+
+#define lex_step_lineno()          yyset_lineno(yyget_lineno(yyscanner) + 1, yyscanner)
+
+#define lex_step_column()          yyset_column(yyget_column(yyscanner) + 1, yyscanner)
+
+#line 450 "lex.yy.c"
+#line 451 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -714,10 +722,10 @@ YY_DECL
 		}
 
 	{
-#line 11 "snow.l"
+#line 19 "snow.l"
 
 
-#line 720 "lex.yy.c"
+#line 728 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -776,31 +784,31 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 13 "snow.l"
-{ return TOKEN_WORD; }
+#line 21 "snow.l"
+{ lex_step_column(); return TOKEN_WORD; }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 15 "snow.l"
+#line 23 "snow.l"
 {}
 	YY_BREAK
 case 3:
 /* rule 3 can match eol */
 YY_RULE_SETUP
-#line 17 "snow.l"
-{ yyset_column(0, yyscanner); yyset_lineno(yyget_lineno(yyscanner) + 1, yyscanner); }
+#line 25 "snow.l"
+{ lex_set_column(0); lex_step_lineno(); }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 19 "snow.l"
+#line 27 "snow.l"
 { return TOKEN_UNKNOW; }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 21 "snow.l"
+#line 29 "snow.l"
 ECHO;
 	YY_BREAK
-#line 803 "lex.yy.c"
+#line 811 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1981,5 +1989,5 @@ void yyfree (void * ptr , yyscan_t yyscanner)
 
 #define YYTABLES_NAME "yytables"
 
-#line 21 "snow.l"
+#line 29 "snow.l"
 
