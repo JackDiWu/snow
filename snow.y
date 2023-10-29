@@ -8,6 +8,8 @@
 
 #define LEX_PARAM    ((yyparse_t)parser)->scanner
 
+#define LEX_PRINT()  printf("[lex] %s\n", yyget_text(LEX_PARAM))
+
 void yyerror (void *parser, char const *s);
 %}
 
@@ -31,7 +33,7 @@ word {}
 ;
 
 word:
-TOKEN_WORD { printf("- %s\n", yyget_text(LEX_PARAM)); }
+TOKEN_WORD { LEX_PRINT(); }
 ;
 
 %%
