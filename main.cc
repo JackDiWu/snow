@@ -13,7 +13,7 @@ extern "C" {
 
 std::string text = "I am storm 123 0x232 0.15234";
 
-void test_lex() {
+void test_lexer() {
     yyscan_t scan;
 
     yylex_init(&scan);
@@ -31,7 +31,7 @@ void test_lex() {
     yylex_destroy(scan);
 }
 
-void test_parse() {
+void test_parser() {
     auto parser = yy_init();
     
     yy_scan(parser, text.data(), text.size());
@@ -40,7 +40,7 @@ void test_parse() {
 }
 
 int main(int argc, const char **argv) {
-    test_lex();
-    // test_parse();
+    test_lexer();
+    // test_parser();
     return 0;
 }
