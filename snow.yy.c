@@ -70,14 +70,16 @@
 #line 1 "snow.y"
 
 
+#include "parser.h"
+
 #include "snow.yy.h"
 
 #include "lex.yy.h"
 
-void yyerror (void *scanner, char const *s);
+void yyerror (void *parser, char const *s);
 
 
-#line 81 "snow.yy.c"
+#line 83 "snow.yy.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -498,7 +500,7 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    26,    26,    27,    31
+       0,    28,    28,    29,    33
 };
 #endif
 
@@ -620,7 +622,7 @@ enum { YYENOMEM = -2 };
       }                                                           \
     else                                                          \
       {                                                           \
-        yyerror (scanner, YY_("syntax error: cannot back up")); \
+        yyerror (parser, YY_("syntax error: cannot back up")); \
         YYERROR;                                                  \
       }                                                           \
   while (0)
@@ -653,7 +655,7 @@ do {                                                                      \
     {                                                                     \
       YYFPRINTF (stderr, "%s ", Title);                                   \
       yy_symbol_print (stderr,                                            \
-                  Kind, Value, scanner); \
+                  Kind, Value, parser); \
       YYFPRINTF (stderr, "\n");                                           \
     }                                                                     \
 } while (0)
@@ -665,11 +667,11 @@ do {                                                                      \
 
 static void
 yy_symbol_value_print (FILE *yyo,
-                       yysymbol_kind_t yykind, YYSTYPE const * const yyvaluep, void *scanner)
+                       yysymbol_kind_t yykind, YYSTYPE const * const yyvaluep, void *parser)
 {
   FILE *yyoutput = yyo;
   YY_USE (yyoutput);
-  YY_USE (scanner);
+  YY_USE (parser);
   if (!yyvaluep)
     return;
   YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN
@@ -684,12 +686,12 @@ yy_symbol_value_print (FILE *yyo,
 
 static void
 yy_symbol_print (FILE *yyo,
-                 yysymbol_kind_t yykind, YYSTYPE const * const yyvaluep, void *scanner)
+                 yysymbol_kind_t yykind, YYSTYPE const * const yyvaluep, void *parser)
 {
   YYFPRINTF (yyo, "%s %s (",
              yykind < YYNTOKENS ? "token" : "nterm", yysymbol_name (yykind));
 
-  yy_symbol_value_print (yyo, yykind, yyvaluep, scanner);
+  yy_symbol_value_print (yyo, yykind, yyvaluep, parser);
   YYFPRINTF (yyo, ")");
 }
 
@@ -723,7 +725,7 @@ do {                                                            \
 
 static void
 yy_reduce_print (yy_state_t *yyssp, YYSTYPE *yyvsp,
-                 int yyrule, void *scanner)
+                 int yyrule, void *parser)
 {
   int yylno = yyrline[yyrule];
   int yynrhs = yyr2[yyrule];
@@ -736,7 +738,7 @@ yy_reduce_print (yy_state_t *yyssp, YYSTYPE *yyvsp,
       YYFPRINTF (stderr, "   $%d = ", yyi + 1);
       yy_symbol_print (stderr,
                        YY_ACCESSING_SYMBOL (+yyssp[yyi + 1 - yynrhs]),
-                       &yyvsp[(yyi + 1) - (yynrhs)], scanner);
+                       &yyvsp[(yyi + 1) - (yynrhs)], parser);
       YYFPRINTF (stderr, "\n");
     }
 }
@@ -744,7 +746,7 @@ yy_reduce_print (yy_state_t *yyssp, YYSTYPE *yyvsp,
 # define YY_REDUCE_PRINT(Rule)          \
 do {                                    \
   if (yydebug)                          \
-    yy_reduce_print (yyssp, yyvsp, Rule, scanner); \
+    yy_reduce_print (yyssp, yyvsp, Rule, parser); \
 } while (0)
 
 /* Nonzero means print parse trace.  It is left uninitialized so that
@@ -785,10 +787,10 @@ int yydebug;
 
 static void
 yydestruct (const char *yymsg,
-            yysymbol_kind_t yykind, YYSTYPE *yyvaluep, void *scanner)
+            yysymbol_kind_t yykind, YYSTYPE *yyvaluep, void *parser)
 {
   YY_USE (yyvaluep);
-  YY_USE (scanner);
+  YY_USE (parser);
   if (!yymsg)
     yymsg = "Deleting";
   YY_SYMBOL_PRINT (yymsg, yykind, yyvaluep, yylocationp);
@@ -808,7 +810,7 @@ yydestruct (const char *yymsg,
 `----------*/
 
 int
-yyparse (void *scanner)
+yyparse (void *parser)
 {
 /* Lookahead token kind.  */
 int yychar;
@@ -975,7 +977,7 @@ yybackup:
   if (yychar == YYEMPTY)
     {
       YYDPRINTF ((stderr, "Reading a token\n"));
-      yychar = yylex (&yylval, scanner);
+      yychar = yylex (&yylval, LEX_PARAM);
     }
 
   if (yychar <= YYEOF)
@@ -1063,25 +1065,25 @@ yyreduce:
   switch (yyn)
     {
   case 2: /* word_list: word  */
-#line 26 "snow.y"
+#line 28 "snow.y"
      {}
-#line 1069 "snow.yy.c"
+#line 1071 "snow.yy.c"
     break;
 
   case 3: /* word_list: word_list word  */
-#line 27 "snow.y"
+#line 29 "snow.y"
                  {}
-#line 1075 "snow.yy.c"
+#line 1077 "snow.yy.c"
     break;
 
   case 4: /* word: TOKEN_WORD  */
-#line 31 "snow.y"
-           { printf("- %s\n", yyget_text(scanner)); }
-#line 1081 "snow.yy.c"
+#line 33 "snow.y"
+           { printf("- %s\n", yyget_text(LEX_PARAM)); }
+#line 1083 "snow.yy.c"
     break;
 
 
-#line 1085 "snow.yy.c"
+#line 1087 "snow.yy.c"
 
       default: break;
     }
@@ -1128,7 +1130,7 @@ yyerrlab:
   if (!yyerrstatus)
     {
       ++yynerrs;
-      yyerror (scanner, YY_("syntax error"));
+      yyerror (parser, YY_("syntax error"));
     }
 
   if (yyerrstatus == 3)
@@ -1145,7 +1147,7 @@ yyerrlab:
       else
         {
           yydestruct ("Error: discarding",
-                      yytoken, &yylval, scanner);
+                      yytoken, &yylval, parser);
           yychar = YYEMPTY;
         }
     }
@@ -1201,7 +1203,7 @@ yyerrlab1:
 
 
       yydestruct ("Error: popping",
-                  YY_ACCESSING_SYMBOL (yystate), yyvsp, scanner);
+                  YY_ACCESSING_SYMBOL (yystate), yyvsp, parser);
       YYPOPSTACK (1);
       yystate = *yyssp;
       YY_STACK_PRINT (yyss, yyssp);
@@ -1239,7 +1241,7 @@ yyabortlab:
 | yyexhaustedlab -- YYNOMEM (memory exhaustion) comes here.  |
 `-----------------------------------------------------------*/
 yyexhaustedlab:
-  yyerror (scanner, YY_("memory exhausted"));
+  yyerror (parser, YY_("memory exhausted"));
   yyresult = 2;
   goto yyreturnlab;
 
@@ -1254,7 +1256,7 @@ yyreturnlab:
          user semantic actions for why this is necessary.  */
       yytoken = YYTRANSLATE (yychar);
       yydestruct ("Cleanup: discarding lookahead",
-                  yytoken, &yylval, scanner);
+                  yytoken, &yylval, parser);
     }
   /* Do not reclaim the symbols of the rule whose action triggered
      this YYABORT or YYACCEPT.  */
@@ -1263,7 +1265,7 @@ yyreturnlab:
   while (yyssp != yyss)
     {
       yydestruct ("Cleanup: popping",
-                  YY_ACCESSING_SYMBOL (+*yyssp), yyvsp, scanner);
+                  YY_ACCESSING_SYMBOL (+*yyssp), yyvsp, parser);
       YYPOPSTACK (1);
     }
 #ifndef yyoverflow
@@ -1274,9 +1276,5 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 34 "snow.y"
+#line 36 "snow.y"
 
-
-void yyerror (void *scanner, char const *s) {
-    printf ("[%s %d:%d] %s\n", s, yyget_lineno(scanner), yyget_column(scanner), yyget_text(scanner));
-}

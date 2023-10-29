@@ -70,7 +70,7 @@ typedef int YYSTYPE;
 
 
 
-int yyparse (void *scanner);
+int yyparse (void *parser);
 
 
 #endif /* !YY_YY_SNOW_YY_H_INCLUDED  */

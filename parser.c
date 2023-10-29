@@ -26,5 +26,9 @@ int yy_scan(yyparse_t parser, const char *data, int size) {
     yyset_lineno(1, parser->scanner);
     yyset_column(1, parser->scanner);
 
-    return yyparse(parser->scanner);
+    return yyparse(parser);
+}
+
+void yyerror (void *parser, char const *s) {
+    printf ("[%s %d:%d] %s\n", s, yyget_lineno(LEX_PARAM), yyget_column(LEX_PARAM), yyget_text(LEX_PARAM));
 }

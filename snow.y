@@ -1,10 +1,12 @@
 %{
 
+#include "parser.h"
+
 #include "snow.yy.h"
 
 #include "lex.yy.h"
 
-void yyerror (void *scanner, char const *s);
+void yyerror (void *parser, char const *s);
 
 %}
 
@@ -14,9 +16,9 @@ void yyerror (void *scanner, char const *s);
 
 %define api.pure
 
-%lex-param {yyscan_t scanner}
+%lex-param {LEX_PARAM}
 
-%parse-param {void *scanner}
+%parse-param {void *parser}
 
 %token TOKEN_UNKNOW TOKEN_WORD
 
@@ -28,11 +30,7 @@ word {}
 ;
 
 word:
-TOKEN_WORD { printf("- %s\n", yyget_text(scanner)); }
+TOKEN_WORD { printf("- %s\n", yyget_text(LEX_PARAM)); }
 ;
 
 %%
-
-void yyerror (void *scanner, char const *s) {
-    printf ("[%s %d:%d] %s\n", s, yyget_lineno(scanner), yyget_column(scanner), yyget_text(scanner));
-}

@@ -2,7 +2,7 @@
  * @Author: Jack
  * @Date: 2023-10-29 14:22:23
  * @LastEditors: Jack
- * @LastEditTime: 2023-10-29 14:58:45
+ * @LastEditTime: 2023-10-29 23:10:09
  */
 #ifndef _SNOW_PARSER_H_
 #define _SNOW_PARSER_H_
@@ -11,6 +11,10 @@ typedef struct _yyparse_t {
     void *scanner;
     
 } *yyparse_t;
+
+
+#define LEX_PARAM       ((yyparse_t)parser)->scanner
+
 
 yyparse_t yy_init(void) ;
 
