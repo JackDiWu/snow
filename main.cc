@@ -2,7 +2,7 @@
  * @Author: Jack
  * @Date: 2023-10-29 11:52:56
  * @LastEditors: Jack
- * @LastEditTime: 2023-10-30 10:42:01
+ * @LastEditTime: 2023-10-30 11:10:37
  */
 #include "defs.h"
 
@@ -34,11 +34,11 @@ void test_lexer() {
 }
 
 void test_parser() {
-    auto parser = yy_init();
+    auto parser = yy_new();
     
     yy_scan(parser, text.data(), text.size());
 
-    yy_destroy(parser);
+    yy_close(parser);
 }
 
 int main(int argc, const char **argv) {
