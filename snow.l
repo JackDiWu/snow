@@ -4,11 +4,11 @@
 
 #define lex_set_line(n)            yyset_lineno(n, yyscanner)
 
-#define lex_set_token(n)            yyset_column(n, yyscanner)
+#define lex_set_token(n)           yyset_column(n, yyscanner)
 
 #define lex_next_line()            yyset_lineno(yyget_lineno(yyscanner) + 1, yyscanner)
 
-#define lex_next_token()            yyset_column(yyget_column(yyscanner) + 1, yyscanner)
+#define lex_next_token()           yyset_column(yyget_column(yyscanner) + 1, yyscanner)
 
 #define lex_return(t)              return t
 
@@ -83,6 +83,8 @@
 \:                           { lex_next_token(); lex_return(TOKEN_COLON); }
 
 \;                           { lex_next_token(); lex_return(TOKEN_SEMICOLON); }
+
+\\                           { lex_next_token(); lex_return(TOKEN_BACKSLASH); }
 
 \&\&                         { lex_next_token(); lex_return(TOKEN_DOUBLE_AND); }
 

@@ -124,33 +124,34 @@ enum yysymbol_kind_t
   YYSYMBOL_TOKEN_SUB = 11,                 /* TOKEN_SUB  */
   YYSYMBOL_TOKEN_TIMES = 12,               /* TOKEN_TIMES  */
   YYSYMBOL_TOKEN_DIVIDE = 13,              /* TOKEN_DIVIDE  */
-  YYSYMBOL_TOKEN_POINT = 14,               /* TOKEN_POINT  */
-  YYSYMBOL_TOKEN_LP = 15,                  /* TOKEN_LP  */
-  YYSYMBOL_TOKEN_RP = 16,                  /* TOKEN_RP  */
-  YYSYMBOL_TOKEN_LS = 17,                  /* TOKEN_LS  */
-  YYSYMBOL_TOKEN_RS = 18,                  /* TOKEN_RS  */
-  YYSYMBOL_TOKEN_LC = 19,                  /* TOKEN_LC  */
-  YYSYMBOL_TOKEN_RC = 20,                  /* TOKEN_RC  */
-  YYSYMBOL_TOKEN_LA = 21,                  /* TOKEN_LA  */
-  YYSYMBOL_TOKEN_RA = 22,                  /* TOKEN_RA  */
-  YYSYMBOL_TOKEN_DOUBLE_AND = 23,          /* TOKEN_DOUBLE_AND  */
-  YYSYMBOL_TOKEN_DOUBLE_OR = 24,           /* TOKEN_DOUBLE_OR  */
-  YYSYMBOL_TOKEN_DOUBLE_LA = 25,           /* TOKEN_DOUBLE_LA  */
-  YYSYMBOL_TOKEN_DOUBLE_RA = 26,           /* TOKEN_DOUBLE_RA  */
-  YYSYMBOL_TOKEN_AND = 27,                 /* TOKEN_AND  */
-  YYSYMBOL_TOKEN_OR = 28,                  /* TOKEN_OR  */
+  YYSYMBOL_TOKEN_LP = 14,                  /* TOKEN_LP  */
+  YYSYMBOL_TOKEN_RP = 15,                  /* TOKEN_RP  */
+  YYSYMBOL_TOKEN_LS = 16,                  /* TOKEN_LS  */
+  YYSYMBOL_TOKEN_RS = 17,                  /* TOKEN_RS  */
+  YYSYMBOL_TOKEN_LC = 18,                  /* TOKEN_LC  */
+  YYSYMBOL_TOKEN_RC = 19,                  /* TOKEN_RC  */
+  YYSYMBOL_TOKEN_LA = 20,                  /* TOKEN_LA  */
+  YYSYMBOL_TOKEN_RA = 21,                  /* TOKEN_RA  */
+  YYSYMBOL_TOKEN_DOUBLE_AND = 22,          /* TOKEN_DOUBLE_AND  */
+  YYSYMBOL_TOKEN_DOUBLE_OR = 23,           /* TOKEN_DOUBLE_OR  */
+  YYSYMBOL_TOKEN_DOUBLE_LA = 24,           /* TOKEN_DOUBLE_LA  */
+  YYSYMBOL_TOKEN_DOUBLE_RA = 25,           /* TOKEN_DOUBLE_RA  */
+  YYSYMBOL_TOKEN_AND = 26,                 /* TOKEN_AND  */
+  YYSYMBOL_TOKEN_OR = 27,                  /* TOKEN_OR  */
+  YYSYMBOL_TOKEN_POINT = 28,               /* TOKEN_POINT  */
   YYSYMBOL_TOKEN_BROKEN_ISSUE = 29,        /* TOKEN_BROKEN_ISSUE  */
-  YYSYMBOL_TOKEN_AT = 30,                  /* TOKEN_AT  */
-  YYSYMBOL_TOKEN_EXCLAMATION = 31,         /* TOKEN_EXCLAMATION  */
+  YYSYMBOL_TOKEN_EXCLAMATION = 30,         /* TOKEN_EXCLAMATION  */
+  YYSYMBOL_TOKEN_AT = 31,                  /* TOKEN_AT  */
   YYSYMBOL_TOKEN_HASHTAG = 32,             /* TOKEN_HASHTAG  */
   YYSYMBOL_TOKEN_DOLLAR = 33,              /* TOKEN_DOLLAR  */
   YYSYMBOL_TOKEN_PERCENT = 34,             /* TOKEN_PERCENT  */
   YYSYMBOL_TOKEN_START = 35,               /* TOKEN_START  */
   YYSYMBOL_TOKEN_COLON = 36,               /* TOKEN_COLON  */
   YYSYMBOL_TOKEN_SEMICOLON = 37,           /* TOKEN_SEMICOLON  */
-  YYSYMBOL_YYACCEPT = 38,                  /* $accept  */
-  YYSYMBOL_word_list = 39,                 /* word_list  */
-  YYSYMBOL_word = 40                       /* word  */
+  YYSYMBOL_TOKEN_BACKSLASH = 38,           /* TOKEN_BACKSLASH  */
+  YYSYMBOL_YYACCEPT = 39,                  /* $accept  */
+  YYSYMBOL_word_list = 40,                 /* word_list  */
+  YYSYMBOL_word = 41                       /* word  */
 };
 typedef enum yysymbol_kind_t yysymbol_kind_t;
 
@@ -481,7 +482,7 @@ union yyalloc
 #define YYLAST   4
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  38
+#define YYNTOKENS  39
 /* YYNNTS -- Number of nonterminals.  */
 #define YYNNTS  3
 /* YYNRULES -- Number of rules.  */
@@ -490,7 +491,7 @@ union yyalloc
 #define YYNSTATES  6
 
 /* YYMAXUTOK -- Last valid token kind.  */
-#define YYMAXUTOK   292
+#define YYMAXUTOK   293
 
 
 /* YYTRANSLATE(TOKEN-NUM) -- Symbol number corresponding to TOKEN-NUM
@@ -533,7 +534,7 @@ static const yytype_int8 yytranslate[] =
        5,     6,     7,     8,     9,    10,    11,    12,    13,    14,
       15,    16,    17,    18,    19,    20,    21,    22,    23,    24,
       25,    26,    27,    28,    29,    30,    31,    32,    33,    34,
-      35,    36,    37
+      35,    36,    37,    38
 };
 
 #if YYDEBUG
@@ -559,12 +560,13 @@ static const char *const yytname[] =
   "\"end of file\"", "error", "\"invalid token\"", "TOKEN_UNKNOW",
   "TOKEN_WORD", "TOKEN_STRING", "TOKEN_DEC", "TOKEN_HEX", "TOKEN_FLOAT",
   "TOKEN_EQUAL", "TOKEN_PLUS", "TOKEN_SUB", "TOKEN_TIMES", "TOKEN_DIVIDE",
-  "TOKEN_POINT", "TOKEN_LP", "TOKEN_RP", "TOKEN_LS", "TOKEN_RS",
-  "TOKEN_LC", "TOKEN_RC", "TOKEN_LA", "TOKEN_RA", "TOKEN_DOUBLE_AND",
-  "TOKEN_DOUBLE_OR", "TOKEN_DOUBLE_LA", "TOKEN_DOUBLE_RA", "TOKEN_AND",
-  "TOKEN_OR", "TOKEN_BROKEN_ISSUE", "TOKEN_AT", "TOKEN_EXCLAMATION",
+  "TOKEN_LP", "TOKEN_RP", "TOKEN_LS", "TOKEN_RS", "TOKEN_LC", "TOKEN_RC",
+  "TOKEN_LA", "TOKEN_RA", "TOKEN_DOUBLE_AND", "TOKEN_DOUBLE_OR",
+  "TOKEN_DOUBLE_LA", "TOKEN_DOUBLE_RA", "TOKEN_AND", "TOKEN_OR",
+  "TOKEN_POINT", "TOKEN_BROKEN_ISSUE", "TOKEN_EXCLAMATION", "TOKEN_AT",
   "TOKEN_HASHTAG", "TOKEN_DOLLAR", "TOKEN_PERCENT", "TOKEN_START",
-  "TOKEN_COLON", "TOKEN_SEMICOLON", "$accept", "word_list", "word", YY_NULLPTR
+  "TOKEN_COLON", "TOKEN_SEMICOLON", "TOKEN_BACKSLASH", "$accept",
+  "word_list", "word", YY_NULLPTR
 };
 
 static const char *
@@ -628,13 +630,13 @@ static const yytype_int8 yycheck[] =
    state STATE-NUM.  */
 static const yytype_int8 yystos[] =
 {
-       0,     4,    39,    40,     0,    40
+       0,     4,    40,    41,     0,    41
 };
 
 /* YYR1[RULE-NUM] -- Symbol kind of the left-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr1[] =
 {
-       0,    38,    39,    39,    40
+       0,    39,    40,    40,    41
 };
 
 /* YYR2[RULE-NUM] -- Number of symbols on the right-hand side of rule RULE-NUM.  */
@@ -1114,23 +1116,23 @@ yyreduce:
   case 2: /* word_list: word  */
 #line 41 "snow.y"
      {}
-#line 1118 "snow.yy.c"
+#line 1120 "snow.yy.c"
     break;
 
   case 3: /* word_list: word_list word  */
 #line 42 "snow.y"
                  {}
-#line 1124 "snow.yy.c"
+#line 1126 "snow.yy.c"
     break;
 
   case 4: /* word: TOKEN_WORD  */
 #line 46 "snow.y"
            { LEX_PRINT(); }
-#line 1130 "snow.yy.c"
+#line 1132 "snow.yy.c"
     break;
 
 
-#line 1134 "snow.yy.c"
+#line 1136 "snow.yy.c"
 
       default: break;
     }
