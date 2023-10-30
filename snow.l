@@ -66,6 +66,24 @@
 
 \|                           { lex_next_token(); lex_return(TOKEN_OR); }
 
+\~                           { lex_next_token(); lex_return(TOKEN_BROKEN_ISSUE); }
+
+\!                           { lex_next_token(); lex_return(TOKEN_EXCLAMATION); }
+
+\@                           { lex_next_token(); lex_return(TOKEN_AT); }
+
+\#                           { lex_next_token(); lex_return(TOKEN_HASHTAG); }
+
+\$                           { lex_next_token(); lex_return(TOKEN_DOLLAR); }
+
+\%                           { lex_next_token(); lex_return(TOKEN_PERCENT); }
+
+\^                           { lex_next_token(); lex_return(TOKEN_START); }
+
+\:                           { lex_next_token(); lex_return(TOKEN_COLON); }
+
+\;                           { lex_next_token(); lex_return(TOKEN_SEMICOLON); }
+
 \&\&                         { lex_next_token(); lex_return(TOKEN_DOUBLE_AND); }
 
 \|\|                         { lex_next_token(); lex_return(TOKEN_DOUBLE_OR); }

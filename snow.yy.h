@@ -74,12 +74,21 @@ extern int yydebug;
     TOKEN_RC = 275,                /* TOKEN_RC  */
     TOKEN_LA = 276,                /* TOKEN_LA  */
     TOKEN_RA = 277,                /* TOKEN_RA  */
-    TOKEN_AND = 278,               /* TOKEN_AND  */
-    TOKEN_OR = 279,                /* TOKEN_OR  */
-    TOKEN_DOUBLE_AND = 280,        /* TOKEN_DOUBLE_AND  */
-    TOKEN_DOUBLE_OR = 281,         /* TOKEN_DOUBLE_OR  */
-    TOKEN_DOUBLE_LA = 282,         /* TOKEN_DOUBLE_LA  */
-    TOKEN_DOUBLE_RA = 283          /* TOKEN_DOUBLE_RA  */
+    TOKEN_DOUBLE_AND = 278,        /* TOKEN_DOUBLE_AND  */
+    TOKEN_DOUBLE_OR = 279,         /* TOKEN_DOUBLE_OR  */
+    TOKEN_DOUBLE_LA = 280,         /* TOKEN_DOUBLE_LA  */
+    TOKEN_DOUBLE_RA = 281,         /* TOKEN_DOUBLE_RA  */
+    TOKEN_AND = 282,               /* TOKEN_AND  */
+    TOKEN_OR = 283,                /* TOKEN_OR  */
+    TOKEN_BROKEN_ISSUE = 284,      /* TOKEN_BROKEN_ISSUE  */
+    TOKEN_AT = 285,                /* TOKEN_AT  */
+    TOKEN_EXCLAMATION = 286,       /* TOKEN_EXCLAMATION  */
+    TOKEN_HASHTAG = 287,           /* TOKEN_HASHTAG  */
+    TOKEN_DOLLAR = 288,            /* TOKEN_DOLLAR  */
+    TOKEN_PERCENT = 289,           /* TOKEN_PERCENT  */
+    TOKEN_START = 290,             /* TOKEN_START  */
+    TOKEN_COLON = 291,             /* TOKEN_COLON  */
+    TOKEN_SEMICOLON = 292          /* TOKEN_SEMICOLON  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
