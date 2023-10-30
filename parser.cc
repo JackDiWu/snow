@@ -2,7 +2,7 @@
  * @Author: Jack
  * @Date: 2023-10-29 15:06:43
  * @LastEditors: Jack
- * @LastEditTime: 2023-10-30 11:54:50
+ * @LastEditTime: 2023-10-30 12:00:30
  */
 #include "parser.h"
 
@@ -11,23 +11,19 @@ extern "C" {
     #include "lex.yy.h"
 }
 
-snow::parser::parser(const char *data, int size) {
-    yylex_init(&_yyparse.scanner);
+snow::scanner::scanner(const char *data, int size) : parser(&_parser) {
+    yylex_init(&yylexer());
     
-    yy_scan_bytes(data, size, _yyparse.scanner);
+    yy_scan_bytes(data, size, yylexer());
 
-    yyset_lineno(1, _yyparse.scanner);
-    yyset_column(0, _yyparse.scanner);
+    yyset_lineno(1, yylexer());
+    yyset_column(0, yylexer());
 }
 
-snow::parser::parser(const std::string &text) {
-    parser(text.data(), text.size());
+snow::scanner::~scanner() {
+    yylex_destroy(yylexer());
 }
 
-snow::parser::~parser() {
-    yylex_destroy(_yyparse.scanner);
-}
-
-int snow::parser::scan() {
-    return yyparse(&_yyparse);
+int snow::scanner::scan() {
+    return yyparse(parser);
 }
