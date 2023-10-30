@@ -2,7 +2,7 @@
  * @Author: Jack
  * @Date: 2023-10-29 15:06:43
  * @LastEditors: Jack
- * @LastEditTime: 2023-10-30 18:58:40
+ * @LastEditTime: 2023-10-30 19:03:37
  */
 #include "parser.h"
 
@@ -11,7 +11,7 @@ extern "C" {
     #include "lex.yy.h"
 }
 
-snow::scanner::scanner(const char *data, int size) : parser(&_parser) {
+snow::scanner::scanner(const char *nm, const char *data, int size) : name(nm), parser(&_parser) {
     yylex_init(&yylexer());
     
     yy_scan_bytes(data, size, yylexer());
@@ -20,6 +20,7 @@ snow::scanner::scanner(const char *data, int size) : parser(&_parser) {
     yyset_column(0, yylexer());
 
     parser->self = this;
+    parser->name = name.c_str();
 }
 
 snow::scanner::~scanner() {

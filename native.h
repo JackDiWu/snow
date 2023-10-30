@@ -2,7 +2,7 @@
  * @Author: Jack
  * @Date: 2023-10-29 14:22:23
  * @LastEditors: Jack
- * @LastEditTime: 2023-10-30 18:59:55
+ * @LastEditTime: 2023-10-30 19:02:59
  */
 #ifndef _SNOW_NATIVE_H_
 #define _SNOW_NATIVE_H_
@@ -16,9 +16,13 @@ typedef struct _yyparse_t {
     void *self;
     
     void *scanner;
+
+    const char *name;
 } *yyparse_t;
 
 #define yyself()              ((yyparse_t)parser)->self
+
+#define yyname()              ((yyparse_t)parser)->name
 
 #define yylexer()             ((yyparse_t)parser)->scanner
 

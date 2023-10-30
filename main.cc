@@ -2,7 +2,7 @@
  * @Author: Jack
  * @Date: 2023-10-29 11:52:56
  * @LastEditors: Jack
- * @LastEditTime: 2023-10-30 12:02:24
+ * @LastEditTime: 2023-10-30 19:02:12
  */
 #include "defs.h"
 #include "parser.h"
@@ -35,7 +35,7 @@ void test_lexer() {
 }
 
 void test_parser() {
-    auto scanner = std::make_shared<snow::scanner>(text.data(), text.size());
+    auto scanner = std::make_shared<snow::scanner>("main.cc", text.data(), text.size());
     scanner->resolve();
 }
 
