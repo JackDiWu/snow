@@ -2,7 +2,7 @@
  * @Author: Jack
  * @Date: 2023-10-30 11:12:37
  * @LastEditors: Jack
- * @LastEditTime: 2023-10-30 12:00:55
+ * @LastEditTime: 2023-10-30 12:02:17
  */
 #ifndef _SNOW_PARSER_HPP_
 #define _SNOW_PARSER_HPP_
@@ -21,7 +21,7 @@ namespace snow {
             virtual ~scanner();
 
         public:
-            virtual int scan();
+            virtual int resolve();
     };
 
 }
