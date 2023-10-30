@@ -56,6 +56,10 @@
 
 \}                           { lex_next_token(); lex_return(TOKEN_RC); }
 
+\<                           { lex_next_token(); lex_return(TOKEN_LA); }
+
+\>                           { lex_next_token(); lex_return(TOKEN_RA); }
+
 .                            { lex_return(TOKEN_UNKNOW); }
 
 %%
