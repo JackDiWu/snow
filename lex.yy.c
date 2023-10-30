@@ -362,8 +362,8 @@ struct yy_trans_info
 	};
 static const flex_int16_t yy_accept[23] =
     {   0,
-        0,    0,   10,    8,    6,    7,    8,    8,    1,    1,
-        4,    7,    0,    5,    0,    0,    1,    4,    4,    3,
+        0,    0,   10,    8,    7,    6,    8,    8,    1,    1,
+        4,    6,    0,    5,    0,    0,    1,    4,    4,    3,
         2,    0
     } ;
 
@@ -825,15 +825,15 @@ YY_RULE_SETUP
 { lex_next_word(); lex_return(TOKEN_STRING); }
 	YY_BREAK
 case 6:
+/* rule 6 can match eol */
 YY_RULE_SETUP
 #line 33 "snow.l"
-{}
+{ lex_next_line(); lex_set_word(0); }
 	YY_BREAK
 case 7:
-/* rule 7 can match eol */
 YY_RULE_SETUP
 #line 35 "snow.l"
-{ lex_next_line(); lex_set_word(0); }
+{}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
