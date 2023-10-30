@@ -78,10 +78,8 @@
 
 #define lex_param ((yyparse_t)parser)->scanner
 
-void yyerror (void *parser, char const *s);
 
-
-#line 85 "snow.yy.c"
+#line 83 "snow.yy.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -541,7 +539,7 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    40,    40,    41,    45
+       0,    38,    38,    39,    43
 };
 #endif
 
@@ -1114,25 +1112,25 @@ yyreduce:
   switch (yyn)
     {
   case 2: /* word_list: word  */
-#line 40 "snow.y"
+#line 38 "snow.y"
      {}
-#line 1120 "snow.yy.c"
+#line 1118 "snow.yy.c"
     break;
 
   case 3: /* word_list: word_list word  */
-#line 41 "snow.y"
+#line 39 "snow.y"
                  {}
-#line 1126 "snow.yy.c"
+#line 1124 "snow.yy.c"
     break;
 
   case 4: /* word: TOKEN_WORD  */
-#line 45 "snow.y"
+#line 43 "snow.y"
            { yyprint(); }
-#line 1132 "snow.yy.c"
+#line 1130 "snow.yy.c"
     break;
 
 
-#line 1136 "snow.yy.c"
+#line 1134 "snow.yy.c"
 
       default: break;
     }
@@ -1325,5 +1323,5 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 48 "snow.y"
+#line 46 "snow.y"
 

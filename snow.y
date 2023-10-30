@@ -8,8 +8,6 @@
 
 #define lex_param ((yyparse_t)parser)->scanner
 
-void yyerror (void *parser, char const *s);
-
 %}
 
 %defines
