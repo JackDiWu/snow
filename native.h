@@ -12,6 +12,8 @@
 #include "snow.yy.h"
 #include "lex.yy.h"
 
+void yyerror (void *parser, char const *s);
+
 typedef struct _yyparse_t {
     void *self;
     
@@ -27,7 +29,5 @@ typedef struct _yyparse_t {
 #define yylexer               ((yyparse_t)parser)->scanner
 
 #define yyprint()             printf("[lex] %s\n", yyget_text(yylexer))
-
-void yyerror (void *parser, char const *s);
 
 #endif
