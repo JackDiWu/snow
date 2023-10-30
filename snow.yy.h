@@ -64,7 +64,13 @@ extern int yydebug;
     TOKEN_PLUS = 265,              /* TOKEN_PLUS  */
     TOKEN_SUB = 266,               /* TOKEN_SUB  */
     TOKEN_TIMES = 267,             /* TOKEN_TIMES  */
-    TOKEN_DIVIDE = 268             /* TOKEN_DIVIDE  */
+    TOKEN_DIVIDE = 268,            /* TOKEN_DIVIDE  */
+    TOKEN_LP = 269,                /* TOKEN_LP  */
+    TOKEN_RP = 270,                /* TOKEN_RP  */
+    TOKEN_LS = 271,                /* TOKEN_LS  */
+    TOKEN_RS = 272,                /* TOKEN_RS  */
+    TOKEN_LC = 273,                /* TOKEN_LC  */
+    TOKEN_RC = 274                 /* TOKEN_RC  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif

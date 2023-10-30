@@ -29,6 +29,8 @@ void yyerror (void *parser, char const *s);
 
 %token TOKEN_EQUAL TOKEN_PLUS TOKEN_SUB TOKEN_TIMES TOKEN_DIVIDE
 
+%token TOKEN_LP TOKEN_RP TOKEN_LS TOKEN_RS TOKEN_LC TOKEN_RC
+
 %%
 
 word_list:

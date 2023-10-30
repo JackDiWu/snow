@@ -34,16 +34,27 @@
 
 (\ |\t)                      {}
 
-=                            { lex_next_token(); lex_return(TOKEN_EQUAL); }
+\=                           { lex_next_token(); lex_return(TOKEN_EQUAL); }
 
 \+                           { lex_next_token(); lex_return(TOKEN_PLUS); }
 
--                            { lex_next_token(); lex_return(TOKEN_SUB); }
+\-                           { lex_next_token(); lex_return(TOKEN_SUB); }
 
 \*                           { lex_next_token(); lex_return(TOKEN_TIMES); }
 
 \/                           { lex_next_token(); lex_return(TOKEN_DIVIDE); }
 
+\(                           { lex_next_token(); lex_return(TOKEN_LP); }
+
+\)                           { lex_next_token(); lex_return(TOKEN_RP); }
+
+\[                           { lex_next_token(); lex_return(TOKEN_LS); }
+
+\]                           { lex_next_token(); lex_return(TOKEN_RS); }
+
+\{                           { lex_next_token(); lex_return(TOKEN_LC); }
+
+\}                           { lex_next_token(); lex_return(TOKEN_RC); }
 
 .                            { lex_return(TOKEN_UNKNOW); }
 
