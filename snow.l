@@ -20,13 +20,13 @@
 
 %%
 
-[_a-zA-Z0-9]+                { lex_next_column(); lex_return(TOKEN_WORD); }
-
 [0-9]+                       { lex_next_column(); lex_return(TOKEN_DEC); }
 
 0x[0-9a-fA-F]+               { lex_next_column(); lex_return(TOKEN_HEX); }
 
 [0-9]+\.[0-9]+               { lex_next_column(); lex_return(TOKEN_FLOAT); }
+
+[_a-zA-Z0-9]+                { lex_next_column(); lex_return(TOKEN_WORD); }
 
 \"([^\\\"]|\\.)*\"           { lex_next_column(); lex_return(TOKEN_STRING); }
 
