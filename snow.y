@@ -5,6 +5,11 @@
 #include "snow.yy.h"
 
 #include "lex.yy.h"
+
+#define LEX_PARAM    ((yyparse_t)parser)->scanner
+
+void yyerror (void *parser, char const *s);
+
 %}
 
 %defines
@@ -37,7 +42,7 @@ word {}
 ;
 
 word:
-TOKEN_WORD { LEX_PRINT(); }
+TOKEN_WORD { yyprint(); }
 ;
 
 %%
