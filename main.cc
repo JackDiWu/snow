@@ -2,7 +2,7 @@
  * @Author: Jack
  * @Date: 2023-10-29 11:52:56
  * @LastEditors: Jack
- * @LastEditTime: 2023-10-30 10:01:09
+ * @LastEditTime: 2023-10-30 10:02:36
  */
 #include "defs.h"
 
@@ -11,7 +11,7 @@ extern "C" {
     #include "lex.yy.h"
 }
 
-std::string text = "I am storm \"fjdksl\\\"1k;;fkdsl;\" 123 0x232 0.15234 \"fd\\\'\\\"sfdsdf\" ";
+std::string text = "I am storm \"say\\\"something\" 123 0x232 0.15234 \"Hello\\\'\\\"world\" ";
 
 void test_lexer() {
     yyscan_t scan;
@@ -25,7 +25,7 @@ void test_lexer() {
     do {
         token = yylex(nullptr, scan);
 
-        printf("----------- %d %s\n", token, yyget_text(scan));
+        printf("[lex] %d %s\n", token, yyget_text(scan));
     }  while (token >= TOKEN_UNKNOW);
 
     yylex_destroy(scan);

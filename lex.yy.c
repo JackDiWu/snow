@@ -362,9 +362,9 @@ struct yy_trans_info
 	};
 static const flex_int16_t yy_accept[23] =
     {   0,
-        0,    0,   10,    8,    6,    7,    8,    8,    2,    2,
-        1,    7,    0,    5,    0,    0,    2,    0,    1,    4,
-        3,    0
+        0,    0,   10,    8,    6,    7,    8,    8,    1,    1,
+        1,    7,    0,    5,    0,    0,    1,    1,    1,    4,
+        1,    0
     } ;
 
 static const YY_CHAR yy_ec[256] =
@@ -402,41 +402,43 @@ static const YY_CHAR yy_ec[256] =
 static const YY_CHAR yy_meta[14] =
     {   0,
         1,    1,    1,    1,    1,    1,    1,    2,    2,    3,
-        4,    1,    4
+        3,    1,    3
     } ;
 
 static const flex_int16_t yy_base[27] =
     {   0,
-        0,    0,   19,   44,   44,   44,   15,    8,   14,    4,
-        0,   44,   22,   44,   13,    0,    0,    0,    0,    0,
-        0,   44,   34,   37,   13,   40
+        0,    0,   26,   48,   48,   48,   16,    8,   14,    5,
+        0,   48,   22,   48,   14,    0,    3,    0,   24,    0,
+       27,   48,   40,   42,   13,   44
     } ;
 
 static const flex_int16_t yy_def[27] =
     {   0,
        22,    1,   22,   22,   22,   22,   22,   23,   22,    9,
-       24,   22,   23,   22,   23,   25,   10,   26,   24,   25,
+       24,   22,   23,   22,   23,   25,    9,   24,   26,   25,
        26,    0,   22,   22,   22,   22
     } ;
 
-static const flex_int16_t yy_nxt[58] =
+static const flex_int16_t yy_nxt[62] =
     {   0,
         4,    5,    6,    7,    5,    8,    4,    9,   10,   11,
-       11,    4,   11,   14,   20,   22,   22,   12,   22,   15,
-       16,   17,   17,   22,   22,   22,   18,   14,   22,   22,
-       22,   22,   22,   15,   13,   13,   13,   13,   19,   19,
-       19,   21,   21,    3,   22,   22,   22,   22,   22,   22,
-       22,   22,   22,   22,   22,   22,   22
+       11,    4,   11,   14,   20,   18,   22,   18,   12,   15,
+       16,   17,   17,   18,   18,   22,   19,   14,   22,   22,
+       22,   22,   22,   15,   18,   22,   18,   18,   22,   18,
+       13,   13,   13,   18,   18,   21,   21,    3,   22,   22,
+       22,   22,   22,   22,   22,   22,   22,   22,   22,   22,
+       22
     } ;
 
-static const flex_int16_t yy_chk[58] =
+static const flex_int16_t yy_chk[62] =
     {   0,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    8,   25,   15,   10,    7,    3,    8,
-        9,    9,    9,    0,    0,    0,    9,   13,    0,    0,
-        0,    0,    0,   13,   23,   23,   23,   23,   24,   24,
-       24,   26,   26,   22,   22,   22,   22,   22,   22,   22,
-       22,   22,   22,   22,   22,   22,   22
+        1,    1,    1,    8,   25,   17,   15,   10,    7,    8,
+        9,    9,    9,    9,    9,    3,    9,   13,    0,    0,
+        0,    0,    0,   13,   19,    0,   19,   21,    0,   21,
+       23,   23,   23,   24,   24,   26,   26,   22,   22,   22,
+       22,   22,   22,   22,   22,   22,   22,   22,   22,   22,
+       22
     } ;
 
 /* The intent behind this definition is that it'll catch
@@ -461,8 +463,8 @@ static const flex_int16_t yy_chk[58] =
 
 #define lex_return(t)              return t
 
-#line 464 "lex.yy.c"
-#line 465 "lex.yy.c"
+#line 466 "lex.yy.c"
+#line 467 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -739,7 +741,7 @@ YY_DECL
 #line 21 "snow.l"
 
 
-#line 742 "lex.yy.c"
+#line 744 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -772,7 +774,7 @@ yy_match:
 			yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
 			++yy_cp;
 			}
-		while ( yy_base[yy_current_state] != 44 );
+		while ( yy_base[yy_current_state] != 48 );
 
 yy_find_action:
 		yy_act = yy_accept[yy_current_state];
@@ -843,7 +845,7 @@ YY_RULE_SETUP
 #line 39 "snow.l"
 ECHO;
 	YY_BREAK
-#line 846 "lex.yy.c"
+#line 848 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 

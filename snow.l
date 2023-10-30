@@ -20,7 +20,7 @@
 
 %%
 
-[_a-zA-Z][_a-zA-Z0-9]*       { lex_next_column(); lex_return(TOKEN_WORD); }
+[_a-zA-Z0-9]+                { lex_next_column(); lex_return(TOKEN_WORD); }
 
 [0-9]+                       { lex_next_column(); lex_return(TOKEN_DEC); }
 
