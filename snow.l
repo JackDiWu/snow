@@ -70,6 +70,10 @@
 
 \|\|                         { lex_next_token(); lex_return(TOKEN_DOUBLE_OR); }
 
+\<\<                         { lex_next_token(); lex_return(TOKEN_DOUBLE_LA); }
+
+\>\>                         { lex_next_token(); lex_return(TOKEN_DOUBLE_RA); }
+
 .                            { lex_return(TOKEN_UNKNOW); }
 
 %%

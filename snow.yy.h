@@ -77,7 +77,9 @@ extern int yydebug;
     TOKEN_AND = 278,               /* TOKEN_AND  */
     TOKEN_OR = 279,                /* TOKEN_OR  */
     TOKEN_DOUBLE_AND = 280,        /* TOKEN_DOUBLE_AND  */
-    TOKEN_DOUBLE_OR = 281          /* TOKEN_DOUBLE_OR  */
+    TOKEN_DOUBLE_OR = 281,         /* TOKEN_DOUBLE_OR  */
+    TOKEN_DOUBLE_LA = 282,         /* TOKEN_DOUBLE_LA  */
+    TOKEN_DOUBLE_RA = 283          /* TOKEN_DOUBLE_RA  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
