@@ -2,7 +2,7 @@
  * @Author: Jack
  * @Date: 2023-10-29 14:22:23
  * @LastEditors: Jack
- * @LastEditTime: 2023-10-30 11:51:54
+ * @LastEditTime: 2023-10-30 18:59:55
  */
 #ifndef _SNOW_NATIVE_H_
 #define _SNOW_NATIVE_H_
@@ -13,11 +13,15 @@
 #include "lex.yy.h"
 
 typedef struct _yyparse_t {
+    void *self;
+    
     void *scanner;
 } *yyparse_t;
 
+#define yyself()              ((yyparse_t)parser)->self
+
 #define yylexer()             ((yyparse_t)parser)->scanner
 
-#define yyprint()             printf("[lex] %s\n", yyget_text(LEX_PARAM))
+#define yyprint()             printf("[lex] %s\n", yyget_text(yylexer()))
 
 #endif

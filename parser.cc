@@ -2,7 +2,7 @@
  * @Author: Jack
  * @Date: 2023-10-29 15:06:43
  * @LastEditors: Jack
- * @LastEditTime: 2023-10-30 12:02:15
+ * @LastEditTime: 2023-10-30 18:58:40
  */
 #include "parser.h"
 
@@ -18,6 +18,8 @@ snow::scanner::scanner(const char *data, int size) : parser(&_parser) {
 
     yyset_lineno(1, yylexer());
     yyset_column(0, yylexer());
+
+    parser->self = this;
 }
 
 snow::scanner::~scanner() {
