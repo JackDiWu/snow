@@ -34,13 +34,15 @@
 
 (\ |\t)                      {}
 
-\+                            { lex_next_token(); lex_return(TOKEN_PLUS); }
+=                            { lex_next_token(); lex_return(TOKEN_EQUAL); }
+
+\+                           { lex_next_token(); lex_return(TOKEN_PLUS); }
 
 -                            { lex_next_token(); lex_return(TOKEN_SUB); }
 
-\*                            { lex_next_token(); lex_return(TOKEN_TIMES); }
+\*                           { lex_next_token(); lex_return(TOKEN_TIMES); }
 
-\/                            { lex_next_token(); lex_return(TOKEN_DIVIDE); }
+\/                           { lex_next_token(); lex_return(TOKEN_DIVIDE); }
 
 
 .                            { lex_return(TOKEN_UNKNOW); }

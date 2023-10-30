@@ -119,13 +119,14 @@ enum yysymbol_kind_t
   YYSYMBOL_TOKEN_DEC = 6,                  /* TOKEN_DEC  */
   YYSYMBOL_TOKEN_HEX = 7,                  /* TOKEN_HEX  */
   YYSYMBOL_TOKEN_FLOAT = 8,                /* TOKEN_FLOAT  */
-  YYSYMBOL_TOKEN_PLUS = 9,                 /* TOKEN_PLUS  */
-  YYSYMBOL_TOKEN_SUB = 10,                 /* TOKEN_SUB  */
-  YYSYMBOL_TOKEN_TIMES = 11,               /* TOKEN_TIMES  */
-  YYSYMBOL_TOKEN_DIVIDE = 12,              /* TOKEN_DIVIDE  */
-  YYSYMBOL_YYACCEPT = 13,                  /* $accept  */
-  YYSYMBOL_word_list = 14,                 /* word_list  */
-  YYSYMBOL_word = 15                       /* word  */
+  YYSYMBOL_TOKEN_EQUAL = 9,                /* TOKEN_EQUAL  */
+  YYSYMBOL_TOKEN_PLUS = 10,                /* TOKEN_PLUS  */
+  YYSYMBOL_TOKEN_SUB = 11,                 /* TOKEN_SUB  */
+  YYSYMBOL_TOKEN_TIMES = 12,               /* TOKEN_TIMES  */
+  YYSYMBOL_TOKEN_DIVIDE = 13,              /* TOKEN_DIVIDE  */
+  YYSYMBOL_YYACCEPT = 14,                  /* $accept  */
+  YYSYMBOL_word_list = 15,                 /* word_list  */
+  YYSYMBOL_word = 16                       /* word  */
 };
 typedef enum yysymbol_kind_t yysymbol_kind_t;
 
@@ -456,7 +457,7 @@ union yyalloc
 #define YYLAST   4
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  13
+#define YYNTOKENS  14
 /* YYNNTS -- Number of nonterminals.  */
 #define YYNNTS  3
 /* YYNRULES -- Number of rules.  */
@@ -465,7 +466,7 @@ union yyalloc
 #define YYNSTATES  6
 
 /* YYMAXUTOK -- Last valid token kind.  */
-#define YYMAXUTOK   267
+#define YYMAXUTOK   268
 
 
 /* YYTRANSLATE(TOKEN-NUM) -- Symbol number corresponding to TOKEN-NUM
@@ -505,7 +506,7 @@ static const yytype_int8 yytranslate[] =
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     1,     2,     3,     4,
-       5,     6,     7,     8,     9,    10,    11,    12
+       5,     6,     7,     8,     9,    10,    11,    12,    13
 };
 
 #if YYDEBUG
@@ -530,8 +531,8 @@ static const char *const yytname[] =
 {
   "\"end of file\"", "error", "\"invalid token\"", "TOKEN_UNKNOW",
   "TOKEN_WORD", "TOKEN_STRING", "TOKEN_DEC", "TOKEN_HEX", "TOKEN_FLOAT",
-  "TOKEN_PLUS", "TOKEN_SUB", "TOKEN_TIMES", "TOKEN_DIVIDE", "$accept",
-  "word_list", "word", YY_NULLPTR
+  "TOKEN_EQUAL", "TOKEN_PLUS", "TOKEN_SUB", "TOKEN_TIMES", "TOKEN_DIVIDE",
+  "$accept", "word_list", "word", YY_NULLPTR
 };
 
 static const char *
@@ -595,13 +596,13 @@ static const yytype_int8 yycheck[] =
    state STATE-NUM.  */
 static const yytype_int8 yystos[] =
 {
-       0,     4,    14,    15,     0,    15
+       0,     4,    15,    16,     0,    16
 };
 
 /* YYR1[RULE-NUM] -- Symbol kind of the left-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr1[] =
 {
-       0,    13,    14,    14,    15
+       0,    14,    15,    15,    16
 };
 
 /* YYR2[RULE-NUM] -- Number of symbols on the right-hand side of rule RULE-NUM.  */
@@ -1081,23 +1082,23 @@ yyreduce:
   case 2: /* word_list: word  */
 #line 35 "snow.y"
      {}
-#line 1085 "snow.yy.c"
+#line 1086 "snow.yy.c"
     break;
 
   case 3: /* word_list: word_list word  */
 #line 36 "snow.y"
                  {}
-#line 1091 "snow.yy.c"
+#line 1092 "snow.yy.c"
     break;
 
   case 4: /* word: TOKEN_WORD  */
 #line 40 "snow.y"
            { LEX_PRINT(); }
-#line 1097 "snow.yy.c"
+#line 1098 "snow.yy.c"
     break;
 
 
-#line 1101 "snow.yy.c"
+#line 1102 "snow.yy.c"
 
       default: break;
     }

@@ -60,10 +60,11 @@ extern int yydebug;
     TOKEN_DEC = 261,               /* TOKEN_DEC  */
     TOKEN_HEX = 262,               /* TOKEN_HEX  */
     TOKEN_FLOAT = 263,             /* TOKEN_FLOAT  */
-    TOKEN_PLUS = 264,              /* TOKEN_PLUS  */
-    TOKEN_SUB = 265,               /* TOKEN_SUB  */
-    TOKEN_TIMES = 266,             /* TOKEN_TIMES  */
-    TOKEN_DIVIDE = 267             /* TOKEN_DIVIDE  */
+    TOKEN_EQUAL = 264,             /* TOKEN_EQUAL  */
+    TOKEN_PLUS = 265,              /* TOKEN_PLUS  */
+    TOKEN_SUB = 266,               /* TOKEN_SUB  */
+    TOKEN_TIMES = 267,             /* TOKEN_TIMES  */
+    TOKEN_DIVIDE = 268             /* TOKEN_DIVIDE  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
