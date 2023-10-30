@@ -13,6 +13,7 @@ yyparse_t yy_init(void) {
 void yy_destroy(yyparse_t parser) {
     if (parser) {
         yylex_destroy(parser->scanner);
+        free(parser);
     }
 }
 
