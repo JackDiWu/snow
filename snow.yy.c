@@ -76,7 +76,7 @@
 
 #include "lex.yy.h"
 
-#define LEX_PARAM    ((yyparse_t)parser)->scanner
+#define lex_param ((yyparse_t)parser)->scanner
 
 void yyerror (void *parser, char const *s);
 
@@ -1026,7 +1026,7 @@ yybackup:
   if (yychar == YYEMPTY)
     {
       YYDPRINTF ((stderr, "Reading a token\n"));
-      yychar = yylex (&yylval, LEX_PARAM);
+      yychar = yylex (&yylval, lex_param);
     }
 
   if (yychar <= YYEOF)
