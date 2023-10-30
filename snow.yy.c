@@ -138,20 +138,21 @@ enum yysymbol_kind_t
   YYSYMBOL_TOKEN_DOUBLE_RA = 25,           /* TOKEN_DOUBLE_RA  */
   YYSYMBOL_TOKEN_AND = 26,                 /* TOKEN_AND  */
   YYSYMBOL_TOKEN_OR = 27,                  /* TOKEN_OR  */
-  YYSYMBOL_TOKEN_POINT = 28,               /* TOKEN_POINT  */
-  YYSYMBOL_TOKEN_BROKEN_ISSUE = 29,        /* TOKEN_BROKEN_ISSUE  */
-  YYSYMBOL_TOKEN_EXCLAMATION = 30,         /* TOKEN_EXCLAMATION  */
-  YYSYMBOL_TOKEN_AT = 31,                  /* TOKEN_AT  */
-  YYSYMBOL_TOKEN_HASHTAG = 32,             /* TOKEN_HASHTAG  */
-  YYSYMBOL_TOKEN_DOLLAR = 33,              /* TOKEN_DOLLAR  */
-  YYSYMBOL_TOKEN_PERCENT = 34,             /* TOKEN_PERCENT  */
-  YYSYMBOL_TOKEN_START = 35,               /* TOKEN_START  */
-  YYSYMBOL_TOKEN_COLON = 36,               /* TOKEN_COLON  */
-  YYSYMBOL_TOKEN_SEMICOLON = 37,           /* TOKEN_SEMICOLON  */
-  YYSYMBOL_TOKEN_BACKSLASH = 38,           /* TOKEN_BACKSLASH  */
-  YYSYMBOL_YYACCEPT = 39,                  /* $accept  */
-  YYSYMBOL_word_list = 40,                 /* word_list  */
-  YYSYMBOL_word = 41                       /* word  */
+  YYSYMBOL_TOKEN_QUESTION = 28,            /* TOKEN_QUESTION  */
+  YYSYMBOL_TOKEN_POINT = 29,               /* TOKEN_POINT  */
+  YYSYMBOL_TOKEN_BROKEN_ISSUE = 30,        /* TOKEN_BROKEN_ISSUE  */
+  YYSYMBOL_TOKEN_EXCLAMATION = 31,         /* TOKEN_EXCLAMATION  */
+  YYSYMBOL_TOKEN_AT = 32,                  /* TOKEN_AT  */
+  YYSYMBOL_TOKEN_HASHTAG = 33,             /* TOKEN_HASHTAG  */
+  YYSYMBOL_TOKEN_DOLLAR = 34,              /* TOKEN_DOLLAR  */
+  YYSYMBOL_TOKEN_PERCENT = 35,             /* TOKEN_PERCENT  */
+  YYSYMBOL_TOKEN_START = 36,               /* TOKEN_START  */
+  YYSYMBOL_TOKEN_COLON = 37,               /* TOKEN_COLON  */
+  YYSYMBOL_TOKEN_SEMICOLON = 38,           /* TOKEN_SEMICOLON  */
+  YYSYMBOL_TOKEN_BACKSLASH = 39,           /* TOKEN_BACKSLASH  */
+  YYSYMBOL_YYACCEPT = 40,                  /* $accept  */
+  YYSYMBOL_word_list = 41,                 /* word_list  */
+  YYSYMBOL_word = 42                       /* word  */
 };
 typedef enum yysymbol_kind_t yysymbol_kind_t;
 
@@ -482,7 +483,7 @@ union yyalloc
 #define YYLAST   4
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  39
+#define YYNTOKENS  40
 /* YYNNTS -- Number of nonterminals.  */
 #define YYNNTS  3
 /* YYNRULES -- Number of rules.  */
@@ -491,7 +492,7 @@ union yyalloc
 #define YYNSTATES  6
 
 /* YYMAXUTOK -- Last valid token kind.  */
-#define YYMAXUTOK   293
+#define YYMAXUTOK   294
 
 
 /* YYTRANSLATE(TOKEN-NUM) -- Symbol number corresponding to TOKEN-NUM
@@ -534,7 +535,7 @@ static const yytype_int8 yytranslate[] =
        5,     6,     7,     8,     9,    10,    11,    12,    13,    14,
       15,    16,    17,    18,    19,    20,    21,    22,    23,    24,
       25,    26,    27,    28,    29,    30,    31,    32,    33,    34,
-      35,    36,    37,    38
+      35,    36,    37,    38,    39
 };
 
 #if YYDEBUG
@@ -563,10 +564,10 @@ static const char *const yytname[] =
   "TOKEN_LP", "TOKEN_RP", "TOKEN_LS", "TOKEN_RS", "TOKEN_LC", "TOKEN_RC",
   "TOKEN_LA", "TOKEN_RA", "TOKEN_DOUBLE_AND", "TOKEN_DOUBLE_OR",
   "TOKEN_DOUBLE_LA", "TOKEN_DOUBLE_RA", "TOKEN_AND", "TOKEN_OR",
-  "TOKEN_POINT", "TOKEN_BROKEN_ISSUE", "TOKEN_EXCLAMATION", "TOKEN_AT",
-  "TOKEN_HASHTAG", "TOKEN_DOLLAR", "TOKEN_PERCENT", "TOKEN_START",
-  "TOKEN_COLON", "TOKEN_SEMICOLON", "TOKEN_BACKSLASH", "$accept",
-  "word_list", "word", YY_NULLPTR
+  "TOKEN_QUESTION", "TOKEN_POINT", "TOKEN_BROKEN_ISSUE",
+  "TOKEN_EXCLAMATION", "TOKEN_AT", "TOKEN_HASHTAG", "TOKEN_DOLLAR",
+  "TOKEN_PERCENT", "TOKEN_START", "TOKEN_COLON", "TOKEN_SEMICOLON",
+  "TOKEN_BACKSLASH", "$accept", "word_list", "word", YY_NULLPTR
 };
 
 static const char *
@@ -630,13 +631,13 @@ static const yytype_int8 yycheck[] =
    state STATE-NUM.  */
 static const yytype_int8 yystos[] =
 {
-       0,     4,    40,    41,     0,    41
+       0,     4,    41,    42,     0,    42
 };
 
 /* YYR1[RULE-NUM] -- Symbol kind of the left-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr1[] =
 {
-       0,    39,    40,    40,    41
+       0,    40,    41,    41,    42
 };
 
 /* YYR2[RULE-NUM] -- Number of symbols on the right-hand side of rule RULE-NUM.  */
@@ -1116,23 +1117,23 @@ yyreduce:
   case 2: /* word_list: word  */
 #line 41 "snow.y"
      {}
-#line 1120 "snow.yy.c"
+#line 1121 "snow.yy.c"
     break;
 
   case 3: /* word_list: word_list word  */
 #line 42 "snow.y"
                  {}
-#line 1126 "snow.yy.c"
+#line 1127 "snow.yy.c"
     break;
 
   case 4: /* word: TOKEN_WORD  */
 #line 46 "snow.y"
            { LEX_PRINT(); }
-#line 1132 "snow.yy.c"
+#line 1133 "snow.yy.c"
     break;
 
 
-#line 1136 "snow.yy.c"
+#line 1137 "snow.yy.c"
 
       default: break;
     }

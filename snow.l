@@ -66,6 +66,8 @@
 
 \|                           { lex_next_token(); lex_return(TOKEN_OR); }
 
+\?                           { lex_next_token(); lex_return(TOKEN_QUESTION); }
+
 \~                           { lex_next_token(); lex_return(TOKEN_BROKEN_ISSUE); }
 
 \!                           { lex_next_token(); lex_return(TOKEN_EXCLAMATION); }
