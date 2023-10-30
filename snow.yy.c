@@ -70,7 +70,7 @@
 #line 1 "snow.y"
 
 
-#include "parser.h"
+#include "native.h"
 
 #include "snow.yy.h"
 

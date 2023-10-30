@@ -2,9 +2,10 @@
  * @Author: Jack
  * @Date: 2023-10-29 11:52:56
  * @LastEditors: Jack
- * @LastEditTime: 2023-10-30 11:10:37
+ * @LastEditTime: 2023-10-30 11:24:42
  */
 #include "defs.h"
+#include "parser.h"
 
 extern "C" {
     #include "snow.yy.h"
@@ -13,7 +14,7 @@ extern "C" {
 
 // std::string text = "I am storm + - * / () [] {} <>  .~!@#$%^&*;:?\\ &&  || << >> \"say\\\"something+-*/\" 123 0x232 0.15234 \"Hello\\\'\\\"world\" ";
 
-std::string text = "I am '12132\"fds\"df' \"99\'dddd\'ccc\" '233' storm";
+std::string text = "I am storm";
 
 void test_lexer() {
     yyscan_t scan;
@@ -34,15 +35,13 @@ void test_lexer() {
 }
 
 void test_parser() {
-    auto parser = yy_new();
+    auto parser = std::make_shared<snow::parser>();
     
-    yy_scan(parser, text.data(), text.size());
-
-    yy_close(parser);
+    parser->scan(text.data(), text.size());
 }
 
 int main(int argc, const char **argv) {
-    test_lexer();
-    // test_parser();
+    // test_lexer();
+    test_parser();
     return 0;
 }

@@ -1,21 +1,29 @@
 /*
  * @Author: Jack
- * @Date: 2023-10-29 14:22:23
+ * @Date: 2023-10-30 11:12:37
  * @LastEditors: Jack
- * @LastEditTime: 2023-10-30 11:10:25
+ * @LastEditTime: 2023-10-30 11:23:25
  */
-#ifndef _SNOW_PARSER_H_
-#define _SNOW_PARSER_H_
+#ifndef _SNOW_PARSER_HPP_
+#define _SNOW_PARSER_HPP_
 
-typedef struct _yyparse_t {
-    void *scanner;
-    
-} *yyparse_t;
+#include "defs.h"
+namespace snow {
+    class parser {
+        protected:
+            _yyparse_t _yyparse;
 
-yyparse_t yy_new(void) ;
+        public:
+            parser();
+            
+            virtual ~parser();
 
-void yy_close(yyparse_t parser);
+        public:
+            virtual int scan(const char *data, int size);
+    };
 
-int yy_scan(yyparse_t parser, const char *data, int size);
+}
+
+
 
 #endif
