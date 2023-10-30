@@ -30,6 +30,8 @@
 
 \"([^\\\"]|\\.)*\"           { lex_next_token(); lex_return(TOKEN_STRING); }
 
+\'([^\\\']|\\.)*\'           { lex_next_token(); lex_return(TOKEN_STRING); }
+
 (\r\n|\n)                    { lex_next_line(); lex_set_token(0); }
 
 (\ |\t)                      {}
