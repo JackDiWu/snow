@@ -60,6 +60,16 @@
 
 \>                           { lex_next_token(); lex_return(TOKEN_RA); }
 
+\.                           { lex_next_token(); lex_return(TOKEN_POINT); }
+
+\&                           { lex_next_token(); lex_return(TOKEN_AND); }
+
+\|                           { lex_next_token(); lex_return(TOKEN_OR); }
+
+\&\&                         { lex_next_token(); lex_return(TOKEN_DOUBLE_AND); }
+
+\|\|                         { lex_next_token(); lex_return(TOKEN_DOUBLE_OR); }
+
 .                            { lex_return(TOKEN_UNKNOW); }
 
 %%

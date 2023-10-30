@@ -2,7 +2,7 @@
  * @Author: Jack
  * @Date: 2023-10-29 11:52:56
  * @LastEditors: Jack
- * @LastEditTime: 2023-10-30 10:16:52
+ * @LastEditTime: 2023-10-30 10:23:28
  */
 #include "defs.h"
 
@@ -11,7 +11,7 @@ extern "C" {
     #include "lex.yy.h"
 }
 
-std::string text = "I am storm + - * / () [] {} \"say\\\"something+-*/\" 123 0x232 0.15234 \"Hello\\\'\\\"world\" ";
+std::string text = "I am storm + - * / () [] {} <>  !@#$%^ & && | || . \"say\\\"something+-*/\" 123 0x232 0.15234 \"Hello\\\'\\\"world\" ";
 
 void test_lexer() {
     yyscan_t scan;
