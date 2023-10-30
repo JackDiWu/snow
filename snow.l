@@ -4,11 +4,11 @@
 
 #define lex_set_line(n)            yyset_lineno(n, yyscanner)
 
-#define lex_set_word(n)            yyset_column(n, yyscanner)
+#define lex_set_token(n)            yyset_column(n, yyscanner)
 
 #define lex_next_line()            yyset_lineno(yyget_lineno(yyscanner) + 1, yyscanner)
 
-#define lex_next_word()            yyset_column(yyget_column(yyscanner) + 1, yyscanner)
+#define lex_next_token()            yyset_column(yyget_column(yyscanner) + 1, yyscanner)
 
 #define lex_return(t)              return t
 
@@ -20,19 +20,28 @@
 
 %%
 
-[0-9]+                       { lex_next_word(); lex_return(TOKEN_DEC); }
+[0-9]+                       { lex_next_token(); lex_return(TOKEN_DEC); }
 
-0x[0-9a-fA-F]+               { lex_next_word(); lex_return(TOKEN_HEX); }
+0x[0-9a-fA-F]+               { lex_next_token(); lex_return(TOKEN_HEX); }
 
-[0-9]+\.[0-9]+               { lex_next_word(); lex_return(TOKEN_FLOAT); }
+[0-9]+\.[0-9]+               { lex_next_token(); lex_return(TOKEN_FLOAT); }
 
-[_a-zA-Z0-9]+                { lex_next_word(); lex_return(TOKEN_WORD); }
+[_a-zA-Z0-9]+                { lex_next_token(); lex_return(TOKEN_WORD); }
 
-\"([^\\\"]|\\.)*\"           { lex_next_word(); lex_return(TOKEN_STRING); }
+\"([^\\\"]|\\.)*\"           { lex_next_token(); lex_return(TOKEN_STRING); }
 
-(\r\n|\n)                    { lex_next_line(); lex_set_word(0); }
+(\r\n|\n)                    { lex_next_line(); lex_set_token(0); }
 
 (\ |\t)                      {}
+
+\+                            { lex_next_token(); lex_return(TOKEN_PLUS); }
+
+-                            { lex_next_token(); lex_return(TOKEN_SUB); }
+
+\*                            { lex_next_token(); lex_return(TOKEN_TIMES); }
+
+\/                            { lex_next_token(); lex_return(TOKEN_DIVIDE); }
+
 
 .                            { lex_return(TOKEN_UNKNOW); }
 
