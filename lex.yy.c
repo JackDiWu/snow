@@ -363,8 +363,8 @@ struct yy_trans_info
 static const flex_int16_t yy_accept[23] =
     {   0,
         0,    0,   10,    8,    6,    7,    8,    8,    1,    1,
-        1,    7,    0,    5,    0,    0,    1,    1,    1,    4,
-        1,    0
+        4,    7,    0,    5,    0,    0,    1,    4,    4,    3,
+        2,    0
     } ;
 
 static const YY_CHAR yy_ec[256] =
@@ -453,13 +453,13 @@ static const flex_int16_t yy_chk[62] =
 
 #include "snow.yy.h"
 
-#define lex_set_lineno(n)          yyset_lineno(n, yyscanner)
+#define lex_set_line(n)            yyset_lineno(n, yyscanner)
 
-#define lex_set_column(n)          yyset_column(n, yyscanner)
+#define lex_set_word(n)            yyset_column(n, yyscanner)
 
-#define lex_next_lineno()          yyset_lineno(yyget_lineno(yyscanner) + 1, yyscanner)
+#define lex_next_line()            yyset_lineno(yyget_lineno(yyscanner) + 1, yyscanner)
 
-#define lex_next_column()          yyset_column(yyget_column(yyscanner) + 1, yyscanner)
+#define lex_next_word()            yyset_column(yyget_column(yyscanner) + 1, yyscanner)
 
 #define lex_return(t)              return t
 
@@ -801,28 +801,28 @@ do_action:	/* This label is used only to access EOF actions. */
 case 1:
 YY_RULE_SETUP
 #line 23 "snow.l"
-{ lex_next_column(); lex_return(TOKEN_WORD); }
+{ lex_next_word(); lex_return(TOKEN_DEC); }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
 #line 25 "snow.l"
-{ lex_next_column(); lex_return(TOKEN_DEC); }
+{ lex_next_word(); lex_return(TOKEN_HEX); }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
 #line 27 "snow.l"
-{ lex_next_column(); lex_return(TOKEN_HEX); }
+{ lex_next_word(); lex_return(TOKEN_FLOAT); }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
 #line 29 "snow.l"
-{ lex_next_column(); lex_return(TOKEN_FLOAT); }
+{ lex_next_word(); lex_return(TOKEN_WORD); }
 	YY_BREAK
 case 5:
 /* rule 5 can match eol */
 YY_RULE_SETUP
 #line 31 "snow.l"
-{ lex_next_column(); lex_return(TOKEN_STRING); }
+{ lex_next_word(); lex_return(TOKEN_STRING); }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
@@ -833,7 +833,7 @@ case 7:
 /* rule 7 can match eol */
 YY_RULE_SETUP
 #line 35 "snow.l"
-{ lex_next_lineno(); lex_set_column(0); }
+{ lex_next_line(); lex_set_word(0); }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
