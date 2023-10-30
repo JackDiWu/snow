@@ -360,11 +360,11 @@ struct yy_trans_info
 	flex_int32_t yy_verify;
 	flex_int32_t yy_nxt;
 	};
-static const flex_int16_t yy_accept[22] =
+static const flex_int16_t yy_accept[23] =
     {   0,
         0,    0,   10,    8,    6,    7,    8,    8,    2,    2,
-        1,    7,    0,    5,    0,    2,    0,    1,    4,    3,
-        0
+        1,    7,    0,    5,    0,    0,    2,    0,    1,    4,
+        3,    0
     } ;
 
 static const YY_CHAR yy_ec[256] =
@@ -378,10 +378,10 @@ static const YY_CHAR yy_ec[256] =
         1,    1,    1,    1,   10,   10,   10,   10,   10,   10,
        11,   11,   11,   11,   11,   11,   11,   11,   11,   11,
        11,   11,   11,   11,   11,   11,   11,   11,   11,   11,
-        1,    1,    1,    1,   11,    1,   10,   10,   10,   10,
+        1,   12,    1,    1,   11,    1,   10,   10,   10,   10,
 
        10,   10,   11,   11,   11,   11,   11,   11,   11,   11,
-       11,   11,   11,   11,   11,   11,   11,   11,   11,   12,
+       11,   11,   11,   11,   11,   11,   11,   11,   11,   13,
        11,   11,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
@@ -399,42 +399,44 @@ static const YY_CHAR yy_ec[256] =
         1,    1,    1,    1,    1
     } ;
 
-static const YY_CHAR yy_meta[13] =
+static const YY_CHAR yy_meta[14] =
     {   0,
-        1,    1,    2,    1,    1,    1,    1,    3,    3,    4,
-        5,    5
+        1,    1,    1,    1,    1,    1,    1,    2,    2,    3,
+        4,    1,    4
     } ;
 
-static const flex_int16_t yy_base[26] =
+static const flex_int16_t yy_base[27] =
     {   0,
-        0,    0,   32,   33,   33,   33,   28,   24,    6,   17,
-        0,   33,   14,   11,    0,    0,    0,    0,    0,    0,
-       33,   18,   21,   13,   24
+        0,    0,   19,   44,   44,   44,   15,    8,   14,    4,
+        0,   44,   22,   44,   13,    0,    0,    0,    0,    0,
+        0,   44,   34,   37,   13,   40
     } ;
 
-static const flex_int16_t yy_def[26] =
+static const flex_int16_t yy_def[27] =
     {   0,
-       21,    1,   21,   21,   21,   21,   21,   22,   21,    9,
-       23,   21,   22,   22,   24,   10,   25,   23,   24,   25,
-        0,   21,   21,   21,   21
+       22,    1,   22,   22,   22,   22,   22,   23,   22,    9,
+       24,   22,   23,   22,   23,   25,   10,   26,   24,   25,
+       26,    0,   22,   22,   22,   22
     } ;
 
-static const flex_int16_t yy_nxt[46] =
+static const flex_int16_t yy_nxt[58] =
     {   0,
         4,    5,    6,    7,    5,    8,    4,    9,   10,   11,
-       11,   11,   15,   16,   16,   19,   14,   17,   13,   14,
-       13,   13,   13,   18,   18,   18,   20,   20,   21,   14,
-       12,   21,    3,   21,   21,   21,   21,   21,   21,   21,
-       21,   21,   21,   21,   21
+       11,    4,   11,   14,   20,   22,   22,   12,   22,   15,
+       16,   17,   17,   22,   22,   22,   18,   14,   22,   22,
+       22,   22,   22,   15,   13,   13,   13,   13,   19,   19,
+       19,   21,   21,    3,   22,   22,   22,   22,   22,   22,
+       22,   22,   22,   22,   22,   22,   22
     } ;
 
-static const flex_int16_t yy_chk[46] =
+static const flex_int16_t yy_chk[58] =
     {   0,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    9,    9,    9,   24,   14,    9,   22,   13,
-       22,   22,   22,   23,   23,   23,   25,   25,   10,    8,
-        7,    3,   21,   21,   21,   21,   21,   21,   21,   21,
-       21,   21,   21,   21,   21
+        1,    1,    1,    8,   25,   15,   10,    7,    3,    8,
+        9,    9,    9,    0,    0,    0,    9,   13,    0,    0,
+        0,    0,    0,   13,   23,   23,   23,   23,   24,   24,
+       24,   26,   26,   22,   22,   22,   22,   22,   22,   22,
+       22,   22,   22,   22,   22,   22,   22
     } ;
 
 /* The intent behind this definition is that it'll catch
@@ -459,8 +461,8 @@ static const flex_int16_t yy_chk[46] =
 
 #define lex_return(t)              return t
 
-#line 462 "lex.yy.c"
-#line 463 "lex.yy.c"
+#line 464 "lex.yy.c"
+#line 465 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -737,7 +739,7 @@ YY_DECL
 #line 21 "snow.l"
 
 
-#line 740 "lex.yy.c"
+#line 742 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -764,13 +766,13 @@ yy_match:
 			while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 				{
 				yy_current_state = (int) yy_def[yy_current_state];
-				if ( yy_current_state >= 22 )
+				if ( yy_current_state >= 23 )
 					yy_c = yy_meta[yy_c];
 				}
 			yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
 			++yy_cp;
 			}
-		while ( yy_base[yy_current_state] != 33 );
+		while ( yy_base[yy_current_state] != 44 );
 
 yy_find_action:
 		yy_act = yy_accept[yy_current_state];
@@ -815,6 +817,7 @@ YY_RULE_SETUP
 { lex_next_column(); lex_return(TOKEN_FLOAT); }
 	YY_BREAK
 case 5:
+/* rule 5 can match eol */
 YY_RULE_SETUP
 #line 31 "snow.l"
 { lex_next_column(); lex_return(TOKEN_STRING); }
@@ -840,7 +843,7 @@ YY_RULE_SETUP
 #line 39 "snow.l"
 ECHO;
 	YY_BREAK
-#line 843 "lex.yy.c"
+#line 846 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1139,7 +1142,7 @@ static int yy_get_next_buffer (yyscan_t yyscanner)
 		while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 			{
 			yy_current_state = (int) yy_def[yy_current_state];
-			if ( yy_current_state >= 22 )
+			if ( yy_current_state >= 23 )
 				yy_c = yy_meta[yy_c];
 			}
 		yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
@@ -1168,11 +1171,11 @@ static int yy_get_next_buffer (yyscan_t yyscanner)
 	while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 		{
 		yy_current_state = (int) yy_def[yy_current_state];
-		if ( yy_current_state >= 22 )
+		if ( yy_current_state >= 23 )
 			yy_c = yy_meta[yy_c];
 		}
 	yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
-	yy_is_jam = (yy_current_state == 21);
+	yy_is_jam = (yy_current_state == 22);
 
 	(void)yyg;
 	return yy_is_jam ? 0 : yy_current_state;
