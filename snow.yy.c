@@ -76,13 +76,7 @@
 
 #include "lex.yy.h"
 
-#define LEX_PARAM    ((yyparse_t)parser)->scanner
-
-#define LEX_PRINT()  printf("[lex] %s\n", yyget_text(LEX_PARAM))
-
-void yyerror (void *parser, char const *s);
-
-#line 86 "snow.yy.c"
+#line 80 "snow.yy.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -542,7 +536,7 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    41,    41,    42,    46
+       0,    35,    35,    36,    40
 };
 #endif
 
@@ -1115,25 +1109,25 @@ yyreduce:
   switch (yyn)
     {
   case 2: /* word_list: word  */
-#line 41 "snow.y"
+#line 35 "snow.y"
      {}
-#line 1121 "snow.yy.c"
+#line 1115 "snow.yy.c"
     break;
 
   case 3: /* word_list: word_list word  */
-#line 42 "snow.y"
+#line 36 "snow.y"
                  {}
-#line 1127 "snow.yy.c"
+#line 1121 "snow.yy.c"
     break;
 
   case 4: /* word: TOKEN_WORD  */
-#line 46 "snow.y"
+#line 40 "snow.y"
            { LEX_PRINT(); }
-#line 1133 "snow.yy.c"
+#line 1127 "snow.yy.c"
     break;
 
 
-#line 1137 "snow.yy.c"
+#line 1131 "snow.yy.c"
 
       default: break;
     }
@@ -1326,9 +1320,5 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 49 "snow.y"
+#line 43 "snow.y"
 
-
-void yyerror (void *parser, char const *s) {
-    printf ("[%d:%d] %s '%s'\n", yyget_lineno(LEX_PARAM), yyget_column(LEX_PARAM), s, yyget_text(LEX_PARAM));
-}
