@@ -2,7 +2,7 @@
  * @Author: Jack
  * @Date: 2023-10-30 11:12:37
  * @LastEditors: Jack
- * @LastEditTime: 2023-10-30 11:23:25
+ * @LastEditTime: 2023-10-30 11:33:39
  */
 #ifndef _SNOW_PARSER_HPP_
 #define _SNOW_PARSER_HPP_
@@ -14,12 +14,14 @@ namespace snow {
             _yyparse_t _yyparse;
 
         public:
-            parser();
+            parser(const char *data, int size);
+
+            parser(const std::string &text);
             
             virtual ~parser();
 
         public:
-            virtual int scan(const char *data, int size);
+            virtual int scan();
     };
 
 }
