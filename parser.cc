@@ -2,7 +2,7 @@
  * @Author: Jack
  * @Date: 2023-10-29 15:06:43
  * @LastEditors: Jack
- * @LastEditTime: 2023-10-30 11:24:26
+ * @LastEditTime: 2023-10-30 11:31:16
  */
 #include "parser.h"
 
@@ -16,7 +16,7 @@ snow::parser::parser() {
 }
 
 snow::parser::~parser() {
-    yylex_destroy(&_yyparse.scanner);
+    yylex_destroy(_yyparse.scanner);
 }
 
 int snow::parser::scan(const char *data, int size) {
