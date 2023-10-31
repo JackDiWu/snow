@@ -37,12 +37,29 @@
 %%
 
 /**************** plus sub ****************/
+op_relation:
+op_plus_sub { $$ = $1; }
+|
+op_relation TOKEN_LA op_plus_sub { $$ = $1 < $3; printf("result: %d = %d < %d\n", $$, $1, $3); }
+|
+op_relation TOKEN_RA op_plus_sub { $$ = $1 > $3; printf("result: %d = %d > %d\n", $$, $1, $3); }
+|
+op_relation TOKEN_LA_EQUAL op_plus_sub { $$ = $1 <= $3; printf("result: %d = %d <= %d\n", $$, $1, $3); }
+|
+op_relation TOKEN_RA_EQUAL op_plus_sub { $$ = $1 >= $3; printf("result: %d = %d >= %d\n", $$, $1, $3); }
+|
+op_relation TOKEN_DOUBLE_EQUAL op_plus_sub { $$ = $1 == $3; printf("result: %d = %d == %d\n", $$, $1, $3); }
+;
+
+
+
+/**************** plus sub ****************/
 op_plus_sub:
 op_times_divide_mod { $$ = $1; }
 |
-op_plus_sub TOKEN_PLUS op_times_divide_mod { $$ = $1 + $3; printf("result: %d = %d + %d\n", $$, $1, $3); }
+op_plus_sub TOKEN_PLUS op_times_divide_mod { $$ = $1 + $3; }
 |
-op_plus_sub TOKEN_SUB op_times_divide_mod { $$ = $1 - $3; printf("result: %d = %d - %d\n", $$, $1, $3); }
+op_plus_sub TOKEN_SUB op_times_divide_mod { $$ = $1 - $3; }
 ;
 
 
