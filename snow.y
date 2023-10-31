@@ -36,6 +36,13 @@
 
 %%
 
+/**************** expression ****************/
+expression:
+op_logic_or { $$ = $1; }
+;
+
+
+
 /**************** logic or ****************/
 op_logic_or:
 op_logic_and { $$ = $1; }
@@ -111,29 +118,31 @@ op_relation TOKEN_RA_EQUAL op_plus_sub { $$ = $1 >= $3; printf("result: %d = %d 
 op_plus_sub:
 op_times_divide_mod { $$ = $1; }
 |
-op_plus_sub TOKEN_PLUS op_times_divide_mod { $$ = $1 + $3; }
+op_plus_sub TOKEN_PLUS op_times_divide_mod { $$ = $1 + $3; printf("result: %d = %d + %d\n", $$, $1, $3); }
 |
-op_plus_sub TOKEN_SUB op_times_divide_mod { $$ = $1 - $3; }
+op_plus_sub TOKEN_SUB op_times_divide_mod { $$ = $1 - $3; printf("result: %d = %d - %d\n", $$, $1, $3); }
 ;
 
 
 
 /**************** times divide mod ****************/
 op_times_divide_mod:
-number { $$ = $1; }
+atom { $$ = $1; }
 |
-op_times_divide_mod TOKEN_TIMES number { $$ = $1 * $3; }
+op_times_divide_mod TOKEN_TIMES atom { $$ = $1 * $3; printf("result: %d = %d * %d\n", $$, $1, $3); }
 |
-op_times_divide_mod TOKEN_DIVIDE number { $$ = $1 / $3; }
+op_times_divide_mod TOKEN_DIVIDE atom { $$ = $1 / $3; printf("result: %d = %d / %d\n", $$, $1, $3); }
 |
-op_times_divide_mod TOKEN_PERCENT number { $$ = $1 % $3; }
+op_times_divide_mod TOKEN_PERCENT atom { $$ = $1 % $3; printf("result: %d = %d mod %d\n", $$, $1, $3); }
 ;
 
 
 
-/**************** number ****************/
-number:
+/**************** number expression ****************/
+atom:
 TOKEN_DEC { $$ = atoi(yyget_text(yylexer)); }
+|
+TOKEN_LP expression TOKEN_RP { $$ = $2; }
 ;
 
 %%
