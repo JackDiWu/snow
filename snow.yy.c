@@ -133,23 +133,27 @@ enum yysymbol_kind_t
   YYSYMBOL_TOKEN_DOUBLE_OR = 23,           /* TOKEN_DOUBLE_OR  */
   YYSYMBOL_TOKEN_DOUBLE_LA = 24,           /* TOKEN_DOUBLE_LA  */
   YYSYMBOL_TOKEN_DOUBLE_RA = 25,           /* TOKEN_DOUBLE_RA  */
-  YYSYMBOL_TOKEN_AND = 26,                 /* TOKEN_AND  */
-  YYSYMBOL_TOKEN_OR = 27,                  /* TOKEN_OR  */
-  YYSYMBOL_TOKEN_QUESTION = 28,            /* TOKEN_QUESTION  */
-  YYSYMBOL_TOKEN_POINT = 29,               /* TOKEN_POINT  */
-  YYSYMBOL_TOKEN_BROKEN_ISSUE = 30,        /* TOKEN_BROKEN_ISSUE  */
-  YYSYMBOL_TOKEN_EXCLAMATION = 31,         /* TOKEN_EXCLAMATION  */
-  YYSYMBOL_TOKEN_AT = 32,                  /* TOKEN_AT  */
-  YYSYMBOL_TOKEN_HASHTAG = 33,             /* TOKEN_HASHTAG  */
-  YYSYMBOL_TOKEN_DOLLAR = 34,              /* TOKEN_DOLLAR  */
-  YYSYMBOL_TOKEN_PERCENT = 35,             /* TOKEN_PERCENT  */
-  YYSYMBOL_TOKEN_START = 36,               /* TOKEN_START  */
-  YYSYMBOL_TOKEN_COLON = 37,               /* TOKEN_COLON  */
-  YYSYMBOL_TOKEN_SEMICOLON = 38,           /* TOKEN_SEMICOLON  */
-  YYSYMBOL_TOKEN_BACKSLASH = 39,           /* TOKEN_BACKSLASH  */
-  YYSYMBOL_YYACCEPT = 40,                  /* $accept  */
-  YYSYMBOL_word_list = 41,                 /* word_list  */
-  YYSYMBOL_word = 42                       /* word  */
+  YYSYMBOL_TOKEN_DOUBLE_EQUAL = 26,        /* TOKEN_DOUBLE_EQUAL  */
+  YYSYMBOL_TOKEN_LA_EQUAL = 27,            /* TOKEN_LA_EQUAL  */
+  YYSYMBOL_TOKEN_RA_EQUAL = 28,            /* TOKEN_RA_EQUAL  */
+  YYSYMBOL_TOKEN_AND = 29,                 /* TOKEN_AND  */
+  YYSYMBOL_TOKEN_OR = 30,                  /* TOKEN_OR  */
+  YYSYMBOL_TOKEN_QUESTION = 31,            /* TOKEN_QUESTION  */
+  YYSYMBOL_TOKEN_POINT = 32,               /* TOKEN_POINT  */
+  YYSYMBOL_TOKEN_BROKEN_ISSUE = 33,        /* TOKEN_BROKEN_ISSUE  */
+  YYSYMBOL_TOKEN_EXCLAMATION = 34,         /* TOKEN_EXCLAMATION  */
+  YYSYMBOL_TOKEN_AT = 35,                  /* TOKEN_AT  */
+  YYSYMBOL_TOKEN_HASHTAG = 36,             /* TOKEN_HASHTAG  */
+  YYSYMBOL_TOKEN_DOLLAR = 37,              /* TOKEN_DOLLAR  */
+  YYSYMBOL_TOKEN_PERCENT = 38,             /* TOKEN_PERCENT  */
+  YYSYMBOL_TOKEN_START = 39,               /* TOKEN_START  */
+  YYSYMBOL_TOKEN_COLON = 40,               /* TOKEN_COLON  */
+  YYSYMBOL_TOKEN_SEMICOLON = 41,           /* TOKEN_SEMICOLON  */
+  YYSYMBOL_TOKEN_BACKSLASH = 42,           /* TOKEN_BACKSLASH  */
+  YYSYMBOL_YYACCEPT = 43,                  /* $accept  */
+  YYSYMBOL_op_plus_sub = 44,               /* op_plus_sub  */
+  YYSYMBOL_op_times_divide_mod = 45,       /* op_times_divide_mod  */
+  YYSYMBOL_number = 46                     /* number  */
 };
 typedef enum yysymbol_kind_t yysymbol_kind_t;
 
@@ -475,21 +479,21 @@ union yyalloc
 #endif /* !YYCOPY_NEEDED */
 
 /* YYFINAL -- State number of the termination state.  */
-#define YYFINAL  4
+#define YYFINAL  5
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   4
+#define YYLAST   26
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  40
+#define YYNTOKENS  43
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  3
+#define YYNNTS  4
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  4
+#define YYNRULES  9
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  6
+#define YYNSTATES  16
 
 /* YYMAXUTOK -- Last valid token kind.  */
-#define YYMAXUTOK   294
+#define YYMAXUTOK   297
 
 
 /* YYTRANSLATE(TOKEN-NUM) -- Symbol number corresponding to TOKEN-NUM
@@ -532,14 +536,14 @@ static const yytype_int8 yytranslate[] =
        5,     6,     7,     8,     9,    10,    11,    12,    13,    14,
       15,    16,    17,    18,    19,    20,    21,    22,    23,    24,
       25,    26,    27,    28,    29,    30,    31,    32,    33,    34,
-      35,    36,    37,    38,    39
+      35,    36,    37,    38,    39,    40,    41,    42
 };
 
 #if YYDEBUG
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    38,    38,    39,    43
+       0,    41,    41,    43,    45,    52,    54,    56,    58,    65
 };
 #endif
 
@@ -560,11 +564,13 @@ static const char *const yytname[] =
   "TOKEN_EQUAL", "TOKEN_PLUS", "TOKEN_SUB", "TOKEN_TIMES", "TOKEN_DIVIDE",
   "TOKEN_LP", "TOKEN_RP", "TOKEN_LS", "TOKEN_RS", "TOKEN_LC", "TOKEN_RC",
   "TOKEN_LA", "TOKEN_RA", "TOKEN_DOUBLE_AND", "TOKEN_DOUBLE_OR",
-  "TOKEN_DOUBLE_LA", "TOKEN_DOUBLE_RA", "TOKEN_AND", "TOKEN_OR",
+  "TOKEN_DOUBLE_LA", "TOKEN_DOUBLE_RA", "TOKEN_DOUBLE_EQUAL",
+  "TOKEN_LA_EQUAL", "TOKEN_RA_EQUAL", "TOKEN_AND", "TOKEN_OR",
   "TOKEN_QUESTION", "TOKEN_POINT", "TOKEN_BROKEN_ISSUE",
   "TOKEN_EXCLAMATION", "TOKEN_AT", "TOKEN_HASHTAG", "TOKEN_DOLLAR",
   "TOKEN_PERCENT", "TOKEN_START", "TOKEN_COLON", "TOKEN_SEMICOLON",
-  "TOKEN_BACKSLASH", "$accept", "word_list", "word", YY_NULLPTR
+  "TOKEN_BACKSLASH", "$accept", "op_plus_sub", "op_times_divide_mod",
+  "number", YY_NULLPTR
 };
 
 static const char *
@@ -574,7 +580,7 @@ yysymbol_name (yysymbol_kind_t yysymbol)
 }
 #endif
 
-#define YYPACT_NINF (-4)
+#define YYPACT_NINF (-13)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
@@ -588,7 +594,8 @@ yysymbol_name (yysymbol_kind_t yysymbol)
    STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
-      -3,    -4,     0,    -4,    -4,    -4
+       3,   -13,     2,   -12,   -13,   -13,     3,     3,     3,     3,
+       3,   -12,   -12,   -13,   -13,   -13
 };
 
 /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -596,19 +603,20 @@ static const yytype_int8 yypact[] =
    means the default is an error.  */
 static const yytype_int8 yydefact[] =
 {
-       0,     4,     0,     2,     1,     3
+       0,     9,     0,     2,     5,     1,     0,     0,     0,     0,
+       0,     3,     4,     6,     7,     8
 };
 
 /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-      -4,    -4,     1
+     -13,   -13,     0,    -5
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-       0,     2,     3
+       0,     2,     3,     4
 };
 
 /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -616,31 +624,36 @@ static const yytype_int8 yydefgoto[] =
    number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int8 yytable[] =
 {
-       4,     1,     0,     5,     1
+       8,     9,     5,    13,    14,    15,    11,    12,     0,     1,
+       0,     0,     6,     7,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,    10
 };
 
 static const yytype_int8 yycheck[] =
 {
-       0,     4,    -1,     2,     4
+      12,    13,     0,     8,     9,    10,     6,     7,    -1,     6,
+      -1,    -1,    10,    11,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    38
 };
 
 /* YYSTOS[STATE-NUM] -- The symbol kind of the accessing symbol of
    state STATE-NUM.  */
 static const yytype_int8 yystos[] =
 {
-       0,     4,    41,    42,     0,    42
+       0,     6,    44,    45,    46,     0,    10,    11,    12,    13,
+      38,    45,    45,    46,    46,    46
 };
 
 /* YYR1[RULE-NUM] -- Symbol kind of the left-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr1[] =
 {
-       0,    40,    41,    41,    42
+       0,    43,    44,    44,    44,    45,    45,    45,    45,    46
 };
 
 /* YYR2[RULE-NUM] -- Number of symbols on the right-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr2[] =
 {
-       0,     2,     1,     2,     1
+       0,     2,     1,     3,     3,     1,     3,     3,     3,     1
 };
 
 
@@ -1111,26 +1124,56 @@ yyreduce:
   YY_REDUCE_PRINT (yyn);
   switch (yyn)
     {
-  case 2: /* word_list: word  */
-#line 38 "snow.y"
-     {}
-#line 1118 "snow.yy.c"
+  case 2: /* op_plus_sub: op_times_divide_mod  */
+#line 41 "snow.y"
+                    { yyval = yyvsp[0]; }
+#line 1131 "snow.yy.c"
     break;
 
-  case 3: /* word_list: word_list word  */
-#line 39 "snow.y"
-                 {}
-#line 1124 "snow.yy.c"
-    break;
-
-  case 4: /* word: TOKEN_WORD  */
+  case 3: /* op_plus_sub: op_plus_sub TOKEN_PLUS op_times_divide_mod  */
 #line 43 "snow.y"
-           { yyprint(); }
-#line 1130 "snow.yy.c"
+                                           { yyval = yyvsp[-2] + yyvsp[0]; printf("result: %d = %d + %d\n", yyval, yyvsp[-2], yyvsp[0]); }
+#line 1137 "snow.yy.c"
+    break;
+
+  case 4: /* op_plus_sub: op_plus_sub TOKEN_SUB op_times_divide_mod  */
+#line 45 "snow.y"
+                                          { yyval = yyvsp[-2] - yyvsp[0]; printf("result: %d = %d - %d\n", yyval, yyvsp[-2], yyvsp[0]); }
+#line 1143 "snow.yy.c"
+    break;
+
+  case 5: /* op_times_divide_mod: number  */
+#line 52 "snow.y"
+       { yyval = yyvsp[0]; }
+#line 1149 "snow.yy.c"
+    break;
+
+  case 6: /* op_times_divide_mod: op_times_divide_mod TOKEN_TIMES number  */
+#line 54 "snow.y"
+                                       { yyval = yyvsp[-2] * yyvsp[0]; }
+#line 1155 "snow.yy.c"
+    break;
+
+  case 7: /* op_times_divide_mod: op_times_divide_mod TOKEN_DIVIDE number  */
+#line 56 "snow.y"
+                                        { yyval = yyvsp[-2] / yyvsp[0]; }
+#line 1161 "snow.yy.c"
+    break;
+
+  case 8: /* op_times_divide_mod: op_times_divide_mod TOKEN_PERCENT number  */
+#line 58 "snow.y"
+                                         { yyval = yyvsp[-2] % yyvsp[0]; }
+#line 1167 "snow.yy.c"
+    break;
+
+  case 9: /* number: TOKEN_DEC  */
+#line 65 "snow.y"
+          { yyval = atoi(yyget_text(yylexer)); }
+#line 1173 "snow.yy.c"
     break;
 
 
-#line 1134 "snow.yy.c"
+#line 1177 "snow.yy.c"
 
       default: break;
     }
@@ -1323,5 +1366,5 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 46 "snow.y"
+#line 68 "snow.y"
 

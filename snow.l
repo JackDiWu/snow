@@ -90,6 +90,8 @@
 
 \\                           { lex_next_token(); lex_return(TOKEN_BACKSLASH); }
 
+\=\=                         { lex_next_token(); lex_return(TOKEN_DOUBLE_EQUAL); }
+
 \&\&                         { lex_next_token(); lex_return(TOKEN_DOUBLE_AND); }
 
 \|\|                         { lex_next_token(); lex_return(TOKEN_DOUBLE_OR); }
@@ -97,6 +99,10 @@
 \<\<                         { lex_next_token(); lex_return(TOKEN_DOUBLE_LA); }
 
 \>\>                         { lex_next_token(); lex_return(TOKEN_DOUBLE_RA); }
+
+\<\=                         { lex_next_token(); lex_return(TOKEN_LA_EQUAL); }
+
+\>\=                         { lex_next_token(); lex_return(TOKEN_RA_EQUAL); }
 
 .                            { lex_return(TOKEN_UNKNOW); }
 

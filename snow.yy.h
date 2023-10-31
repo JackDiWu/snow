@@ -77,20 +77,23 @@ extern int yydebug;
     TOKEN_DOUBLE_OR = 278,         /* TOKEN_DOUBLE_OR  */
     TOKEN_DOUBLE_LA = 279,         /* TOKEN_DOUBLE_LA  */
     TOKEN_DOUBLE_RA = 280,         /* TOKEN_DOUBLE_RA  */
-    TOKEN_AND = 281,               /* TOKEN_AND  */
-    TOKEN_OR = 282,                /* TOKEN_OR  */
-    TOKEN_QUESTION = 283,          /* TOKEN_QUESTION  */
-    TOKEN_POINT = 284,             /* TOKEN_POINT  */
-    TOKEN_BROKEN_ISSUE = 285,      /* TOKEN_BROKEN_ISSUE  */
-    TOKEN_EXCLAMATION = 286,       /* TOKEN_EXCLAMATION  */
-    TOKEN_AT = 287,                /* TOKEN_AT  */
-    TOKEN_HASHTAG = 288,           /* TOKEN_HASHTAG  */
-    TOKEN_DOLLAR = 289,            /* TOKEN_DOLLAR  */
-    TOKEN_PERCENT = 290,           /* TOKEN_PERCENT  */
-    TOKEN_START = 291,             /* TOKEN_START  */
-    TOKEN_COLON = 292,             /* TOKEN_COLON  */
-    TOKEN_SEMICOLON = 293,         /* TOKEN_SEMICOLON  */
-    TOKEN_BACKSLASH = 294          /* TOKEN_BACKSLASH  */
+    TOKEN_DOUBLE_EQUAL = 281,      /* TOKEN_DOUBLE_EQUAL  */
+    TOKEN_LA_EQUAL = 282,          /* TOKEN_LA_EQUAL  */
+    TOKEN_RA_EQUAL = 283,          /* TOKEN_RA_EQUAL  */
+    TOKEN_AND = 284,               /* TOKEN_AND  */
+    TOKEN_OR = 285,                /* TOKEN_OR  */
+    TOKEN_QUESTION = 286,          /* TOKEN_QUESTION  */
+    TOKEN_POINT = 287,             /* TOKEN_POINT  */
+    TOKEN_BROKEN_ISSUE = 288,      /* TOKEN_BROKEN_ISSUE  */
+    TOKEN_EXCLAMATION = 289,       /* TOKEN_EXCLAMATION  */
+    TOKEN_AT = 290,                /* TOKEN_AT  */
+    TOKEN_HASHTAG = 291,           /* TOKEN_HASHTAG  */
+    TOKEN_DOLLAR = 292,            /* TOKEN_DOLLAR  */
+    TOKEN_PERCENT = 293,           /* TOKEN_PERCENT  */
+    TOKEN_START = 294,             /* TOKEN_START  */
+    TOKEN_COLON = 295,             /* TOKEN_COLON  */
+    TOKEN_SEMICOLON = 296,         /* TOKEN_SEMICOLON  */
+    TOKEN_BACKSLASH = 297          /* TOKEN_BACKSLASH  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
