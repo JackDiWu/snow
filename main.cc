@@ -2,7 +2,7 @@
  * @Author: Jack
  * @Date: 2023-10-29 11:52:56
  * @LastEditors: Jack
- * @LastEditTime: 2023-10-31 12:24:09
+ * @LastEditTime: 2023-10-31 12:28:25
  */
 #include "defs.h"
 #include "parser.h"
@@ -14,7 +14,7 @@ extern "C" {
 
 // std::string text = "I am storm + - * / () [] {} <>  .~!@#$%^&*;:?\\ &&  || << >> \"say\\\"something+-*/\" 123 0x232 0.15234 \"Hello\\\'\\\"world\" ";
 
-std::string text = "1 + 3 * 5 != 16";
+std::string text = "15 | 1 + 3 * 5 != 16";
 
 void test_lexer() {
     yyscan_t scan;

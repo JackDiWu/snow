@@ -36,7 +36,25 @@
 
 %%
 
-/**************** plus sub ****************/
+/**************** or ****************/
+op_or:
+op_and { $$ = $1; }
+|
+op_or TOKEN_OR op_and { $$ = $1 | $3; printf("result: %d = %d | %d\n", $$, $1, $3); }
+;
+
+
+
+/**************** and ****************/
+op_and:
+op_equal { $$ = $1; }
+|
+op_and TOKEN_AND op_equal { $$ = $1 & $3; printf("result: %d = %d & %d\n", $$, $1, $3); }
+;
+
+
+
+/**************** equal ****************/
 op_equal:
 op_relation { $$ = $1; }
 |
@@ -47,7 +65,7 @@ op_equal TOKEN_NOT_EQUAL op_relation { $$ = $1 != $3; printf("result: %d = %d !=
 
 
 
-/**************** plus sub ****************/
+/**************** relation ****************/
 op_relation:
 op_plus_sub { $$ = $1; }
 |
