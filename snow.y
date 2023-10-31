@@ -142,6 +142,8 @@ op_times_divide_mod TOKEN_PERCENT op_negative { $$ = $1 % $3; printf("result: %d
 op_negative:
 atom { $$ = $1; }
 |
+TOKEN_PLUS atom { $$ = $2; printf("result: %d = + %d\n", $$, $2); }
+|
 TOKEN_SUB atom { $$ = 0 - $2; printf("result: %d = - %d\n", $$, $2); }
 ;
 
