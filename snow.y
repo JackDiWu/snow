@@ -127,13 +127,22 @@ op_plus_sub TOKEN_SUB op_times_divide_mod { $$ = $1 - $3; printf("result: %d = %
 
 /**************** times divide mod ****************/
 op_times_divide_mod:
+op_negative { $$ = $1; }
+|
+op_times_divide_mod TOKEN_TIMES op_negative { $$ = $1 * $3; printf("result: %d = %d * %d\n", $$, $1, $3); }
+|
+op_times_divide_mod TOKEN_DIVIDE op_negative { $$ = $1 / $3; printf("result: %d = %d / %d\n", $$, $1, $3); }
+|
+op_times_divide_mod TOKEN_PERCENT op_negative { $$ = $1 % $3; printf("result: %d = %d mod %d\n", $$, $1, $3); }
+;
+
+
+
+/**************** positive negative ****************/
+op_negative:
 atom { $$ = $1; }
 |
-op_times_divide_mod TOKEN_TIMES atom { $$ = $1 * $3; printf("result: %d = %d * %d\n", $$, $1, $3); }
-|
-op_times_divide_mod TOKEN_DIVIDE atom { $$ = $1 / $3; printf("result: %d = %d / %d\n", $$, $1, $3); }
-|
-op_times_divide_mod TOKEN_PERCENT atom { $$ = $1 % $3; printf("result: %d = %d mod %d\n", $$, $1, $3); }
+TOKEN_SUB atom { $$ = 0 - $2; printf("result: %d = - %d\n", $$, $2); }
 ;
 
 
