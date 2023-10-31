@@ -92,6 +92,8 @@
 
 \=\=                         { lex_next_token(); lex_return(TOKEN_DOUBLE_EQUAL); }
 
+\!\=                         { lex_next_token(); lex_return(TOKEN_NOT_EQUAL); }
+
 \&\&                         { lex_next_token(); lex_return(TOKEN_DOUBLE_AND); }
 
 \|\|                         { lex_next_token(); lex_return(TOKEN_DOUBLE_OR); }
