@@ -32,15 +32,42 @@
 
 %token TOKEN_LA_EQUAL TOKEN_RA_EQUAL TOKEN_NOT_EQUAL
 
-%token TOKEN_AND TOKEN_OR TOKEN_QUESTION TOKEN_POINT TOKEN_BROKEN_ISSUE TOKEN_EXCLAMATION TOKEN_AT TOKEN_HASHTAG TOKEN_DOLLAR TOKEN_PERCENT TOKEN_START TOKEN_COLON TOKEN_SEMICOLON TOKEN_BACKSLASH
+%token TOKEN_AND TOKEN_OR TOKEN_QUESTION TOKEN_POINT TOKEN_BROKEN_ISSUE TOKEN_EXCLAMATION TOKEN_AT TOKEN_HASHTAG TOKEN_DOLLAR TOKEN_PERCENT TOKEN_XOR TOKEN_COLON TOKEN_SEMICOLON TOKEN_BACKSLASH
 
 %%
 
+/**************** logic or ****************/
+op_logic_or:
+op_logic_and { $$ = $1; }
+|
+op_logic_or TOKEN_DOUBLE_OR op_logic_and { $$ = $1 || $3; printf("result: %d = %d || %d\n", $$, $1, $3); }
+;
+
+
+
+/**************** logic and ****************/
+op_logic_and:
+op_or { $$ = $1; }
+|
+op_logic_and TOKEN_DOUBLE_AND op_or { $$ = $1 && $3; printf("result: %d = %d && %d\n", $$, $1, $3); }
+;
+
+
+
 /**************** or ****************/
 op_or:
+op_xor { $$ = $1; }
+|
+op_or TOKEN_OR op_xor { $$ = $1 | $3; printf("result: %d = %d | %d\n", $$, $1, $3); }
+;
+
+
+
+/**************** xor ****************/
+op_xor:
 op_and { $$ = $1; }
 |
-op_or TOKEN_OR op_and { $$ = $1 | $3; printf("result: %d = %d | %d\n", $$, $1, $3); }
+op_xor TOKEN_XOR op_and { $$ = $1 ^ $3; printf("result: %d = %d ^ %d\n", $$, $1, $3); }
 ;
 
 

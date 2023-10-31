@@ -91,7 +91,7 @@ extern int yydebug;
     TOKEN_HASHTAG = 292,           /* TOKEN_HASHTAG  */
     TOKEN_DOLLAR = 293,            /* TOKEN_DOLLAR  */
     TOKEN_PERCENT = 294,           /* TOKEN_PERCENT  */
-    TOKEN_START = 295,             /* TOKEN_START  */
+    TOKEN_XOR = 295,               /* TOKEN_XOR  */
     TOKEN_COLON = 296,             /* TOKEN_COLON  */
     TOKEN_SEMICOLON = 297,         /* TOKEN_SEMICOLON  */
     TOKEN_BACKSLASH = 298          /* TOKEN_BACKSLASH  */

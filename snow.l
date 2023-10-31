@@ -82,7 +82,7 @@
 
 \%                           { lex_next_token(); lex_return(TOKEN_PERCENT); }
 
-\^                           { lex_next_token(); lex_return(TOKEN_START); }
+\^                           { lex_next_token(); lex_return(TOKEN_XOR); }
 
 \:                           { lex_next_token(); lex_return(TOKEN_COLON); }
 
