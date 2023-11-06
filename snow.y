@@ -138,24 +138,37 @@ op_plus_sub TOKEN_SUB op_times_divide_mod { $$ = $1 - $3; printf("result: %d = %
 
 /**************** times divide mod ****************/
 op_times_divide_mod:
-op_negative { $$ = $1; }
+op_prefix { $$ = $1; }
 |
-op_times_divide_mod TOKEN_TIMES op_negative { $$ = $1 * $3; printf("result: %d = %d * %d\n", $$, $1, $3); }
+op_times_divide_mod TOKEN_TIMES op_prefix { $$ = $1 * $3; printf("result: %d = %d * %d\n", $$, $1, $3); }
 |
-op_times_divide_mod TOKEN_DIVIDE op_negative { $$ = $1 / $3; printf("result: %d = %d / %d\n", $$, $1, $3); }
+op_times_divide_mod TOKEN_DIVIDE op_prefix { $$ = $1 / $3; printf("result: %d = %d / %d\n", $$, $1, $3); }
 |
-op_times_divide_mod TOKEN_PERCENT op_negative { $$ = $1 % $3; printf("result: %d = %d mod %d\n", $$, $1, $3); }
+op_times_divide_mod TOKEN_PERCENT op_prefix { $$ = $1 % $3; printf("result: %d = %d mod %d\n", $$, $1, $3); }
 ;
 
 
 
-/**************** positive negative ****************/
-op_negative:
+/**************** prefix ****************/
+op_prefix:
+op_suffix { $$ = $1; }
+|
+TOKEN_PLUS op_suffix { $$ = $2; printf("result: %d = + %d\n", $$, $2); }
+|
+TOKEN_SUB op_suffix { $$ = -($2); printf("result: %d = - %d\n", $$, $2); }
+|
+TOKEN_EXCLAMATION op_suffix { $$ = !($2); printf("result: %d = ! %d\n", $$, $2); }
+|
+TOKEN_BROKEN_ISSUE op_suffix { $$ = ~($2); printf("result: %d = ~ %d\n", $$, $2); }
+;
+
+
+
+/**************** suffix ****************/
+op_suffix:
 atom { $$ = $1; }
 |
-TOKEN_PLUS atom { $$ = $2; printf("result: %d = + %d\n", $$, $2); }
-|
-TOKEN_SUB atom { $$ = 0 - $2; printf("result: %d = - %d\n", $$, $2); }
+TOKEN_LP expression TOKEN_RP { $$ = $2; }
 ;
 
 
@@ -163,8 +176,6 @@ TOKEN_SUB atom { $$ = 0 - $2; printf("result: %d = - %d\n", $$, $2); }
 /**************** number expression ****************/
 atom:
 TOKEN_DEC { $$ = atoi(yyget_text(yylexer)); }
-|
-TOKEN_LP expression TOKEN_RP { $$ = $2; }
 ;
 
 %%
