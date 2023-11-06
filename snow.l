@@ -22,7 +22,7 @@
 
 [0-9]+                       { lex_next_token(); lex_return(TOKEN_DEC); }
 
-0x[0-9a-fA-F]+               { lex_next_token(); lex_return(TOKEN_HEX); }
+0[xX][0-9a-fA-F]+               { lex_next_token(); lex_return(TOKEN_HEX); }
 
 [0-9]+\.[0-9]+               { lex_next_token(); lex_return(TOKEN_FLOAT); }
 
