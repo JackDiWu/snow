@@ -1,12 +1,14 @@
 %{
 
+#define YYSTYPE          long
+
+#define lex_param        ((yyparse_t)parser)->scanner
+
 #include "native.h"
 
 #include "snow.yy.h"
 
 #include "lex.yy.h"
-
-#define lex_param ((yyparse_t)parser)->scanner
 
 %}
 
@@ -47,7 +49,7 @@ op_logic_or { $$ = $1; }
 op_logic_or:
 op_logic_and { $$ = $1; }
 |
-op_logic_or TOKEN_DOUBLE_OR op_logic_and { $$ = $1 || $3; printf("result: %d = %d || %d\n", $$, $1, $3); }
+op_logic_or TOKEN_DOUBLE_OR op_logic_and { $$ = $1 || $3; printf("result: %ld = %ld || %ld\n", $$, $1, $3); }
 ;
 
 
@@ -56,7 +58,7 @@ op_logic_or TOKEN_DOUBLE_OR op_logic_and { $$ = $1 || $3; printf("result: %d = %
 op_logic_and:
 op_or { $$ = $1; }
 |
-op_logic_and TOKEN_DOUBLE_AND op_or { $$ = $1 && $3; printf("result: %d = %d && %d\n", $$, $1, $3); }
+op_logic_and TOKEN_DOUBLE_AND op_or { $$ = $1 && $3; printf("result: %ld = %ld && %ld\n", $$, $1, $3); }
 ;
 
 
@@ -65,7 +67,7 @@ op_logic_and TOKEN_DOUBLE_AND op_or { $$ = $1 && $3; printf("result: %d = %d && 
 op_or:
 op_xor { $$ = $1; }
 |
-op_or TOKEN_OR op_xor { $$ = $1 | $3; printf("result: %d = %d | %d\n", $$, $1, $3); }
+op_or TOKEN_OR op_xor { $$ = $1 | $3; printf("result: %ld = %ld | %ld\n", $$, $1, $3); }
 ;
 
 
@@ -74,7 +76,7 @@ op_or TOKEN_OR op_xor { $$ = $1 | $3; printf("result: %d = %d | %d\n", $$, $1, $
 op_xor:
 op_and { $$ = $1; }
 |
-op_xor TOKEN_XOR op_and { $$ = $1 ^ $3; printf("result: %d = %d ^ %d\n", $$, $1, $3); }
+op_xor TOKEN_XOR op_and { $$ = $1 ^ $3; printf("result: %ld = %ld ^ %ld\n", $$, $1, $3); }
 ;
 
 
@@ -83,7 +85,7 @@ op_xor TOKEN_XOR op_and { $$ = $1 ^ $3; printf("result: %d = %d ^ %d\n", $$, $1,
 op_and:
 op_equal { $$ = $1; }
 |
-op_and TOKEN_AND op_equal { $$ = $1 & $3; printf("result: %d = %d & %d\n", $$, $1, $3); }
+op_and TOKEN_AND op_equal { $$ = $1 & $3; printf("result: %ld = %ld & %ld\n", $$, $1, $3); }
 ;
 
 
@@ -92,9 +94,9 @@ op_and TOKEN_AND op_equal { $$ = $1 & $3; printf("result: %d = %d & %d\n", $$, $
 op_equal:
 op_relation { $$ = $1; }
 |
-op_equal TOKEN_DOUBLE_EQUAL op_relation { $$ = $1 == $3; printf("result: %d = %d == %d\n", $$, $1, $3); }
+op_equal TOKEN_DOUBLE_EQUAL op_relation { $$ = $1 == $3; printf("result: %ld = %ld == %ld\n", $$, $1, $3); }
 |
-op_equal TOKEN_NOT_EQUAL op_relation { $$ = $1 != $3; printf("result: %d = %d != %d\n", $$, $1, $3); }
+op_equal TOKEN_NOT_EQUAL op_relation { $$ = $1 != $3; printf("result: %ld = %ld != %ld\n", $$, $1, $3); }
 ;
 
 
@@ -103,13 +105,13 @@ op_equal TOKEN_NOT_EQUAL op_relation { $$ = $1 != $3; printf("result: %d = %d !=
 op_relation:
 op_bit { $$ = $1; }
 |
-op_relation TOKEN_LA op_bit { $$ = $1 < $3; printf("result: %d = %d < %d\n", $$, $1, $3); }
+op_relation TOKEN_LA op_bit { $$ = $1 < $3; printf("result: %ld = %ld < %ld\n", $$, $1, $3); }
 |
-op_relation TOKEN_RA op_bit { $$ = $1 > $3; printf("result: %d = %d > %d\n", $$, $1, $3); }
+op_relation TOKEN_RA op_bit { $$ = $1 > $3; printf("result: %ld = %ld > %ld\n", $$, $1, $3); }
 |
-op_relation TOKEN_LA_EQUAL op_bit { $$ = $1 <= $3; printf("result: %d = %d <= %d\n", $$, $1, $3); }
+op_relation TOKEN_LA_EQUAL op_bit { $$ = $1 <= $3; printf("result: %ld = %ld <= %ld\n", $$, $1, $3); }
 |
-op_relation TOKEN_RA_EQUAL op_bit { $$ = $1 >= $3; printf("result: %d = %d >= %d\n", $$, $1, $3); }
+op_relation TOKEN_RA_EQUAL op_bit { $$ = $1 >= $3; printf("result: %ld = %ld >= %ld\n", $$, $1, $3); }
 ;
 
 
@@ -118,9 +120,9 @@ op_relation TOKEN_RA_EQUAL op_bit { $$ = $1 >= $3; printf("result: %d = %d >= %d
 op_bit:
 op_plus_sub { $$ = $1; }
 |
-op_bit TOKEN_DOUBLE_LA op_plus_sub { $$ = $1 << $3; printf("result: %d = %d << %d\n", $$, $1, $3); }
+op_bit TOKEN_DOUBLE_LA op_plus_sub { $$ = $1 << $3; printf("result: %ld = %ld << %ld\n", $$, $1, $3); }
 |
-op_bit TOKEN_DOUBLE_RA op_plus_sub { $$ = $1 >> $3; printf("result: %d = %d >> %d\n", $$, $1, $3); }
+op_bit TOKEN_DOUBLE_RA op_plus_sub { $$ = $1 >> $3; printf("result: %ld = %ld >> %ld\n", $$, $1, $3); }
 ;
 
 
@@ -129,9 +131,9 @@ op_bit TOKEN_DOUBLE_RA op_plus_sub { $$ = $1 >> $3; printf("result: %d = %d >> %
 op_plus_sub:
 op_times_divide_mod { $$ = $1; }
 |
-op_plus_sub TOKEN_PLUS op_times_divide_mod { $$ = $1 + $3; printf("result: %d = %d + %d\n", $$, $1, $3); }
+op_plus_sub TOKEN_PLUS op_times_divide_mod { $$ = $1 + $3; printf("result: %ld = %ld + %ld\n", $$, $1, $3); }
 |
-op_plus_sub TOKEN_SUB op_times_divide_mod { $$ = $1 - $3; printf("result: %d = %d - %d\n", $$, $1, $3); }
+op_plus_sub TOKEN_SUB op_times_divide_mod { $$ = $1 - $3; printf("result: %ld = %ld - %ld\n", $$, $1, $3); }
 ;
 
 
@@ -140,11 +142,11 @@ op_plus_sub TOKEN_SUB op_times_divide_mod { $$ = $1 - $3; printf("result: %d = %
 op_times_divide_mod:
 op_prefix { $$ = $1; }
 |
-op_times_divide_mod TOKEN_TIMES op_prefix { $$ = $1 * $3; printf("result: %d = %d * %d\n", $$, $1, $3); }
+op_times_divide_mod TOKEN_TIMES op_prefix { $$ = $1 * $3; printf("result: %ld = %ld * %ld\n", $$, $1, $3); }
 |
-op_times_divide_mod TOKEN_DIVIDE op_prefix { $$ = $1 / $3; printf("result: %d = %d / %d\n", $$, $1, $3); }
+op_times_divide_mod TOKEN_DIVIDE op_prefix { $$ = $1 / $3; printf("result: %ld = %ld / %ld\n", $$, $1, $3); }
 |
-op_times_divide_mod TOKEN_PERCENT op_prefix { $$ = $1 % $3; printf("result: %d = %d mod %d\n", $$, $1, $3); }
+op_times_divide_mod TOKEN_PERCENT op_prefix { $$ = $1 % $3; printf("result: %ld = %ld mod %ld\n", $$, $1, $3); }
 ;
 
 
@@ -153,13 +155,13 @@ op_times_divide_mod TOKEN_PERCENT op_prefix { $$ = $1 % $3; printf("result: %d =
 op_prefix:
 op_suffix { $$ = $1; }
 |
-TOKEN_PLUS op_suffix { $$ = +($2); printf("result: %d = + %d\n", $$, $2); }
+TOKEN_PLUS op_suffix { $$ = +($2); printf("result: %ld = + %ld\n", $$, $2); }
 |
-TOKEN_SUB op_suffix { $$ = -($2); printf("result: %d = - %d\n", $$, $2); }
+TOKEN_SUB op_suffix { $$ = -($2); printf("result: %ld = - %ld\n", $$, $2); }
 |
-TOKEN_EXCLAMATION op_suffix { $$ = !($2); printf("result: %d = ! %d\n", $$, $2); }
+TOKEN_EXCLAMATION op_suffix { $$ = !($2); printf("result: %ld = ! %ld\n", $$, $2); }
 |
-TOKEN_BROKEN_ISSUE op_suffix { $$ = ~($2); printf("result: %d = ~ %d\n", $$, $2); }
+TOKEN_BROKEN_ISSUE op_suffix { $$ = ~($2); printf("result: %ld = ~ %ld\n", $$, $2); }
 ;
 
 
@@ -173,7 +175,9 @@ atom { $$ = $1; }
 
 /**************** number expression ****************/
 atom:
-TOKEN_DEC { $$ = atoi(yyget_text(yylexer)); }
+TOKEN_DEC { $$ = strtol(yyget_text(yylexer), NULL, 10); }
+|
+TOKEN_HEX { $$ = strtol(yyget_text(yylexer), NULL, 16); }
 |
 TOKEN_LP expression TOKEN_RP { $$ = $2; }
 ;
