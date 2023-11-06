@@ -558,7 +558,7 @@ static const yytype_uint8 yyrline[] =
        0,    41,    41,    48,    50,    57,    59,    66,    68,    75,
       77,    84,    86,    93,    95,    97,   104,   106,   108,   110,
      112,   119,   121,   123,   130,   132,   134,   141,   143,   145,
-     147,   154,   156,   158,   160,   162,   169,   171,   178
+     147,   154,   156,   158,   160,   162,   169,   176,   178
 };
 #endif
 
@@ -625,11 +625,11 @@ static const yytype_int8 yypact[] =
    means the default is an error.  */
 static const yytype_int8 yydefact[] =
 {
-       0,    38,     0,     0,     0,     0,     0,     0,     2,     3,
+       0,    37,     0,     0,     0,     0,     0,     0,     2,     3,
        5,     7,     9,    11,    13,    16,    21,    24,    27,    31,
       36,    32,    33,     0,    35,    34,     1,     0,     0,     0,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,     0,    37,     4,     6,     8,    10,
+       0,     0,     0,     0,     0,    38,     4,     6,     8,    10,
       12,    14,    15,    17,    18,    19,    20,    22,    23,    25,
       26,    28,    29,    30
 };
@@ -690,7 +690,7 @@ static const yytype_int8 yyr1[] =
        0,    44,    45,    46,    46,    47,    47,    48,    48,    49,
       49,    50,    50,    51,    51,    51,    52,    52,    52,    52,
       52,    53,    53,    53,    54,    54,    54,    55,    55,    55,
-      55,    56,    56,    56,    56,    56,    57,    57,    58
+      55,    56,    56,    56,    56,    56,    57,    58,    58
 };
 
 /* YYR2[RULE-NUM] -- Number of symbols on the right-hand side of rule RULE-NUM.  */
@@ -699,7 +699,7 @@ static const yytype_int8 yyr2[] =
        0,     2,     1,     1,     3,     1,     3,     1,     3,     1,
        3,     1,     3,     1,     3,     3,     1,     3,     3,     3,
        3,     1,     3,     3,     1,     3,     3,     1,     3,     3,
-       3,     1,     2,     2,     2,     2,     1,     3,     1
+       3,     1,     2,     2,     2,     2,     1,     1,     3
 };
 
 
@@ -1380,15 +1380,15 @@ yyreduce:
 #line 1381 "snow.yy.c"
     break;
 
-  case 37: /* op_suffix: TOKEN_LP expression TOKEN_RP  */
-#line 171 "snow.y"
-                             { yyval = yyvsp[-1]; }
+  case 37: /* atom: TOKEN_DEC  */
+#line 176 "snow.y"
+          { yyval = atoi(yyget_text(yylexer)); }
 #line 1387 "snow.yy.c"
     break;
 
-  case 38: /* atom: TOKEN_DEC  */
+  case 38: /* atom: TOKEN_LP expression TOKEN_RP  */
 #line 178 "snow.y"
-          { yyval = atoi(yyget_text(yylexer)); }
+                             { yyval = yyvsp[-1]; }
 #line 1393 "snow.yy.c"
     break;
 

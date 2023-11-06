@@ -167,8 +167,6 @@ TOKEN_BROKEN_ISSUE op_suffix { $$ = ~($2); printf("result: %d = ~ %d\n", $$, $2)
 /**************** suffix ****************/
 op_suffix:
 atom { $$ = $1; }
-|
-TOKEN_LP expression TOKEN_RP { $$ = $2; }
 ;
 
 
@@ -176,6 +174,8 @@ TOKEN_LP expression TOKEN_RP { $$ = $2; }
 /**************** number expression ****************/
 atom:
 TOKEN_DEC { $$ = atoi(yyget_text(yylexer)); }
+|
+TOKEN_LP expression TOKEN_RP { $$ = $2; }
 ;
 
 %%
