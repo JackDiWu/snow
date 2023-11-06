@@ -1,14 +1,6 @@
 %{
 
-#define YYSTYPE          long
-
-#define lex_param        ((yyparse_t)parser)->scanner
-
 #include "native.h"
-
-#include "snow.yy.h"
-
-#include "lex.yy.h"
 
 %}
 
