@@ -101,15 +101,26 @@ op_equal TOKEN_NOT_EQUAL op_relation { $$ = $1 != $3; printf("result: %d = %d !=
 
 /**************** relation ****************/
 op_relation:
+op_bit { $$ = $1; }
+|
+op_relation TOKEN_LA op_bit { $$ = $1 < $3; printf("result: %d = %d < %d\n", $$, $1, $3); }
+|
+op_relation TOKEN_RA op_bit { $$ = $1 > $3; printf("result: %d = %d > %d\n", $$, $1, $3); }
+|
+op_relation TOKEN_LA_EQUAL op_bit { $$ = $1 <= $3; printf("result: %d = %d <= %d\n", $$, $1, $3); }
+|
+op_relation TOKEN_RA_EQUAL op_bit { $$ = $1 >= $3; printf("result: %d = %d >= %d\n", $$, $1, $3); }
+;
+
+
+
+/**************** bit ****************/
+op_bit:
 op_plus_sub { $$ = $1; }
 |
-op_relation TOKEN_LA op_plus_sub { $$ = $1 < $3; printf("result: %d = %d < %d\n", $$, $1, $3); }
+op_bit TOKEN_DOUBLE_LA op_plus_sub { $$ = $1 << $3; printf("result: %d = %d << %d\n", $$, $1, $3); }
 |
-op_relation TOKEN_RA op_plus_sub { $$ = $1 > $3; printf("result: %d = %d > %d\n", $$, $1, $3); }
-|
-op_relation TOKEN_LA_EQUAL op_plus_sub { $$ = $1 <= $3; printf("result: %d = %d <= %d\n", $$, $1, $3); }
-|
-op_relation TOKEN_RA_EQUAL op_plus_sub { $$ = $1 >= $3; printf("result: %d = %d >= %d\n", $$, $1, $3); }
+op_bit TOKEN_DOUBLE_RA op_plus_sub { $$ = $1 >> $3; printf("result: %d = %d >> %d\n", $$, $1, $3); }
 ;
 
 
