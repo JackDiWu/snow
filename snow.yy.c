@@ -1352,7 +1352,7 @@ yyreduce:
 
   case 32: /* op_prefix: TOKEN_PLUS op_suffix  */
 #line 156 "snow.y"
-                     { yyval = yyvsp[0]; printf("result: %d = + %d\n", yyval, yyvsp[0]); }
+                     { yyval = +(yyvsp[0]); printf("result: %d = + %d\n", yyval, yyvsp[0]); }
 #line 1357 "snow.yy.c"
     break;
 

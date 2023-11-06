@@ -153,7 +153,7 @@ op_times_divide_mod TOKEN_PERCENT op_prefix { $$ = $1 % $3; printf("result: %d =
 op_prefix:
 op_suffix { $$ = $1; }
 |
-TOKEN_PLUS op_suffix { $$ = $2; printf("result: %d = + %d\n", $$, $2); }
+TOKEN_PLUS op_suffix { $$ = +($2); printf("result: %d = + %d\n", $$, $2); }
 |
 TOKEN_SUB op_suffix { $$ = -($2); printf("result: %d = - %d\n", $$, $2); }
 |
