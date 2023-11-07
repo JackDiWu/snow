@@ -148,21 +148,22 @@ enum yysymbol_kind_t
   YYSYMBOL_TOKEN_COMMA = 44,               /* TOKEN_COMMA  */
   YYSYMBOL_YYACCEPT = 45,                  /* $accept  */
   YYSYMBOL_call_param = 46,                /* call_param  */
-  YYSYMBOL_call = 47,                      /* call  */
-  YYSYMBOL_expression = 48,                /* expression  */
-  YYSYMBOL_op_logic_or = 49,               /* op_logic_or  */
-  YYSYMBOL_op_logic_and = 50,              /* op_logic_and  */
-  YYSYMBOL_op_or = 51,                     /* op_or  */
-  YYSYMBOL_op_xor = 52,                    /* op_xor  */
-  YYSYMBOL_op_and = 53,                    /* op_and  */
-  YYSYMBOL_op_equal = 54,                  /* op_equal  */
-  YYSYMBOL_op_relation = 55,               /* op_relation  */
-  YYSYMBOL_op_bit = 56,                    /* op_bit  */
-  YYSYMBOL_op_plus_sub = 57,               /* op_plus_sub  */
-  YYSYMBOL_op_times_divide_mod = 58,       /* op_times_divide_mod  */
-  YYSYMBOL_op_prefix = 59,                 /* op_prefix  */
-  YYSYMBOL_op_suffix = 60,                 /* op_suffix  */
-  YYSYMBOL_atom = 61                       /* atom  */
+  YYSYMBOL_call_name = 47,                 /* call_name  */
+  YYSYMBOL_call = 48,                      /* call  */
+  YYSYMBOL_expression = 49,                /* expression  */
+  YYSYMBOL_op_logic_or = 50,               /* op_logic_or  */
+  YYSYMBOL_op_logic_and = 51,              /* op_logic_and  */
+  YYSYMBOL_op_or = 52,                     /* op_or  */
+  YYSYMBOL_op_xor = 53,                    /* op_xor  */
+  YYSYMBOL_op_and = 54,                    /* op_and  */
+  YYSYMBOL_op_equal = 55,                  /* op_equal  */
+  YYSYMBOL_op_relation = 56,               /* op_relation  */
+  YYSYMBOL_op_bit = 57,                    /* op_bit  */
+  YYSYMBOL_op_plus_sub = 58,               /* op_plus_sub  */
+  YYSYMBOL_op_times_divide_mod = 59,       /* op_times_divide_mod  */
+  YYSYMBOL_op_prefix = 60,                 /* op_prefix  */
+  YYSYMBOL_op_suffix = 61,                 /* op_suffix  */
+  YYSYMBOL_atom = 62                       /* atom  */
 };
 typedef enum yysymbol_kind_t yysymbol_kind_t;
 
@@ -488,14 +489,14 @@ union yyalloc
 #endif /* !YYCOPY_NEEDED */
 
 /* YYFINAL -- State number of the termination state.  */
-#define YYFINAL  32
+#define YYFINAL  31
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   69
+#define YYLAST   61
 
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  45
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  17
+#define YYNNTS  18
 /* YYNRULES -- Number of rules.  */
 #define YYNRULES  44
 /* YYNSTATES -- Number of states.  */
@@ -582,9 +583,9 @@ static const char *const yytname[] =
   "TOKEN_OR", "TOKEN_QUESTION", "TOKEN_POINT", "TOKEN_BROKEN_ISSUE",
   "TOKEN_EXCLAMATION", "TOKEN_AT", "TOKEN_HASHTAG", "TOKEN_DOLLAR",
   "TOKEN_PERCENT", "TOKEN_XOR", "TOKEN_COLON", "TOKEN_SEMICOLON",
-  "TOKEN_BACKSLASH", "TOKEN_COMMA", "$accept", "call_param", "call",
-  "expression", "op_logic_or", "op_logic_and", "op_or", "op_xor", "op_and",
-  "op_equal", "op_relation", "op_bit", "op_plus_sub",
+  "TOKEN_BACKSLASH", "TOKEN_COMMA", "$accept", "call_param", "call_name",
+  "call", "expression", "op_logic_or", "op_logic_and", "op_or", "op_xor",
+  "op_and", "op_equal", "op_relation", "op_bit", "op_plus_sub",
   "op_times_divide_mod", "op_prefix", "op_suffix", "atom", YY_NULLPTR
 };
 
@@ -595,7 +596,7 @@ yysymbol_name (yysymbol_kind_t yysymbol)
 }
 #endif
 
-#define YYPACT_NINF (-37)
+#define YYPACT_NINF (-26)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
@@ -609,14 +610,14 @@ yysymbol_name (yysymbol_kind_t yysymbol)
    STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
-      -4,     0,   -37,   -37,    18,    18,     5,    18,    18,    23,
-     -37,   -36,   -37,    20,    24,    22,    16,    29,   -25,     6,
-      -7,    41,     8,   -37,   -37,    -4,     0,   -37,   -37,    45,
-     -37,   -37,   -37,    -4,     5,     5,     5,     5,     5,     5,
-       5,     5,     5,     5,     5,     5,     5,     5,     5,     5,
-       5,     5,    46,   -37,   -37,   -37,   -37,   -37,   -37,   -37,
-     -37,   -37,   -37,   -37,   -37,   -37,   -37,   -37,   -37,   -37,
-     -37,   -37,   -37,   -37
+      -4,   -26,   -26,   -26,     9,     9,    -4,     9,     9,    14,
+      -9,   -26,   -15,   -26,    11,    15,    17,    12,    21,   -25,
+      -3,   -16,    29,    -1,   -26,   -26,   -26,   -26,    26,   -26,
+     -26,   -26,    -4,    -4,    -4,    -4,    -4,    -4,    -4,    -4,
+      -4,    -4,    -4,    -4,    -4,    -4,    -4,    -4,    -4,    -4,
+      -4,    -4,   -26,    38,   -26,   -26,   -26,   -26,   -26,   -26,
+     -26,   -26,   -26,   -26,   -26,   -26,   -26,   -26,   -26,   -26,
+     -26,   -26,   -26,   -26
 };
 
 /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -625,11 +626,11 @@ static const yytype_int8 yypact[] =
 static const yytype_int8 yydefact[] =
 {
        0,     4,    41,    42,     0,     0,     0,     0,     0,     0,
-      44,     2,     6,     7,     9,    11,    13,    15,    17,    20,
-      25,    28,    31,    35,    40,     0,     0,    36,    37,     0,
-      39,    38,     1,     0,     0,     0,     0,     0,     0,     0,
+       0,    44,     2,     6,     7,     9,    11,    13,    15,    17,
+      20,    25,    28,    31,    35,    40,    36,    37,     0,    39,
+      38,     1,     0,     0,     0,     0,     0,     0,     0,     0,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,    43,     3,     8,    10,    12,    14,    16,
+       0,     0,    43,     0,     3,     8,    10,    12,    14,    16,
       18,    19,    21,    22,    23,    24,    26,    27,    29,    30,
       32,    33,    34,     5
 };
@@ -637,15 +638,15 @@ static const yytype_int8 yydefact[] =
 /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-     -37,   -20,   -37,    56,    30,    28,    31,    32,    27,   -11,
-      -6,     9,    10,    -1,   -37,    37,   -37
+     -26,    10,   -26,   -26,    48,    22,    20,    23,    24,    19,
+       5,   -22,     1,     2,   -23,   -26,    28,   -26
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
        0,     9,    10,    11,    12,    13,    14,    15,    16,    17,
-      18,    19,    20,    21,    22,    23,    24
+      18,    19,    20,    21,    22,    23,    24,    25
 };
 
 /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -653,24 +654,24 @@ static const yytype_int8 yydefgoto[] =
    number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int8 yytable[] =
 {
-       1,    39,     2,     3,    40,    52,     4,     5,    33,    26,
-       6,     2,     3,    54,    25,     4,     5,    45,    46,     6,
-      49,    50,    26,    32,     2,     3,    41,    42,    60,    61,
-       7,     8,     6,    43,    44,    62,    63,    64,    65,     7,
-       8,    27,    28,    34,    30,    31,    35,    51,    70,    71,
-      72,    47,    48,    36,    66,    67,    37,    68,    69,    38,
-      53,    73,    29,    56,    55,    59,     0,    57,     0,    58
+       1,    39,     2,     3,    40,    32,     4,     5,    45,    46,
+       6,    49,    50,     1,    31,     2,     3,    41,    42,    62,
+      63,    64,    65,     6,    43,    44,    70,    71,    72,    33,
+       7,     8,    26,    27,    34,    29,    30,    35,    51,    47,
+      48,    52,    53,    54,    60,    61,    66,    67,    36,    68,
+      69,    38,    37,    73,    28,    56,    55,    59,     0,    57,
+       0,    58
 };
 
 static const yytype_int8 yycheck[] =
 {
-       4,    26,     6,     7,    29,    25,    10,    11,    44,     4,
-      14,     6,     7,    33,    14,    10,    11,    24,    25,    14,
-      12,    13,     4,     0,     6,     7,    20,    21,    39,    40,
-      34,    35,    14,    27,    28,    41,    42,    43,    44,    34,
-      35,     4,     5,    23,     7,     8,    22,    39,    49,    50,
-      51,    10,    11,    31,    45,    46,    40,    47,    48,    30,
-      15,    15,     6,    35,    34,    38,    -1,    36,    -1,    37
+       4,    26,     6,     7,    29,    14,    10,    11,    24,    25,
+      14,    12,    13,     4,     0,     6,     7,    20,    21,    41,
+      42,    43,    44,    14,    27,    28,    49,    50,    51,    44,
+      34,    35,     4,     5,    23,     7,     8,    22,    39,    10,
+      11,    15,    32,    33,    39,    40,    45,    46,    31,    47,
+      48,    30,    40,    15,     6,    35,    34,    38,    -1,    36,
+      -1,    37
 };
 
 /* YYSTOS[STATE-NUM] -- The symbol kind of the accessing symbol of
@@ -679,22 +680,22 @@ static const yytype_int8 yystos[] =
 {
        0,     4,     6,     7,    10,    11,    14,    34,    35,    46,
       47,    48,    49,    50,    51,    52,    53,    54,    55,    56,
-      57,    58,    59,    60,    61,    14,     4,    60,    60,    48,
-      60,    60,     0,    44,    23,    22,    31,    40,    30,    26,
+      57,    58,    59,    60,    61,    62,    61,    61,    49,    61,
+      61,     0,    14,    44,    23,    22,    31,    40,    30,    26,
       29,    20,    21,    27,    28,    24,    25,    10,    11,    12,
-      13,    39,    46,    15,    46,    49,    50,    51,    52,    53,
-      54,    54,    55,    55,    55,    55,    56,    56,    57,    57,
-      58,    58,    58,    15
+      13,    39,    15,    46,    46,    50,    51,    52,    53,    54,
+      55,    55,    56,    56,    56,    56,    57,    57,    58,    58,
+      59,    59,    59,    15
 };
 
 /* YYR1[RULE-NUM] -- Symbol kind of the left-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr1[] =
 {
-       0,    45,    46,    46,    46,    47,    48,    49,    49,    50,
-      50,    51,    51,    52,    52,    53,    53,    54,    54,    54,
-      55,    55,    55,    55,    55,    56,    56,    56,    57,    57,
-      57,    58,    58,    58,    58,    59,    59,    59,    59,    59,
-      60,    61,    61,    61,    61
+       0,    45,    46,    46,    47,    48,    49,    50,    50,    51,
+      51,    52,    52,    53,    53,    54,    54,    55,    55,    55,
+      56,    56,    56,    56,    56,    57,    57,    57,    58,    58,
+      58,    59,    59,    59,    59,    60,    60,    60,    60,    60,
+      61,    62,    62,    62,    62
 };
 
 /* YYR2[RULE-NUM] -- Number of symbols on the right-hand side of rule RULE-NUM.  */
@@ -1178,263 +1179,263 @@ yyreduce:
   case 2: /* call_param: expression  */
 #line 35 "snow.y"
            { printf("[call param one] %ld\n", yyvsp[0]); }
-#line 1182 "snow.yy.cc"
+#line 1183 "snow.yy.cc"
     break;
 
   case 3: /* call_param: expression TOKEN_COMMA call_param  */
 #line 37 "snow.y"
                                   { printf("[call param some] %ld\n", yyvsp[-2]); }
-#line 1188 "snow.yy.cc"
+#line 1189 "snow.yy.cc"
     break;
 
-  case 4: /* call_param: TOKEN_WORD  */
+  case 4: /* call_name: TOKEN_WORD  */
 #line 44 "snow.y"
-           { printf("[call name]\n"); }
-#line 1194 "snow.yy.cc"
+           { printf("[call name] %s\n", yyget_text(yylexer)); }
+#line 1195 "snow.yy.cc"
     break;
 
-  case 5: /* call: TOKEN_WORD TOKEN_LP call_param TOKEN_RP  */
+  case 5: /* call: call_name TOKEN_LP call_param TOKEN_RP  */
 #line 51 "snow.y"
-                                        { printf("[call]\n"); }
-#line 1200 "snow.yy.cc"
+                                       { printf("[call]\n"); }
+#line 1201 "snow.yy.cc"
     break;
 
   case 6: /* expression: op_logic_or  */
 #line 58 "snow.y"
             { yyval = yyvsp[0]; }
-#line 1206 "snow.yy.cc"
+#line 1207 "snow.yy.cc"
     break;
 
   case 7: /* op_logic_or: op_logic_and  */
 #line 65 "snow.y"
              { yyval = yyvsp[0]; }
-#line 1212 "snow.yy.cc"
+#line 1213 "snow.yy.cc"
     break;
 
   case 8: /* op_logic_or: op_logic_and TOKEN_DOUBLE_OR op_logic_or  */
 #line 67 "snow.y"
                                          { yyval = yyvsp[-2] || yyvsp[0]; printf("result: %ld = %ld || %ld\n", yyval, yyvsp[-2], yyvsp[0]); }
-#line 1218 "snow.yy.cc"
+#line 1219 "snow.yy.cc"
     break;
 
   case 9: /* op_logic_and: op_or  */
 #line 74 "snow.y"
       { yyval = yyvsp[0]; }
-#line 1224 "snow.yy.cc"
+#line 1225 "snow.yy.cc"
     break;
 
   case 10: /* op_logic_and: op_or TOKEN_DOUBLE_AND op_logic_and  */
 #line 76 "snow.y"
                                     { yyval = yyvsp[-2] && yyvsp[0]; printf("result: %ld = %ld && %ld\n", yyval, yyvsp[-2], yyvsp[0]); }
-#line 1230 "snow.yy.cc"
+#line 1231 "snow.yy.cc"
     break;
 
   case 11: /* op_or: op_xor  */
 #line 83 "snow.y"
        { yyval = yyvsp[0]; }
-#line 1236 "snow.yy.cc"
+#line 1237 "snow.yy.cc"
     break;
 
   case 12: /* op_or: op_xor TOKEN_OR op_or  */
 #line 85 "snow.y"
                       { yyval = yyvsp[-2] | yyvsp[0]; printf("result: %ld = %ld | %ld\n", yyval, yyvsp[-2], yyvsp[0]); }
-#line 1242 "snow.yy.cc"
+#line 1243 "snow.yy.cc"
     break;
 
   case 13: /* op_xor: op_and  */
 #line 92 "snow.y"
        { yyval = yyvsp[0]; }
-#line 1248 "snow.yy.cc"
+#line 1249 "snow.yy.cc"
     break;
 
   case 14: /* op_xor: op_and TOKEN_XOR op_xor  */
 #line 94 "snow.y"
                         { yyval = yyvsp[-2] ^ yyvsp[0]; printf("result: %ld = %ld ^ %ld\n", yyval, yyvsp[-2], yyvsp[0]); }
-#line 1254 "snow.yy.cc"
+#line 1255 "snow.yy.cc"
     break;
 
   case 15: /* op_and: op_equal  */
 #line 101 "snow.y"
          { yyval = yyvsp[0]; }
-#line 1260 "snow.yy.cc"
+#line 1261 "snow.yy.cc"
     break;
 
   case 16: /* op_and: op_equal TOKEN_AND op_and  */
 #line 103 "snow.y"
                           { yyval = yyvsp[-2] & yyvsp[0]; printf("result: %ld = %ld & %ld\n", yyval, yyvsp[-2], yyvsp[0]); }
-#line 1266 "snow.yy.cc"
+#line 1267 "snow.yy.cc"
     break;
 
   case 17: /* op_equal: op_relation  */
 #line 110 "snow.y"
             { yyval = yyvsp[0]; }
-#line 1272 "snow.yy.cc"
+#line 1273 "snow.yy.cc"
     break;
 
   case 18: /* op_equal: op_relation TOKEN_DOUBLE_EQUAL op_equal  */
 #line 112 "snow.y"
                                         { yyval = yyvsp[-2] == yyvsp[0]; printf("result: %ld = %ld == %ld\n", yyval, yyvsp[-2], yyvsp[0]); }
-#line 1278 "snow.yy.cc"
+#line 1279 "snow.yy.cc"
     break;
 
   case 19: /* op_equal: op_relation TOKEN_NOT_EQUAL op_equal  */
 #line 114 "snow.y"
                                      { yyval = yyvsp[-2] != yyvsp[0]; printf("result: %ld = %ld != %ld\n", yyval, yyvsp[-2], yyvsp[0]); }
-#line 1284 "snow.yy.cc"
+#line 1285 "snow.yy.cc"
     break;
 
   case 20: /* op_relation: op_bit  */
 #line 121 "snow.y"
        { yyval = yyvsp[0]; }
-#line 1290 "snow.yy.cc"
+#line 1291 "snow.yy.cc"
     break;
 
   case 21: /* op_relation: op_bit TOKEN_LA op_relation  */
 #line 123 "snow.y"
                             { yyval = yyvsp[-2] < yyvsp[0]; printf("result: %ld = %ld < %ld\n", yyval, yyvsp[-2], yyvsp[0]); }
-#line 1296 "snow.yy.cc"
+#line 1297 "snow.yy.cc"
     break;
 
   case 22: /* op_relation: op_bit TOKEN_RA op_relation  */
 #line 125 "snow.y"
                             { yyval = yyvsp[-2] > yyvsp[0]; printf("result: %ld = %ld > %ld\n", yyval, yyvsp[-2], yyvsp[0]); }
-#line 1302 "snow.yy.cc"
+#line 1303 "snow.yy.cc"
     break;
 
   case 23: /* op_relation: op_bit TOKEN_LA_EQUAL op_relation  */
 #line 127 "snow.y"
                                   { yyval = yyvsp[-2] <= yyvsp[0]; printf("result: %ld = %ld <= %ld\n", yyval, yyvsp[-2], yyvsp[0]); }
-#line 1308 "snow.yy.cc"
+#line 1309 "snow.yy.cc"
     break;
 
   case 24: /* op_relation: op_bit TOKEN_RA_EQUAL op_relation  */
 #line 129 "snow.y"
                                   { yyval = yyvsp[-2] >= yyvsp[0]; printf("result: %ld = %ld >= %ld\n", yyval, yyvsp[-2], yyvsp[0]); }
-#line 1314 "snow.yy.cc"
+#line 1315 "snow.yy.cc"
     break;
 
   case 25: /* op_bit: op_plus_sub  */
 #line 136 "snow.y"
             { yyval = yyvsp[0]; }
-#line 1320 "snow.yy.cc"
+#line 1321 "snow.yy.cc"
     break;
 
   case 26: /* op_bit: op_plus_sub TOKEN_DOUBLE_LA op_bit  */
 #line 138 "snow.y"
                                    { yyval = yyvsp[-2] << yyvsp[0]; printf("result: %ld = %ld << %ld\n", yyval, yyvsp[-2], yyvsp[0]); }
-#line 1326 "snow.yy.cc"
+#line 1327 "snow.yy.cc"
     break;
 
   case 27: /* op_bit: op_plus_sub TOKEN_DOUBLE_RA op_bit  */
 #line 140 "snow.y"
                                    { yyval = yyvsp[-2] >> yyvsp[0]; printf("result: %ld = %ld >> %ld\n", yyval, yyvsp[-2], yyvsp[0]); }
-#line 1332 "snow.yy.cc"
+#line 1333 "snow.yy.cc"
     break;
 
   case 28: /* op_plus_sub: op_times_divide_mod  */
 #line 147 "snow.y"
                     { yyval = yyvsp[0]; }
-#line 1338 "snow.yy.cc"
+#line 1339 "snow.yy.cc"
     break;
 
   case 29: /* op_plus_sub: op_times_divide_mod TOKEN_PLUS op_plus_sub  */
 #line 149 "snow.y"
                                            { yyval = yyvsp[-2] + yyvsp[0]; printf("result: %ld = %ld + %ld\n", yyval, yyvsp[-2], yyvsp[0]); }
-#line 1344 "snow.yy.cc"
+#line 1345 "snow.yy.cc"
     break;
 
   case 30: /* op_plus_sub: op_times_divide_mod TOKEN_SUB op_plus_sub  */
 #line 151 "snow.y"
                                           { yyval = yyvsp[-2] - yyvsp[0]; printf("result: %ld = %ld - %ld\n", yyval, yyvsp[-2], yyvsp[0]); }
-#line 1350 "snow.yy.cc"
+#line 1351 "snow.yy.cc"
     break;
 
   case 31: /* op_times_divide_mod: op_prefix  */
 #line 158 "snow.y"
           { yyval = yyvsp[0]; }
-#line 1356 "snow.yy.cc"
+#line 1357 "snow.yy.cc"
     break;
 
   case 32: /* op_times_divide_mod: op_prefix TOKEN_TIMES op_times_divide_mod  */
 #line 160 "snow.y"
                                           { yyval = yyvsp[-2] * yyvsp[0]; printf("result: %ld = %ld * %ld\n", yyval, yyvsp[-2], yyvsp[0]); }
-#line 1362 "snow.yy.cc"
+#line 1363 "snow.yy.cc"
     break;
 
   case 33: /* op_times_divide_mod: op_prefix TOKEN_DIVIDE op_times_divide_mod  */
 #line 162 "snow.y"
                                            { yyval = yyvsp[-2] / yyvsp[0]; printf("result: %ld = %ld / %ld\n", yyval, yyvsp[-2], yyvsp[0]); }
-#line 1368 "snow.yy.cc"
+#line 1369 "snow.yy.cc"
     break;
 
   case 34: /* op_times_divide_mod: op_prefix TOKEN_PERCENT op_times_divide_mod  */
 #line 164 "snow.y"
                                             { yyval = yyvsp[-2] % yyvsp[0]; printf("result: %ld = %ld mod %ld\n", yyval, yyvsp[-2], yyvsp[0]); }
-#line 1374 "snow.yy.cc"
+#line 1375 "snow.yy.cc"
     break;
 
   case 35: /* op_prefix: op_suffix  */
 #line 171 "snow.y"
           { yyval = yyvsp[0]; }
-#line 1380 "snow.yy.cc"
+#line 1381 "snow.yy.cc"
     break;
 
   case 36: /* op_prefix: TOKEN_PLUS op_suffix  */
 #line 173 "snow.y"
                      { yyval = +(yyvsp[0]); printf("result: %ld = + %ld\n", yyval, yyvsp[0]); }
-#line 1386 "snow.yy.cc"
+#line 1387 "snow.yy.cc"
     break;
 
   case 37: /* op_prefix: TOKEN_SUB op_suffix  */
 #line 175 "snow.y"
                     { yyval = -(yyvsp[0]); printf("result: %ld = - %ld\n", yyval, yyvsp[0]); }
-#line 1392 "snow.yy.cc"
+#line 1393 "snow.yy.cc"
     break;
 
   case 38: /* op_prefix: TOKEN_EXCLAMATION op_suffix  */
 #line 177 "snow.y"
                             { yyval = !(yyvsp[0]); printf("result: %ld = ! %ld\n", yyval, yyvsp[0]); }
-#line 1398 "snow.yy.cc"
+#line 1399 "snow.yy.cc"
     break;
 
   case 39: /* op_prefix: TOKEN_BROKEN_ISSUE op_suffix  */
 #line 179 "snow.y"
                              { yyval = ~(yyvsp[0]); printf("result: %ld = ~ %ld\n", yyval, yyvsp[0]); }
-#line 1404 "snow.yy.cc"
+#line 1405 "snow.yy.cc"
     break;
 
   case 40: /* op_suffix: atom  */
 #line 186 "snow.y"
      { yyval = yyvsp[0]; }
-#line 1410 "snow.yy.cc"
+#line 1411 "snow.yy.cc"
     break;
 
   case 41: /* atom: TOKEN_DEC  */
 #line 193 "snow.y"
           { yyval = strtol(yyget_text(yylexer), NULL, 10); }
-#line 1416 "snow.yy.cc"
+#line 1417 "snow.yy.cc"
     break;
 
   case 42: /* atom: TOKEN_HEX  */
 #line 195 "snow.y"
           { yyval = strtol(yyget_text(yylexer), NULL, 16); }
-#line 1422 "snow.yy.cc"
+#line 1423 "snow.yy.cc"
     break;
 
   case 43: /* atom: TOKEN_LP expression TOKEN_RP  */
 #line 197 "snow.y"
                              { yyval = yyvsp[-1]; }
-#line 1428 "snow.yy.cc"
+#line 1429 "snow.yy.cc"
     break;
 
   case 44: /* atom: call  */
 #line 199 "snow.y"
      { yyval = yyvsp[0]; }
-#line 1434 "snow.yy.cc"
+#line 1435 "snow.yy.cc"
     break;
 
 
-#line 1438 "snow.yy.cc"
+#line 1439 "snow.yy.cc"
 
       default: break;
     }

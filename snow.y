@@ -40,15 +40,15 @@ expression TOKEN_COMMA call_param { printf("[call param some] %ld\n", $1); }
 
 
 /**************** call name ****************/
-call_param:
-TOKEN_WORD { printf("[call name]\n"); }
+call_name:
+TOKEN_WORD { printf("[call name] %s\n", yyget_text(yylexer)); }
 ;
 
 
 
 /**************** call ****************/
 call:
-TOKEN_WORD TOKEN_LP call_param TOKEN_RP { printf("[call]\n"); }
+call_name TOKEN_LP call_param TOKEN_RP { printf("[call]\n"); }
 ;
 
 
