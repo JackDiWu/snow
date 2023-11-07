@@ -86,6 +86,14 @@ namespace snow {
             virtual const char * text() = 0;
     };
 
+    class expr_unary : public expr {
+        public:
+            std::shared_ptr<expr> T;
+
+        public:
+            expr_unary(yytoken_kind_t tk, const char *str, const std::shared_ptr<expr> &t) : expr(tk, str), T(t) {}
+    };
+
     class expr_binary : public expr {
         public:
             std::shared_ptr<expr> L, R;
