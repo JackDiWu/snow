@@ -1392,7 +1392,7 @@ yyreduce:
 
   case 37: /* op_prefix: op_suffix  */
 #line 179 "snow.y"
-          { }
+          { yyval = yyvsp[0]; }
 #line 1397 "snow.yy.cc"
     break;
 
@@ -1446,7 +1446,7 @@ yyreduce:
 
   case 46: /* atom: TOKEN_LP expression TOKEN_RP  */
 #line 207 "snow.y"
-                             { }
+                             { yyval = yyvsp[-1]; }
 #line 1451 "snow.yy.cc"
     break;
 

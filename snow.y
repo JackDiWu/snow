@@ -176,7 +176,7 @@ op_prefix TOKEN_PERCENT op_times_divide_mod { $$ = snow::make_expr<snow::expr_bi
 
 /**************** prefix ****************/
 op_prefix:
-op_suffix { }
+op_suffix { $$ = $1; }
 |
 TOKEN_PLUS op_suffix {  }
 |
@@ -204,7 +204,7 @@ TOKEN_HEX { $$ = snow::make_expr<snow::expr>(snow::EXPR_TYPE_UINT, yyget_text(yy
 |
 TOKEN_STRING { $$ = snow::make_expr<snow::expr>(snow::EXPR_TYPE_STRING, yyget_text(yylexer)); }
 |
-TOKEN_LP expression TOKEN_RP { }
+TOKEN_LP expression TOKEN_RP { $$ = $2; }
 |
 variable { }
 |
