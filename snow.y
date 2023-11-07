@@ -40,6 +40,12 @@ expression TOKEN_SEMICOLON { printf("statement\n"); }
 
 
 /**************** call param ****************/
+variable:
+TOKEN_WORD { printf("[variable] %s\n", yyget_text(yylexer)); }
+
+
+
+/**************** call param ****************/
 call_param:
 expression { printf("[call param one] %ld\n", $1); }
 |
@@ -48,16 +54,9 @@ expression TOKEN_COMMA call_param { printf("[call param some] %ld\n", $1); }
 
 
 
-/**************** call name ****************/
-call_name:
-TOKEN_WORD { printf("[call name] %s\n", yyget_text(yylexer)); }
-;
-
-
-
 /**************** call ****************/
 call:
-call_name TOKEN_LP call_param TOKEN_RP { printf("[call]\n"); }
+variable TOKEN_LP call_param TOKEN_RP { printf("[call] %ld\n", $1); }
 ;
 
 
@@ -205,7 +204,7 @@ TOKEN_HEX { $$ = strtol(yyget_text(yylexer), NULL, 16); }
 |
 TOKEN_LP expression TOKEN_RP { $$ = $2; }
 |
-TOKEN_WORD { $$ = 0; printf("----- %s\n", yyget_text(yylexer)); }
+variable { $$ = $1; }
 |
 call { $$ = $1; }
 ;
