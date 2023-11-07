@@ -120,13 +120,13 @@ namespace snow {
             }
     };
 
-    class atom_string : public atom {
+    class expr_string : public atom {
         public:
-            atom_string(const char *s) : atom(ATOM_TYPE_STRING, TOKEN_FLOAT) { v_string.assign(s); }
+            expr_string(const char *s) : atom(ATOM_TYPE_STRING, TOKEN_FLOAT) { v_string.assign(s); }
 
-            atom_string(const std::string &s): atom_string(s.c_str()) {}
+            expr_string(const std::string &s): expr_string(s.c_str()) {}
 
-            virtual ~atom_string() {}
+            virtual ~expr_string() {}
 
         public:
             virtual const char * text() {
