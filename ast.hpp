@@ -82,13 +82,13 @@ namespace snow {
             double v_float64;
 
         public:
+            data_number(int64_t v) : data_string(EXPR_TYPE_INT), v_int64(v) {}
+
+            data_number(uint64_t v) : data_string(EXPR_TYPE_UINT), v_uint64(v) {}
+
+            data_number(double v) : data_string(EXPR_BINARY_DOUBLE_AND), v_float64(v) {}
+
             data_number(expr_type tk) : data_string(tk) {}
-
-            data_number(expr_type tk, int64_t v) : data_string(tk), v_int64(v) {}
-
-            data_number(expr_type tk, uint64_t v) : data_string(tk), v_uint64(v) {}
-
-            data_number(expr_type tk, double v) : data_string(tk), v_float64(v) {}
 
             data_number(expr_type tk, const char *str) : data_string(tk, str) {
                 switch (type) {
@@ -118,11 +118,11 @@ namespace snow {
 
     class value : public data_number {
         public:
-            value(int64_t v) : data_number(EXPR_TYPE_INT, v) {}
+            value(int64_t v) : data_number(v) {}
 
-            value(uint64_t v) : data_number(EXPR_TYPE_UINT, v) {}
+            value(uint64_t v) : data_number(v) {}
 
-            value(double v) : data_number(EXPR_TYPE_FLOAT, v) {}
+            value(double v) : data_number(v) {}
 
             value(expr_type tk, const char *s) : data_number(tk, s) {}
 
@@ -157,6 +157,84 @@ namespace snow {
             static value sub(T l, T r) {
                 printf("[expr] %lld - %lld -> %lld\n", l, r, l - r);
                 return value(l - r);
+            }
+
+            template <typename T>
+            static value move_l(T l, T r) {
+                printf("[expr] %lld << %lld -> %lld\n", l, r, l << r);
+                return value(l << r);
+            }
+
+            template <typename T>
+            static value move_r(T l, T r) {
+                printf("[expr] %lld >> %lld -> %lld\n", l, r, l >> r);
+                return value(l >> r);
+            }
+
+            template <typename T>
+            static value less(T l, T r) {
+                printf("[expr] %lld < %lld -> %d\n", l, r, l < r);
+                return value((int64_t)(l < r));
+            }
+            
+            template <typename T>
+            static value more(T l, T r) {
+                printf("[expr] %lld > %lld -> %d\n", l, r, l > r);
+                return value((int64_t)(l > r));
+            }
+            
+            template <typename T>
+            static value less_equal(T l, T r) {
+                printf("[expr] %lld <= %lld -> %d\n", l, r, l <= r);
+                return value((int64_t)(l <= r));
+            }
+            
+            template <typename T>
+            static value more_equal(T l, T r) {
+                printf("[expr] %lld >= %lld -> %d\n", l, r, l >= r);
+                return value((int64_t)(l >= r));
+            }
+
+            template <typename T>
+            static value equal(T l, T r) {
+                printf("[expr] %lld == %lld -> %d\n", l, r, l == r);
+                return value((int64_t)(l == r));
+            }
+            
+            template <typename T>
+            static value not_equal(T l, T r) {
+                printf("[expr] %lld != %lld -> %d\n", l, r, l != r);
+                return value((int64_t)(l != r));
+            }
+
+            template <typename T>
+            static value logic_and(T l, T r) {
+                printf("[expr] %lld & %lld -> %lld\n", l, r, l & r);
+                return value(l & r);
+            }
+            
+            template <typename T>
+            static value logic_xor(T l, T r) {
+                printf("[expr] %lld ^ %lld -> %lld\n", l, r, l ^ r);
+                return value(l ^ r);
+            }
+            
+            template <typename T>
+            static value logic_or(T l, T r) {
+                printf("[expr] %lld | %lld -> %lld\n", l, r, l | r);
+                return value(l | r);
+            }
+
+            template <typename T>
+            static value logic_and_and(T l, T r) {
+                printf("[expr] %lld && %lld -> %d\n", l, r, l && r);
+                return value((int64_t)(l && r));
+            }
+            
+            template <typename T>
+            static value logic_or_or(T l, T r) {
+                printf("[expr] %lld || %lld -> %d\n", l, r, l || r);
+                return value((int64_t)(l || r));
             }
     };
 
@@ -269,6 +347,25 @@ namespace snow {
             virtual ~expr_unary() {}
     };
 
+    #define expr_binary_format(op) \
+                if (L->is_value_type(EXPR_TYPE_INT) && R->is_value_type(EXPR_TYPE_INT)) {\
+                    value = value::op<int64_t>(L->value.v_int64, R->value.v_int64);\
+                    return 0;\
+                }\
+                if (L->is_value_type(EXPR_TYPE_INT) || R->is_value_type(EXPR_TYPE_UINT)) {\
+                    value = value::op<uint64_t>((uint64_t)L->value.v_int64, R->value.v_uint64);\
+                    return 0;\
+                }\
+                if (L->is_value_type(EXPR_TYPE_UINT) || R->is_value_type(EXPR_TYPE_INT)) {\
+                    value = value::op<uint64_t>(L->value.v_uint64, (uint64_t)R->value.v_int64);\
+                    return 0;\
+                }\
+                if (L->is_value_type(EXPR_TYPE_UINT) || R->is_value_type(EXPR_TYPE_UINT)) {\
+                    value = value::op<uint64_t>(L->value.v_uint64, R->value.v_uint64);\
+                    return 0;\
+                }\
+                return 0;
+
     class expr_binary : public expr {
         public:
             std::shared_ptr<expr> L, R;
@@ -297,6 +394,36 @@ namespace snow {
                     return plus();
                 case EXPR_BINARY_SUB:
                     return sub();
+                case EXPR_BINARY_DOUBLE_LA:
+                    return move_l();
+                case EXPR_BINARY_DOUBLE_RA:
+                    return move_r();
+
+                case EXPR_BINARY_LA:
+                    return less();
+                case EXPR_BINARY_RA:
+                    return more();
+                case EXPR_BINARY_LA_EQUAL:
+                    return less_equal();
+                case EXPR_BINARY_RA_EQUAL:
+                    return more_equal();
+
+                case EXPR_BINARY_DOUBLE_EQUAL:
+                    return equal();
+                case EXPR_BINARY_NOT_EQUAL:
+                    return not_equal();
+
+                case EXPR_BINARY_AND:
+                    return logic_and();
+                case EXPR_BINARY_XOR:
+                    return logic_xor();
+                case EXPR_BINARY_OR:
+                    return logic_or();
+
+                case EXPR_BINARY_DOUBLE_AND:
+                    return logic_and_and();
+                case EXPR_BINARY_DOUBLE_OR:
+                    return logic_or_or();
                 default:
                     return 0;
                 }
@@ -327,99 +454,71 @@ namespace snow {
             }
 
             virtual int div() {
-                if (L->is_value_type(EXPR_TYPE_INT) && R->is_value_type(EXPR_TYPE_INT)) {
-                    value = value::div<int64_t>(L->value.v_int64, R->value.v_int64);
-                    return 0;
-                }
-                
-                if (L->is_value_type(EXPR_TYPE_INT) || R->is_value_type(EXPR_TYPE_UINT)) {
-                    value = value::div<uint64_t>((uint64_t)L->value.v_int64, R->value.v_uint64);
-                    return 0;
-                }
-                
-                if (L->is_value_type(EXPR_TYPE_UINT) || R->is_value_type(EXPR_TYPE_INT)) {
-                    value = value::div<uint64_t>(L->value.v_uint64, (uint64_t)R->value.v_int64);
-                    return 0;
-                }
-
-                if (L->is_value_type(EXPR_TYPE_UINT) || R->is_value_type(EXPR_TYPE_UINT)) {
-                    value = value::div<uint64_t>(L->value.v_uint64, R->value.v_uint64);
-                    return 0;
-                }
-
-                return 0;
+                expr_binary_format(div)
             }
 
             virtual int mod() {
-                if (L->is_value_type(EXPR_TYPE_INT) && R->is_value_type(EXPR_TYPE_INT)) {
-                    value = value::mod<int64_t>(L->value.v_int64, R->value.v_int64);
-                    return 0;
-                }
-                
-                if (L->is_value_type(EXPR_TYPE_INT) || R->is_value_type(EXPR_TYPE_UINT)) {
-                    value = value::mod<uint64_t>((uint64_t)L->value.v_int64, R->value.v_uint64);
-                    return 0;
-                }
-                
-                if (L->is_value_type(EXPR_TYPE_UINT) || R->is_value_type(EXPR_TYPE_INT)) {
-                    value = value::mod<uint64_t>(L->value.v_uint64, (uint64_t)R->value.v_int64);
-                    return 0;
-                }
-
-                if (L->is_value_type(EXPR_TYPE_UINT) || R->is_value_type(EXPR_TYPE_UINT)) {
-                    value = value::mod<uint64_t>(L->value.v_uint64, R->value.v_uint64);
-                    return 0;
-                }
-
-                return 0;
+                expr_binary_format(mod)
             }
 
             virtual int plus() {
-                if (L->is_value_type(EXPR_TYPE_INT) && R->is_value_type(EXPR_TYPE_INT)) {
-                    value = value::plus<int64_t>(L->value.v_int64, R->value.v_int64);
-                    return 0;
-                }
-                
-                if (L->is_value_type(EXPR_TYPE_INT) || R->is_value_type(EXPR_TYPE_UINT)) {
-                    value = value::plus<uint64_t>((uint64_t)L->value.v_int64, R->value.v_uint64);
-                    return 0;
-                }
-                
-                if (L->is_value_type(EXPR_TYPE_UINT) || R->is_value_type(EXPR_TYPE_INT)) {
-                    value = value::plus<uint64_t>(L->value.v_uint64, (uint64_t)R->value.v_int64);
-                    return 0;
-                }
-
-                if (L->is_value_type(EXPR_TYPE_UINT) || R->is_value_type(EXPR_TYPE_UINT)) {
-                    value = value::plus<uint64_t>(L->value.v_uint64, R->value.v_uint64);
-                    return 0;
-                }
-
-                return 0;
+                expr_binary_format(plus)
             }
 
             virtual int sub() {
-                if (L->is_value_type(EXPR_TYPE_INT) && R->is_value_type(EXPR_TYPE_INT)) {
-                    value = value::sub<int64_t>(L->value.v_int64, R->value.v_int64);
-                    return 0;
-                }
-                
-                if (L->is_value_type(EXPR_TYPE_INT) || R->is_value_type(EXPR_TYPE_UINT)) {
-                    value = value::sub<uint64_t>((uint64_t)L->value.v_int64, R->value.v_uint64);
-                    return 0;
-                }
-                
-                if (L->is_value_type(EXPR_TYPE_UINT) || R->is_value_type(EXPR_TYPE_INT)) {
-                    value = value::sub<uint64_t>(L->value.v_uint64, (uint64_t)R->value.v_int64);
-                    return 0;
-                }
+                expr_binary_format(sub)
+            }
 
-                if (L->is_value_type(EXPR_TYPE_UINT) || R->is_value_type(EXPR_TYPE_UINT)) {
-                    value = value::sub<uint64_t>(L->value.v_uint64, R->value.v_uint64);
-                    return 0;
-                }
+            virtual int move_l() {
+                expr_binary_format(move_l)
+            }
 
-                return 0;
+            virtual int move_r() {
+                expr_binary_format(move_r)
+            }
+
+            virtual int less() {
+                expr_binary_format(less)
+            }
+            
+            virtual int more() {
+                expr_binary_format(more)
+            }
+            
+            virtual int less_equal() {
+                expr_binary_format(less_equal)
+            }
+            
+            virtual int more_equal() {
+                expr_binary_format(more_equal)
+            }
+
+            virtual int equal() {
+                expr_binary_format(equal)
+            }
+            
+            virtual int not_equal() {
+                expr_binary_format(not_equal)
+            }
+
+            virtual int logic_and() {
+                expr_binary_format(logic_and)
+            }
+            
+            virtual int logic_xor() {
+                expr_binary_format(logic_xor)
+            }
+            
+            virtual int logic_or() {
+                expr_binary_format(logic_or)
+            }
+
+            virtual int logic_and_and() {
+                expr_binary_format(logic_and_and)
+            }
+            
+            virtual int logic_or_or() {
+                expr_binary_format(logic_or_or)
             }
     };
 
