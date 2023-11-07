@@ -205,6 +205,8 @@ TOKEN_HEX { $$ = strtol(yyget_text(yylexer), NULL, 16); }
 |
 TOKEN_LP expression TOKEN_RP { $$ = $2; }
 |
+TOKEN_WORD { $$ = 0; printf("----- %s\n", yyget_text(yylexer)); }
+|
 call { $$ = $1; }
 ;
 

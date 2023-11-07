@@ -2,14 +2,14 @@
  * @Author: Jack
  * @Date: 2023-10-29 11:52:56
  * @LastEditors: Jack
- * @LastEditTime: 2023-11-07 14:11:31
+ * @LastEditTime: 2023-11-07 14:15:35
  */
 #include "defs.h"
 #include "parser.hpp"
 
 // std::string text = "I am storm + - * / () [] {} <>  .~!@#$%^&*;:?\\ &&  || << >> \"say\\\"something+-*/\" 123 0x232 0.15234 \"Hello\\\'\\\"world\" ";
 
-std::string text = "\n\n print(123, 444, 678) \n\n ";
+std::string text = "123 + abc ";
 
 void test_lexer() {
     yyscan_t scan;

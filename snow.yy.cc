@@ -493,14 +493,14 @@ union yyalloc
 /* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  31
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   63
+#define YYLAST   65
 
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  46
 /* YYNNTS -- Number of nonterminals.  */
 #define YYNNTS  19
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  46
+#define YYNRULES  47
 /* YYNSTATES -- Number of states.  */
 #define YYNSTATES  76
 
@@ -560,7 +560,7 @@ static const yytype_uint8 yyrline[] =
       76,    83,    85,    92,    94,   101,   103,   110,   112,   119,
      121,   123,   130,   132,   134,   136,   138,   145,   147,   149,
      156,   158,   160,   167,   169,   171,   173,   180,   182,   184,
-     186,   188,   195,   202,   204,   206,   208
+     186,   188,   195,   202,   204,   206,   208,   210
 };
 #endif
 
@@ -605,7 +605,7 @@ yysymbol_name (yysymbol_kind_t yysymbol)
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
 
-#define YYTABLE_NINF (-1)
+#define YYTABLE_NINF (-7)
 
 #define yytable_value_is_error(Yyn) \
   0
@@ -614,12 +614,12 @@ yysymbol_name (yysymbol_kind_t yysymbol)
    STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
-      -4,   -28,   -28,   -28,     2,     2,    -4,     2,     2,    14,
-     -10,   -28,   -27,   -28,    -6,    20,    16,     8,     6,    -3,
-      -9,     4,    30,   -12,   -28,   -28,   -28,   -28,    36,   -28,
+      -4,   -10,   -28,   -28,     2,     2,    -4,     2,     2,    14,
+      22,   -28,   -27,   -28,    -6,    20,    16,     8,    21,    -3,
+      -9,     4,    30,   -12,   -28,   -28,   -28,   -28,    37,   -28,
      -28,   -28,    -4,   -28,    -4,    -4,    -4,    -4,    -4,    -4,
       -4,    -4,    -4,    -4,    -4,    -4,    -4,    -4,    -4,    -4,
-      -4,    -4,   -28,    37,     9,   -28,   -28,   -28,   -28,   -28,
+      -4,    -4,   -28,    38,    10,   -28,   -28,   -28,   -28,   -28,
      -28,   -28,   -28,   -28,   -28,   -28,   -28,   -28,   -28,   -28,
      -28,   -28,   -28,   -28,    -4,   -28
 };
@@ -629,8 +629,8 @@ static const yytype_int8 yypact[] =
    means the default is an error.  */
 static const yytype_int8 yydefact[] =
 {
-       0,     6,    43,    44,     0,     0,     0,     0,     0,     0,
-       0,    46,     2,     8,     9,    11,    13,    15,    17,    19,
+       0,    46,    43,    44,     0,     0,     0,     0,     0,     0,
+       0,    47,     2,     8,     9,    11,    13,    15,    17,    19,
       22,    27,    30,    33,    37,    42,    38,    39,     0,    41,
       40,     1,     0,     3,     0,     0,     0,     0,     0,     0,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
@@ -642,8 +642,8 @@ static const yytype_int8 yydefact[] =
 /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-     -28,   -28,   -19,   -28,   -28,    15,    22,    23,    21,    24,
-      25,     5,    -8,     1,     3,   -11,   -28,    18,   -28
+     -28,   -28,   -18,   -28,   -28,    15,    23,    24,    25,    26,
+      27,     5,    -8,     1,     3,   -11,   -28,    18,   -28
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
@@ -658,13 +658,13 @@ static const yytype_int8 yydefgoto[] =
    number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int8 yytable[] =
 {
-       1,    49,    50,     2,     3,    32,     1,     4,     5,     2,
+       1,    49,    50,     2,     3,    -6,     1,     4,     5,     2,
        3,     6,    41,    42,    31,    12,    33,     6,    34,    43,
       44,    28,    26,    27,    39,    29,    30,    40,    51,    45,
-      46,     7,     8,    62,    63,    64,    65,    38,    70,    71,
+      46,     7,     8,    62,    63,    64,    65,    32,    70,    71,
       72,    47,    48,    35,    60,    61,    66,    67,    36,    37,
-      68,    69,    52,    73,    74,    75,    55,    57,    56,     0,
-       0,    58,     0,    59
+      68,    69,    38,    52,    73,    74,    75,    55,     0,    56,
+       0,    57,     0,    58,     0,    59
 };
 
 static const yytype_int8 yycheck[] =
@@ -672,10 +672,10 @@ static const yytype_int8 yycheck[] =
        4,    13,    14,     7,     8,    15,     4,    11,    12,     7,
        8,    15,    21,    22,     0,     0,    43,    15,    24,    28,
       29,     6,     4,     5,    27,     7,     8,    30,    40,    25,
-      26,    35,    36,    41,    42,    43,    44,    31,    49,    50,
+      26,    35,    36,    41,    42,    43,    44,    15,    49,    50,
       51,    11,    12,    23,    39,    40,    45,    46,    32,    41,
-      47,    48,    16,    16,    45,    74,    34,    36,    35,    -1,
-      -1,    37,    -1,    38
+      47,    48,    31,    16,    16,    45,    74,    34,    -1,    35,
+      -1,    36,    -1,    37,    -1,    38
 };
 
 /* YYSTOS[STATE-NUM] -- The symbol kind of the accessing symbol of
@@ -699,7 +699,7 @@ static const yytype_int8 yyr1[] =
       52,    53,    53,    54,    54,    55,    55,    56,    56,    57,
       57,    57,    58,    58,    58,    58,    58,    59,    59,    59,
       60,    60,    60,    61,    61,    61,    61,    62,    62,    62,
-      62,    62,    63,    64,    64,    64,    64
+      62,    62,    63,    64,    64,    64,    64,    64
 };
 
 /* YYR2[RULE-NUM] -- Number of symbols on the right-hand side of rule RULE-NUM.  */
@@ -709,7 +709,7 @@ static const yytype_int8 yyr2[] =
        3,     1,     3,     1,     3,     1,     3,     1,     3,     1,
        3,     3,     1,     3,     3,     3,     3,     1,     3,     3,
        1,     3,     3,     1,     3,     3,     3,     1,     2,     2,
-       2,     2,     1,     1,     1,     3,     1
+       2,     2,     1,     1,     1,     3,     1,     1
 };
 
 
@@ -1444,14 +1444,20 @@ yyreduce:
 #line 1445 "snow.yy.cc"
     break;
 
-  case 46: /* atom: call  */
+  case 46: /* atom: TOKEN_WORD  */
 #line 208 "snow.y"
-     { yyval = yyvsp[0]; }
+           { yyval = 0; printf("----- %s\n", yyget_text(yylexer)); }
 #line 1451 "snow.yy.cc"
     break;
 
+  case 47: /* atom: call  */
+#line 210 "snow.y"
+     { yyval = yyvsp[0]; }
+#line 1457 "snow.yy.cc"
+    break;
 
-#line 1455 "snow.yy.cc"
+
+#line 1461 "snow.yy.cc"
 
       default: break;
     }
@@ -1644,5 +1650,5 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 211 "snow.y"
+#line 213 "snow.y"
 
