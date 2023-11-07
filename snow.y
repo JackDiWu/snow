@@ -6,7 +6,7 @@
 
 %defines
 
-%output "snow.yy.c"
+%output "snow.yy.cc"
 
 %define api.pure
 

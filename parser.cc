@@ -2,14 +2,10 @@
  * @Author: Jack
  * @Date: 2023-10-29 15:06:43
  * @LastEditors: Jack
- * @LastEditTime: 2023-10-30 19:05:16
+ * @LastEditTime: 2023-11-07 09:22:48
  */
+#include "defs.h"
 #include "parser.h"
-
-extern "C" {
-    #include "snow.yy.h"
-    #include "lex.yy.h"
-}
 
 snow::scanner::scanner(const char *nm, const char *data, int size) : name(nm), parser(&_parser) {
     yylex_init(&yylexer);

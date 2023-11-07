@@ -2,15 +2,11 @@
  * @Author: Jack
  * @Date: 2023-10-29 11:52:56
  * @LastEditors: Jack
- * @LastEditTime: 2023-11-06 20:09:11
+ * @LastEditTime: 2023-11-07 09:16:59
  */
 #include "defs.h"
 #include "parser.h"
-
-extern "C" {
-    #include "snow.yy.h"
-    #include "lex.yy.h"
-}
+#include "native.h"
 
 // std::string text = "I am storm + - * / () [] {} <>  .~!@#$%^&*;:?\\ &&  || << >> \"say\\\"something+-*/\" 123 0x232 0.15234 \"Hello\\\'\\\"world\" ";
 

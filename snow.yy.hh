@@ -35,8 +35,8 @@
    especially those whose name start with YY_ or yy_.  They are
    private implementation details that can be changed or removed.  */
 
-#ifndef YY_YY_SNOW_YY_H_INCLUDED
-# define YY_YY_SNOW_YY_H_INCLUDED
+#ifndef YY_YY_SNOW_YY_HH_INCLUDED
+# define YY_YY_SNOW_YY_HH_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 0
@@ -112,4 +112,4 @@ typedef int YYSTYPE;
 int yyparse (void *parser);
 
 
-#endif /* !YY_YY_SNOW_YY_H_INCLUDED  */
+#endif /* !YY_YY_SNOW_YY_HH_INCLUDED  */
