@@ -1206,7 +1206,7 @@ yyreduce:
 
   case 6: /* call: variable TOKEN_LP call_param TOKEN_RP  */
 #line 57 "snow.y"
-                                      { printf("[call]\n"); }
+                                      { yyval = snow::make_expr<snow::expr_call>(snow::EXPR_CALL_FUNCTION, yyvsp[-3], yyvsp[-1]); }
 #line 1211 "snow.yy.cc"
     break;
 

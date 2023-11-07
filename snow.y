@@ -54,7 +54,7 @@ expression TOKEN_COMMA call_param { $$ = $3; std::dynamic_pointer_cast<snow::exp
 
 /**************** call ****************/
 call:
-variable TOKEN_LP call_param TOKEN_RP { printf("[call]\n"); }
+variable TOKEN_LP call_param TOKEN_RP { $$ = snow::make_expr<snow::expr_call>(snow::EXPR_CALL_FUNCTION, $1, $3); }
 ;
 
 

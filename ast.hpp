@@ -39,7 +39,7 @@ namespace snow {
         EXPR_BINARY_DOUBLE_OR,
 
         EXPR_CALL_PARAMETER,
-        EXPR_CALL,
+        EXPR_CALL_FUNCTION,
     } expr_type;
 
     class data {
@@ -518,6 +518,8 @@ namespace snow {
         public:
             std::vector<std::shared_ptr<expr>> list;
 
+            std::string buffer;
+
         public:
             expr_parameters(expr_type tk, const std::shared_ptr<expr> &one) : expr(tk, "call paramter") {
                 push(one);
@@ -527,18 +529,30 @@ namespace snow {
 
         public:
             void push(const std::shared_ptr<expr> &one) {
-                dbg_printf("[call param] %s\n", one->text());
                 list.push_back(one);
+                dbg_printf("[call param] %s\n", one->text());
+            }
+
+            virtual const char * text() {
+                buffer = " ";
+                for (auto it = list.end() - 1; it >= list.begin(); it--) {
+                    buffer += (std::string(it->get()->text()) + " ");
+                }
+                return buffer.c_str();
             }
     };
 
-    class expr_call : public expr_variable {
+    class expr_call : public expr {
         public:
+            std::string name;
+
             std::shared_ptr<expr_parameters> parameters;
 
         public:
-            expr_call(expr_type tk, const char *str, const std::shared_ptr<expr_parameters> &p) : expr_variable(tk, str), parameters(p) {
-
+            expr_call(expr_type tk, const std::shared_ptr<expr> &v, const std::shared_ptr<expr> &p) : expr(tk) {
+                name = std::dynamic_pointer_cast<expr_variable>(v)->name;
+                parameters = std::dynamic_pointer_cast<expr_parameters>(p);
+                dbg_printf("[call] %s (%s)\n", name.c_str(), parameters->text());
             }
 
             virtual ~expr_call() {}

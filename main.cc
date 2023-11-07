@@ -2,7 +2,7 @@
  * @Author: Jack
  * @Date: 2023-10-29 11:52:56
  * @LastEditors: Jack
- * @LastEditTime: 2023-11-07 22:34:38
+ * @LastEditTime: 2023-11-07 23:15:16
  */
 #include "defs.h"
 #include "parser.hpp"
@@ -74,7 +74,7 @@ int main(int argc, const char **argv) {
 
     // printf("---- %s\n", a->T());
 
-    // auto b = std::dynamic_pointer_cast<B>(a);
+    // std::shared_ptr<B> b = std::dynamic_pointer_cast<B>(a);
 
     // printf("---- %s\n", b->T());
 
