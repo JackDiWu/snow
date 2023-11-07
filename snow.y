@@ -202,6 +202,8 @@ TOKEN_DEC { $$ = strtol(yyget_text(yylexer), NULL, 10); }
 |
 TOKEN_HEX { $$ = strtol(yyget_text(yylexer), NULL, 16); }
 |
+TOKEN_STRING { $$ = 101; }
+|
 TOKEN_LP expression TOKEN_RP { $$ = $2; }
 |
 variable { $$ = $1; }

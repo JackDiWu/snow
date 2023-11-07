@@ -131,7 +131,6 @@ namespace snow {
             void push(const std::shared_ptr<expr> &it) {
                 list.push_back(it);
             }
-
     };
 
     class expr_call : public expr {
