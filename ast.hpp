@@ -424,33 +424,14 @@ namespace snow {
                     return logic_and_and();
                 case EXPR_BINARY_DOUBLE_OR:
                     return logic_or_or();
+                    
                 default:
                     return 0;
                 }
             }
 
             virtual int times() {
-                if (L->is_value_type(EXPR_TYPE_INT) && R->is_value_type(EXPR_TYPE_INT)) {
-                    value = value::times<int64_t>(L->value.v_int64, R->value.v_int64);
-                    return 0;
-                }
-                
-                if (L->is_value_type(EXPR_TYPE_INT) || R->is_value_type(EXPR_TYPE_UINT)) {
-                    value = value::times<uint64_t>((uint64_t)L->value.v_int64, R->value.v_uint64);
-                    return 0;
-                }
-                
-                if (L->is_value_type(EXPR_TYPE_UINT) || R->is_value_type(EXPR_TYPE_INT)) {
-                    value = value::times<uint64_t>(L->value.v_uint64, (uint64_t)R->value.v_int64);
-                    return 0;
-                }
-
-                if (L->is_value_type(EXPR_TYPE_UINT) || R->is_value_type(EXPR_TYPE_UINT)) {
-                    value = value::times<uint64_t>(L->value.v_uint64, R->value.v_uint64);
-                    return 0;
-                }
-
-                return 0;
+                expr_binary_format(times)
             }
 
             virtual int div() {
