@@ -115,6 +115,28 @@ namespace snow {
             }
 
             virtual ~data_number() {}
+
+        public:
+            virtual const char * text() {
+                switch (type) {
+                    case EXPR_TYPE_INT: {
+                        v_string = std::to_string(v_int64);
+                        break;
+                    }
+                    case EXPR_TYPE_UINT: {
+                        v_string = std::to_string(v_uint64);
+                        break;
+                    }
+                    case EXPR_TYPE_FLOAT: {
+                        v_string = std::to_string(v_float64);
+                        break;
+                    }
+                    default: {
+                        break;
+                    }
+                }
+                return v_string.c_str();
+            }
     };
 
     class value : public data_number {
@@ -350,19 +372,19 @@ namespace snow {
 
     #define expr_binary_format(op) \
                 if (L->is_value_type(EXPR_TYPE_INT) && R->is_value_type(EXPR_TYPE_INT)) {\
-                    value = value::op<int64_t>(L->value.v_int64, R->value.v_int64);\
+                    expr::value = value::op<int64_t>(L->value.v_int64, R->value.v_int64);\
                     return 0;\
                 }\
                 if (L->is_value_type(EXPR_TYPE_INT) || R->is_value_type(EXPR_TYPE_UINT)) {\
-                    value = value::op<uint64_t>((uint64_t)L->value.v_int64, R->value.v_uint64);\
+                    expr::value = value::op<uint64_t>((uint64_t)L->value.v_int64, R->value.v_uint64);\
                     return 0;\
                 }\
                 if (L->is_value_type(EXPR_TYPE_UINT) || R->is_value_type(EXPR_TYPE_INT)) {\
-                    value = value::op<uint64_t>(L->value.v_uint64, (uint64_t)R->value.v_int64);\
+                    expr::value = value::op<uint64_t>(L->value.v_uint64, (uint64_t)R->value.v_int64);\
                     return 0;\
                 }\
                 if (L->is_value_type(EXPR_TYPE_UINT) || R->is_value_type(EXPR_TYPE_UINT)) {\
-                    value = value::op<uint64_t>(L->value.v_uint64, R->value.v_uint64);\
+                    expr::value = value::op<uint64_t>(L->value.v_uint64, R->value.v_uint64);\
                     return 0;\
                 }\
                 return 0;
@@ -530,13 +552,12 @@ namespace snow {
         public:
             void push(const std::shared_ptr<expr> &one) {
                 list.push_back(one);
-                dbg_printf("[call param] %s\n", one->text());
             }
 
             virtual const char * text() {
                 buffer = " ";
                 for (auto it = list.end() - 1; it >= list.begin(); it--) {
-                    buffer += (std::string(it->get()->text()) + " ");
+                    buffer += (std::string(it->get()->value.text()) + " ");
                 }
                 return buffer.c_str();
             }
@@ -559,7 +580,6 @@ namespace snow {
             expr_call(expr_type tk, const std::shared_ptr<expr> &v, const std::shared_ptr<expr> &p) : expr(tk) {
                 name = std::dynamic_pointer_cast<expr_variable>(v)->name;
                 parameters = std::dynamic_pointer_cast<expr_parameters>(p);
-                dbg_printf("[call] %s (%s)\n", name.c_str(), parameters->text());
             }
 
             virtual ~expr_call() {}
@@ -567,7 +587,7 @@ namespace snow {
         public:
             virtual int resolve() {
                 parameters->resolve();
-
+                dbg_printf("[call] %s (%s)\n", name.c_str(), parameters->text());
                 return 0;
             }
     };
