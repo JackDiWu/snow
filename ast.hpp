@@ -135,12 +135,17 @@ namespace snow {
             }
     };
 
-    class expr_call : public atom {
+    class expr_variable : public atom {
         public:
             std::string name;
 
         public:
-            expr_call(const char *s) : atom(ATOM_TYPE_WORD, TOKEN_WORD), name(s) { }
+            expr_variable(const char *s) : atom(ATOM_TYPE_WORD, TOKEN_WORD), name(s) { }
+    };
+
+    class expr_call : public expr_variable {
+        public:
+            expr_call(const char *s) : expr_variable(s) { }
     };
 }
 
