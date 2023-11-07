@@ -1188,19 +1188,19 @@ yyreduce:
 
   case 3: /* variable: TOKEN_WORD  */
 #line 42 "snow.y"
-           { printf("[variable] %s\n", yyget_text(yy_lexer)); }
+           { yyval = snow::make_expr<snow::expr_variable>(snow::EXPR_TYPE_INT, yyget_text(yy_lexer)); }
 #line 1193 "snow.yy.cc"
     break;
 
   case 4: /* call_param: expression  */
 #line 48 "snow.y"
-           { printf("[call param one]\n"); }
+           { yyval = snow::make_expr<snow::expr_parameters>(snow::EXPR_CALL_PARAMETER, yyvsp[0]); }
 #line 1199 "snow.yy.cc"
     break;
 
   case 5: /* call_param: expression TOKEN_COMMA call_param  */
 #line 50 "snow.y"
-                                  { printf("[call param some]\n"); }
+                                  { yyval = yyvsp[0]; std::dynamic_pointer_cast<snow::expr_parameters>(yyval)->push(yyvsp[-2]);  }
 #line 1205 "snow.yy.cc"
     break;
 

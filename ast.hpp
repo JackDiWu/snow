@@ -39,6 +39,7 @@ namespace snow {
         EXPR_BINARY_DOUBLE_OR,
 
         EXPR_CALL_PARAMETER,
+        EXPR_CALL,
     } expr_type;
 
     class data {
@@ -424,7 +425,7 @@ namespace snow {
                     return logic_and_and();
                 case EXPR_BINARY_DOUBLE_OR:
                     return logic_or_or();
-                    
+
                 default:
                     return 0;
                 }
@@ -503,12 +504,22 @@ namespace snow {
             }
     };
 
+    class expr_variable : public expr {
+        public:
+            std::string name;
+
+        public:
+            expr_variable(expr_type tk, const char *str) : expr(tk, str), name(str) {}
+
+            virtual ~expr_variable() {}
+    };
+
     class expr_parameters : public expr {
         public:
             std::vector<std::shared_ptr<expr>> list;
 
         public:
-            expr_parameters(const std::shared_ptr<expr> &one) : expr(EXPR_CALL_PARAMETER, "call paramter") {
+            expr_parameters(expr_type tk, const std::shared_ptr<expr> &one) : expr(tk, "call paramter") {
                 push(one);
             }
 
@@ -516,18 +527,17 @@ namespace snow {
 
         public:
             void push(const std::shared_ptr<expr> &one) {
-                list.push_back(std::shared_ptr<expr>(one));
+                dbg_printf("[call param] %s\n", one->text());
+                list.push_back(one);
             }
     };
 
-    class expr_call : public expr {
+    class expr_call : public expr_variable {
         public:
-            std::string name;
-
             std::shared_ptr<expr_parameters> parameters;
 
         public:
-            expr_call(expr_type tk, const char *str, const std::shared_ptr<expr_parameters> &p) : expr(tk, str), name(str), parameters(p) {
+            expr_call(expr_type tk, const char *str, const std::shared_ptr<expr_parameters> &p) : expr_variable(tk, str), parameters(p) {
 
             }
 

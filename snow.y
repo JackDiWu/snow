@@ -39,15 +39,15 @@ expression { $$ = $1; }
 
 /**************** call param ****************/
 variable:
-TOKEN_WORD { printf("[variable] %s\n", yyget_text(yy_lexer)); }
+TOKEN_WORD { $$ = snow::make_expr<snow::expr_variable>(snow::EXPR_TYPE_INT, yyget_text(yy_lexer)); }
 
 
 
 /**************** call param ****************/
 call_param:
-expression { printf("[call param one]\n"); }
+expression { $$ = snow::make_expr<snow::expr_parameters>(snow::EXPR_CALL_PARAMETER, $1); }
 |
-expression TOKEN_COMMA call_param { printf("[call param some]\n"); }
+expression TOKEN_COMMA call_param { $$ = $3; std::dynamic_pointer_cast<snow::expr_parameters>($$)->push($1);  }
 ;
 
 
