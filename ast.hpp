@@ -131,109 +131,109 @@ namespace snow {
         public:
             template <typename T>
             static value times(T l, T r) {
-                printf("[expr] %lld * %lld -> %lld\n", l, r, l * r);
+                dbg_printf("[expr] %lld * %lld -> %lld\n", l, r, l * r);
                 return value(l * r);
             }
 
             template <typename T>
             static value div(T l, T r) {
-                printf("[expr] %lld / %lld -> %lld\n", l, r, l / r);
+                dbg_printf("[expr] %lld / %lld -> %lld\n", l, r, l / r);
                 return value(l / r);
             }
 
             template <typename T>
             static value mod(T l, T r) {
-                 printf("[expr] %lld %% %lld -> %lld\n", l, r, l % r);
+                 dbg_printf("[expr] %lld %% %lld -> %lld\n", l, r, l % r);
                 return value(l % r);
             }
 
             template <typename T>
             static value plus(T l, T r) {
-                printf("[expr] %lld + %lld -> %lld\n", l, r, l + r);
+                dbg_printf("[expr] %lld + %lld -> %lld\n", l, r, l + r);
                 return value(l + r);
             }
 
             template <typename T>
             static value sub(T l, T r) {
-                printf("[expr] %lld - %lld -> %lld\n", l, r, l - r);
+                dbg_printf("[expr] %lld - %lld -> %lld\n", l, r, l - r);
                 return value(l - r);
             }
 
             template <typename T>
             static value move_l(T l, T r) {
-                printf("[expr] %lld << %lld -> %lld\n", l, r, l << r);
+                dbg_printf("[expr] %lld << %lld -> %lld\n", l, r, l << r);
                 return value(l << r);
             }
 
             template <typename T>
             static value move_r(T l, T r) {
-                printf("[expr] %lld >> %lld -> %lld\n", l, r, l >> r);
+                dbg_printf("[expr] %lld >> %lld -> %lld\n", l, r, l >> r);
                 return value(l >> r);
             }
 
             template <typename T>
             static value less(T l, T r) {
-                printf("[expr] %lld < %lld -> %d\n", l, r, l < r);
+                dbg_printf("[expr] %lld < %lld -> %d\n", l, r, l < r);
                 return value((int64_t)(l < r));
             }
             
             template <typename T>
             static value more(T l, T r) {
-                printf("[expr] %lld > %lld -> %d\n", l, r, l > r);
+                dbg_printf("[expr] %lld > %lld -> %d\n", l, r, l > r);
                 return value((int64_t)(l > r));
             }
             
             template <typename T>
             static value less_equal(T l, T r) {
-                printf("[expr] %lld <= %lld -> %d\n", l, r, l <= r);
+                dbg_printf("[expr] %lld <= %lld -> %d\n", l, r, l <= r);
                 return value((int64_t)(l <= r));
             }
             
             template <typename T>
             static value more_equal(T l, T r) {
-                printf("[expr] %lld >= %lld -> %d\n", l, r, l >= r);
+                dbg_printf("[expr] %lld >= %lld -> %d\n", l, r, l >= r);
                 return value((int64_t)(l >= r));
             }
 
             template <typename T>
             static value equal(T l, T r) {
-                printf("[expr] %lld == %lld -> %d\n", l, r, l == r);
+                dbg_printf("[expr] %lld == %lld -> %d\n", l, r, l == r);
                 return value((int64_t)(l == r));
             }
             
             template <typename T>
             static value not_equal(T l, T r) {
-                printf("[expr] %lld != %lld -> %d\n", l, r, l != r);
+                dbg_printf("[expr] %lld != %lld -> %d\n", l, r, l != r);
                 return value((int64_t)(l != r));
             }
 
             template <typename T>
             static value logic_and(T l, T r) {
-                printf("[expr] %lld & %lld -> %lld\n", l, r, l & r);
+                dbg_printf("[expr] %lld & %lld -> %lld\n", l, r, l & r);
                 return value(l & r);
             }
             
             template <typename T>
             static value logic_xor(T l, T r) {
-                printf("[expr] %lld ^ %lld -> %lld\n", l, r, l ^ r);
+                dbg_printf("[expr] %lld ^ %lld -> %lld\n", l, r, l ^ r);
                 return value(l ^ r);
             }
             
             template <typename T>
             static value logic_or(T l, T r) {
-                printf("[expr] %lld | %lld -> %lld\n", l, r, l | r);
+                dbg_printf("[expr] %lld | %lld -> %lld\n", l, r, l | r);
                 return value(l | r);
             }
 
             template <typename T>
             static value logic_and_and(T l, T r) {
-                printf("[expr] %lld && %lld -> %d\n", l, r, l && r);
+                dbg_printf("[expr] %lld && %lld -> %d\n", l, r, l && r);
                 return value((int64_t)(l && r));
             }
             
             template <typename T>
             static value logic_or_or(T l, T r) {
-                printf("[expr] %lld || %lld -> %d\n", l, r, l || r);
+                dbg_printf("[expr] %lld || %lld -> %d\n", l, r, l || r);
                 return value((int64_t)(l || r));
             }
     };
@@ -246,11 +246,11 @@ namespace snow {
 
         public:
             expr(expr_type tk) : value(tk, ""), token(tk) {
-                // printf("[expr] %s\n", get_type_string(token));
+                // dbg_printf("[expr] %s\n", get_type_string(token));
             }
 
             expr(expr_type tk, const char *str) : value(tk, str), token(tk) {
-                // printf("[expr] %s %s\n", get_type_string(token), str);
+                // dbg_printf("[expr] %s %s\n", get_type_string(token), str);
             }
 
             virtual ~expr() {}
@@ -372,7 +372,7 @@ namespace snow {
 
         public:
             expr_binary(expr_type tk, const std::shared_ptr<expr> &l, const std::shared_ptr<expr> &r) : expr(tk), L(l), R(r) {
-                // printf("[expr] %s %s %s\n", l->text(), get_type_string(token), r->text());
+                // dbg_printf("[expr] %s %s %s\n", l->text(), get_type_string(token), r->text());
             }
 
             virtual ~expr_binary() {}
