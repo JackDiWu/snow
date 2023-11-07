@@ -129,14 +129,16 @@ namespace snow {
             virtual ~value() {}
 
         public:
-            static value plus(int64_t l, int64_t r) {
-                printf("[expr] %lld + %lld\n", l, r);
+            template <typename T>
+            static value plus(T l, T r) {
+                printf("[expr] %lld + %lld -> %lld\n", l, r, l + r);
                 return value(l + r);
             }
 
-            static value plus(uint64_t l, uint64_t r) {
-                printf("[expr] %lld + %lld\n", l, r);
-                return value(l + r);
+            template <typename T>
+            static value times(T l, T r) {
+                printf("[expr] %lld * %lld -> %lld\n", l, r, l * r);
+                return value(l * r);
             }
     };
 
@@ -266,23 +268,58 @@ namespace snow {
 
                 R->resolve();
 
+                switch (token) {
+                case EXPR_BINARY_PLUS:
+                    return plus();
+                case EXPR_BINARY_TIMES:
+                    return times();
+                default:
+                    return 0;
+                }
+            }
+
+            virtual int plus() {
                 if (L->is_value_type(EXPR_TYPE_INT) && R->is_value_type(EXPR_TYPE_INT)) {
-                    value = value::plus(L->value.v_int64, R->value.v_int64);
+                    value = value::plus<int64_t>(L->value.v_int64, R->value.v_int64);
                     return 0;
                 }
                 
                 if (L->is_value_type(EXPR_TYPE_INT) || R->is_value_type(EXPR_TYPE_UINT)) {
-                    value = value::plus((uint64_t)L->value.v_int64, R->value.v_uint64);
+                    value = value::plus<uint64_t>((uint64_t)L->value.v_int64, R->value.v_uint64);
                     return 0;
                 }
                 
                 if (L->is_value_type(EXPR_TYPE_UINT) || R->is_value_type(EXPR_TYPE_INT)) {
-                    value = value::plus(L->value.v_uint64, (uint64_t)R->value.v_int64);
+                    value = value::plus<uint64_t>(L->value.v_uint64, (uint64_t)R->value.v_int64);
                     return 0;
                 }
 
                 if (L->is_value_type(EXPR_TYPE_UINT) || R->is_value_type(EXPR_TYPE_UINT)) {
-                    value = value::plus(L->value.v_uint64, R->value.v_uint64);
+                    value = value::plus<uint64_t>(L->value.v_uint64, R->value.v_uint64);
+                    return 0;
+                }
+
+                return 0;
+            }
+
+            virtual int times() {
+                if (L->is_value_type(EXPR_TYPE_INT) && R->is_value_type(EXPR_TYPE_INT)) {
+                    value = value::times<int64_t>(L->value.v_int64, R->value.v_int64);
+                    return 0;
+                }
+                
+                if (L->is_value_type(EXPR_TYPE_INT) || R->is_value_type(EXPR_TYPE_UINT)) {
+                    value = value::times<uint64_t>((uint64_t)L->value.v_int64, R->value.v_uint64);
+                    return 0;
+                }
+                
+                if (L->is_value_type(EXPR_TYPE_UINT) || R->is_value_type(EXPR_TYPE_INT)) {
+                    value = value::times<uint64_t>(L->value.v_uint64, (uint64_t)R->value.v_int64);
+                    return 0;
+                }
+
+                if (L->is_value_type(EXPR_TYPE_UINT) || R->is_value_type(EXPR_TYPE_UINT)) {
+                    value = value::times<uint64_t>(L->value.v_uint64, R->value.v_uint64);
                     return 0;
                 }
 
