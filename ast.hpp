@@ -43,12 +43,17 @@ namespace snow {
 
     class data {
         public:
-            expr_type token;
+            expr_type type;
 
         public:
-            data(expr_type tk) : token(tk) {}
+            data(expr_type tk) : type(tk) {}
 
             virtual ~data() {}
+
+        public:
+            virtual bool is_type(expr_type tk) {
+                return tk == type;
+            }
     };
 
     class data_string : public data {
@@ -56,6 +61,8 @@ namespace snow {
             std::string v_string;
 
         public:
+            data_string(expr_type tk) : data(tk) {}
+
             data_string(expr_type tk, const char *str) : data(tk), v_string(str) {}
 
             virtual ~data_string() {}
@@ -75,8 +82,16 @@ namespace snow {
             double v_float64;
 
         public:
+            data_number(expr_type tk) : data_string(tk) {}
+
+            data_number(expr_type tk, int64_t v) : data_string(tk), v_int64(v) {}
+
+            data_number(expr_type tk, uint64_t v) : data_string(tk), v_uint64(v) {}
+
+            data_number(expr_type tk, double v) : data_string(tk), v_float64(v) {}
+
             data_number(expr_type tk, const char *str) : data_string(tk, str) {
-                switch (token) {
+                switch (type) {
                     case EXPR_TYPE_INT: {
                         v_int64 = strtol(str, NULL, 10);
                         v_string = str;
@@ -103,9 +118,26 @@ namespace snow {
 
     class value : public data_number {
         public:
-            value(expr_type tk, const char *str) : data_number(tk, str) {}
+            value(int64_t v) : data_number(EXPR_TYPE_INT, v) {}
+
+            value(uint64_t v) : data_number(EXPR_TYPE_UINT, v) {}
+
+            value(double v) : data_number(EXPR_TYPE_FLOAT, v) {}
+
+            value(expr_type tk, const char *s) : data_number(tk, s) {}
 
             virtual ~value() {}
+
+        public:
+            static value plus(int64_t l, int64_t r) {
+                printf("[expr] %lld + %lld\n", l, r);
+                return value(l + r);
+            }
+
+            static value plus(uint64_t l, uint64_t r) {
+                printf("[expr] %lld + %lld\n", l, r);
+                return value(l + r);
+            }
     };
 
     class expr {
@@ -128,6 +160,18 @@ namespace snow {
         public:
             virtual const char * text() {
                 return value.text();
+            }
+
+            virtual int resolve() {
+                return 0;
+            }
+
+            virtual bool is_expr_type(expr_type tk) {
+                return token == tk;
+            }
+
+            virtual bool is_value_type(expr_type tk) {
+                return value.is_type(tk);
             }
 
         public:
@@ -215,6 +259,35 @@ namespace snow {
             }
 
             virtual ~expr_binary() {}
+
+        public:
+            virtual int resolve() {
+                L->resolve();
+
+                R->resolve();
+
+                if (L->is_value_type(EXPR_TYPE_INT) && R->is_value_type(EXPR_TYPE_INT)) {
+                    value = value::plus(L->value.v_int64, R->value.v_int64);
+                    return 0;
+                }
+                
+                if (L->is_value_type(EXPR_TYPE_INT) || R->is_value_type(EXPR_TYPE_UINT)) {
+                    value = value::plus((uint64_t)L->value.v_int64, R->value.v_uint64);
+                    return 0;
+                }
+                
+                if (L->is_value_type(EXPR_TYPE_UINT) || R->is_value_type(EXPR_TYPE_INT)) {
+                    value = value::plus(L->value.v_uint64, (uint64_t)R->value.v_int64);
+                    return 0;
+                }
+
+                if (L->is_value_type(EXPR_TYPE_UINT) || R->is_value_type(EXPR_TYPE_UINT)) {
+                    value = value::plus(L->value.v_uint64, R->value.v_uint64);
+                    return 0;
+                }
+
+                return 0;
+            }
     };
 
     class expr_parameters : public expr {

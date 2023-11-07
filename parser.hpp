@@ -2,7 +2,7 @@
  * @Author: Jack
  * @Date: 2023-10-30 11:12:37
  * @LastEditors: Jack
- * @LastEditTime: 2023-11-07 20:20:08
+ * @LastEditTime: 2023-11-07 20:43:50
  */
 #ifndef _SNOW_PARSER_HPP_
 #define _SNOW_PARSER_HPP_
@@ -46,8 +46,12 @@ namespace snow {
             }
 
         public:
-            virtual int resolve() {
+            virtual int parse() {
                 return yyparse(this);
+            }
+
+            virtual int resolve() {
+                return top->resolve();
             }
     };
     
