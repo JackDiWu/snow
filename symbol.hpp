@@ -2,7 +2,7 @@
  * @Author: Jack
  * @Date: 2023-11-07 14:31:31
  * @LastEditors: Jack
- * @LastEditTime: 2023-11-07 15:07:44
+ * @LastEditTime: 2023-11-07 15:58:15
  */
 #ifndef _SNOW_SYMBOL_H_
 #define _SNOW_SYMBOL_H_
@@ -12,11 +12,9 @@
 namespace snow {
 
     class symbol {
-        public:
-            snow::atom_type atom_type;
 
         public:
-            symbol(snow::atom_type at) : atom_type(at) {}
+            symbol() {}
 
             virtual ~symbol() {}
     };
