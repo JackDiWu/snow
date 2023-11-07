@@ -16,7 +16,7 @@ namespace snow {
 
     class atom {
         public:
-            atom_type type;
+            snow::atom_type atom_type;
 
             yytoken_kind_t token_type;
 
@@ -25,7 +25,7 @@ namespace snow {
             std::string v_string;
 
         public:
-            atom(atom_type ap, yytoken_kind_t tp) : type(ap), token_type(tp) {}
+            atom(snow::atom_type ap, yytoken_kind_t tp) : atom_type(ap), token_type(tp) {}
 
             virtual ~atom() {}
 
@@ -33,13 +33,13 @@ namespace snow {
             virtual const char * text() = 0;
     };
 
-    class atom_binary : public atom {
+    class expr_binary : public atom {
         public:
-            atom_binary(yytoken_kind_t tp) : atom(ATOM_TYPE_SIGN, tp) {
+            expr_binary(yytoken_kind_t tp) : atom(ATOM_TYPE_SIGN, tp) {
 
             }
 
-            virtual ~atom_binary() {}
+            virtual ~expr_binary() {}
 
         public:
             virtual const char * text() {
@@ -77,7 +77,7 @@ namespace snow {
             }
     };
 
-    class atom_number : public atom {
+    class expr_number : public atom {
         public:
             int64_t v_int64;
 
@@ -86,32 +86,32 @@ namespace snow {
             double v_float64;
 
         public:
-            atom_number(int64_t v) : atom(ATOM_TYPE_INT, TOKEN_DEC), v_int64(v) {}
+            expr_number(int64_t v) : atom(ATOM_TYPE_INT, TOKEN_DEC), v_int64(v) {}
 
-            atom_number(uint64_t v) : atom(ATOM_TYPE_UINT, TOKEN_HEX), v_uint64(v) {}
+            expr_number(uint64_t v) : atom(ATOM_TYPE_UINT, TOKEN_HEX), v_uint64(v) {}
 
-            atom_number(double v) : atom(ATOM_TYPE_FLOAT, TOKEN_FLOAT), v_float64(v) {}
+            expr_number(double v) : atom(ATOM_TYPE_FLOAT, TOKEN_FLOAT), v_float64(v) {}
 
-            atom_number(int v) : atom_number((int64_t)v) {}
+            expr_number(int v) : expr_number((int64_t)v) {}
 
-            atom_number(unsigned int v) : atom_number((uint64_t)v) {}
+            expr_number(unsigned int v) : expr_number((uint64_t)v) {}
 
-            virtual ~atom_number() {}
+            virtual ~expr_number() {}
 
         public:
             virtual const char * text() {
-                char buffer[1024] = {};
-                switch (type) {
+                char buffer[MAX_BUFFER_SIZE] = {};
+                switch (atom_type) {
                 case ATOM_TYPE_INT: {
-                    snprintf(buffer, 1024, "%lld", v_int64); atom::v_string.assign(buffer);
+                    snprintf(buffer, MAX_BUFFER_SIZE, "%lld", v_int64); atom::v_string.assign(buffer);
                     return v_string.c_str();
                 }
                 case ATOM_TYPE_UINT: {
-                    snprintf(buffer, 1024, "%llx", v_uint64); atom::v_string.assign(buffer);
+                    snprintf(buffer, MAX_BUFFER_SIZE, "%llx", v_uint64); atom::v_string.assign(buffer);
                     return v_string.c_str();
                 }
                 case ATOM_TYPE_FLOAT: {
-                    snprintf(buffer, 1024, "%lf", v_float64); atom::v_string.assign(buffer);
+                    snprintf(buffer, MAX_BUFFER_SIZE, "%lf", v_float64); atom::v_string.assign(buffer);
                     return v_string.c_str();
                 }
                 default:
