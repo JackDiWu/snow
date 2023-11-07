@@ -77,8 +77,12 @@ namespace snow {
         public:
             snow::value value;
 
+            yytoken_kind_t token;
+
         public:
-            expr(yytoken_kind_t tk, const char *str) : value(tk, str) {}
+            expr() : value(TOKEN_UNKNOW, ""), token(TOKEN_UNKNOW) {}
+
+            expr(yytoken_kind_t tk, const char *str) : value(tk, str), token(tk) {}
 
             virtual ~expr() {}
 
@@ -92,6 +96,8 @@ namespace snow {
 
         public:
             expr_unary(yytoken_kind_t tk, const char *str, const std::shared_ptr<expr> &t) : expr(tk, str), T(t) {}
+
+            virtual ~expr_unary() {}
     };
 
     class expr_binary : public expr {
@@ -101,8 +107,45 @@ namespace snow {
         public:
             expr_binary(
                 yytoken_kind_t tk, const char *str,
-                const std::shared_ptr<expr> &l, const std::shared_ptr<expr> &r
-            ) : expr(tk, str), L(l), R(r) {}
+                const std::shared_ptr<expr> &l,
+                const std::shared_ptr<expr> &r
+            )
+            :
+            expr(tk, str), L(l), R(r) {}
+
+            virtual ~expr_binary() {}
+    };
+
+    class expr_parameters : public expr {
+        public:
+            std::vector<std::shared_ptr<expr>> list;
+
+        public:
+            expr_parameters(const std::shared_ptr<expr> &one) {
+                list.push_back(one);
+            }
+
+            virtual ~expr_parameters() {}
+
+        public:
+            void push(const std::shared_ptr<expr> &it) {
+                list.push_back(it);
+            }
+
+    };
+
+    class expr_call : public expr {
+        public:
+            std::string name;
+
+            std::shared_ptr<expr_parameters> parameters;
+
+        public:
+            expr_call(yytoken_kind_t tk, const char *str, const std::shared_ptr<expr_parameters> &p) : expr(tk, str), name(str), parameters(p) {
+
+            }
+
+            virtual ~expr_call() {}
     };
 }
 
