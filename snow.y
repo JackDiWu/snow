@@ -14,7 +14,7 @@
 
 %parse-param {void *parser}
 
-%token TOKEN_UNKNOW TOKEN_WORD TOKEN_STRING
+%token TOKEN_UNKNOW TOKEN_WORD TOKEN_STRING TOKEN_ENTER
 
 %token TOKEN_DEC TOKEN_HEX TOKEN_FLOAT
 
@@ -29,6 +29,15 @@
 %token TOKEN_AND TOKEN_OR TOKEN_QUESTION TOKEN_POINT TOKEN_BROKEN_ISSUE TOKEN_EXCLAMATION TOKEN_AT TOKEN_HASHTAG TOKEN_DOLLAR TOKEN_PERCENT TOKEN_XOR TOKEN_COLON TOKEN_SEMICOLON TOKEN_BACKSLASH TOKEN_COMMA
 
 %%
+
+/**************** statement ****************/
+statement:
+expression {}
+|
+expression TOKEN_SEMICOLON { printf("statement\n"); }
+;
+
+
 
 /**************** call param ****************/
 call_param:
