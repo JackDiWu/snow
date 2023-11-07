@@ -7,6 +7,7 @@ namespace snow {
 
     typedef enum {
         EXPR_TYPE_NONE,
+
         EXPR_TYPE_INT,
         EXPR_TYPE_UINT,
         EXPR_TYPE_FLOAT,
@@ -114,7 +115,13 @@ namespace snow {
             expr_type token;
 
         public:
-            expr(expr_type tk, const char *str) : value(tk, str), token(tk) {}
+            expr(expr_type tk) : value(tk, ""), token(tk) {
+                printf("[expr] %s\n", get_type_string(token));
+            }
+
+            expr(expr_type tk, const char *str) : value(tk, str), token(tk) {
+                printf("[expr] %s %s\n", get_type_string(token), str);
+            }
 
             virtual ~expr() {}
 
@@ -126,6 +133,18 @@ namespace snow {
         public:
             static const char * get_type_string(expr_type type) {
                 switch (type) {
+                    case EXPR_TYPE_NONE:
+                        return "none";
+        
+                    case EXPR_TYPE_INT:
+                        return "int";
+                    case EXPR_TYPE_UINT:
+                        return "uint";
+                    case EXPR_TYPE_FLOAT:
+                        return "float";
+                    case EXPR_TYPE_STRING:
+                        return "string";
+                    
                     case EXPR_BINARY_TIMES:
                         return "*";
                     case EXPR_BINARY_DIVIDE:
@@ -167,9 +186,10 @@ namespace snow {
                     case EXPR_BINARY_DOUBLE_AND:
                         return "&&";
                     case EXPR_BINARY_DOUBLE_OR:
-                        return "||"; 
+                        return "||";
+
                     default: {
-                        return "unknow expr type";
+                        return "unknow";
                     }
                 }
             }
@@ -180,7 +200,7 @@ namespace snow {
             std::shared_ptr<expr> T;
 
         public:
-            expr_unary(expr_type tk, const char *str, const std::shared_ptr<expr> &t) : expr(tk, str), T(t) {}
+            expr_unary(expr_type tk, const std::shared_ptr<expr> &t) : expr(tk), T(t) {}
 
             virtual ~expr_unary() {}
     };
@@ -190,7 +210,7 @@ namespace snow {
             std::shared_ptr<expr> L, R;
 
         public:
-            expr_binary(expr_type tk, const char *str, const std::shared_ptr<expr> &l, const std::shared_ptr<expr> &r) : expr(tk, str), L(l), R(r) {
+            expr_binary(expr_type tk, const std::shared_ptr<expr> &l, const std::shared_ptr<expr> &r) : expr(tk), L(l), R(r) {
                 printf("[expr] %s %s %s\n", l->text(), get_type_string(token), r->text());
             }
 
@@ -234,13 +254,13 @@ namespace snow {
     }
 
     template<typename T>
-    std::shared_ptr<T> make_expr(expr_type tk, const char *str, const std::shared_ptr<expr> &t) {
-        return std::make_shared<T>(tk, str, t);
+    std::shared_ptr<T> make_expr(expr_type tk, const std::shared_ptr<expr> &t) {
+        return std::make_shared<T>(tk, t);
     }
 
     template<typename T>
-    std::shared_ptr<T> make_expr(expr_type tk, const char *str, const std::shared_ptr<expr> &l, const std::shared_ptr<expr> &r) {
-        return std::make_shared<T>(tk, str, l, r);
+    std::shared_ptr<T> make_expr(expr_type tk, const std::shared_ptr<expr> &l, const std::shared_ptr<expr> &r) {
+        return std::make_shared<T>(tk, l, r);
     }
 }
 
