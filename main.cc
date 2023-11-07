@@ -2,10 +2,11 @@
  * @Author: Jack
  * @Date: 2023-10-29 11:52:56
  * @LastEditors: Jack
- * @LastEditTime: 2023-11-07 14:24:22
+ * @LastEditTime: 2023-11-07 14:35:45
  */
 #include "defs.h"
 #include "parser.hpp"
+#include "symbol.hpp"
 
 // std::string text = "I am storm + - * / () [] {} <>  .~!@#$%^&*;:?\\ &&  || << >> \"say\\\"something+-*/\" 123 0x232 0.15234 \"Hello\\\'\\\"world\" ";
 
@@ -30,6 +31,7 @@ void test_lexer() {
 }
 
 void test_parser() {
+    printf("--- %p\n", snow::symbols::shared().get());
     auto scanner = std::make_shared<snow::scanner>("main.cc", text.data(), text.size());
     scanner->resolve();
 }
