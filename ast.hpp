@@ -19,6 +19,8 @@ namespace snow {
         public:
             atom_type type;
 
+            std::shared_ptr<atom> L, R, T;
+
         public:
             atom(atom_type tp) : type(tp) {}
 
