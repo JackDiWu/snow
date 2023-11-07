@@ -22,7 +22,7 @@ namespace snow {
 
             std::shared_ptr<atom> L, R, T;
 
-            std::string tmp;
+            std::string v_string;
 
         public:
             atom(atom_type ap, yytoken_kind_t tp) : type(ap), token_type(tp) {}
@@ -107,16 +107,16 @@ namespace snow {
                 char buffer[1024] = {};
                 switch (type) {
                 case ATOM_TYPE_INT: {
-                    snprintf(buffer, 1024, "%lld", v_int64); atom::tmp.assign(buffer);
-                    return tmp.c_str();
+                    snprintf(buffer, 1024, "%lld", v_int64); atom::v_string.assign(buffer);
+                    return v_string.c_str();
                 }
                 case ATOM_TYPE_UINT: {
-                    snprintf(buffer, 1024, "%llx", v_uint64); atom::tmp.assign(buffer);
-                    return tmp.c_str();
+                    snprintf(buffer, 1024, "%llx", v_uint64); atom::v_string.assign(buffer);
+                    return v_string.c_str();
                 }
                 case ATOM_TYPE_FLOAT: {
-                    snprintf(buffer, 1024, "%lf", v_float64); atom::tmp.assign(buffer);
-                    return tmp.c_str();
+                    snprintf(buffer, 1024, "%lf", v_float64); atom::v_string.assign(buffer);
+                    return v_string.c_str();
                 }
                 default:
                     return "unknow number";
@@ -126,14 +126,16 @@ namespace snow {
 
     class atom_string : public atom {
         public:
-            std::string v_string;
-
-        public:
-            atom_string(const char *s) : atom(ATOM_TYPE_STRING, TOKEN_FLOAT), v_string(s) {}
+            atom_string(const char *s) : atom(ATOM_TYPE_STRING, TOKEN_FLOAT) { v_string.assign(s); }
 
             atom_string(const std::string &s): atom_string(s.c_str()) {}
 
             virtual ~atom_string() {}
+
+        public:
+            virtual const char * text() {
+                return v_string.c_str();
+            }
     };
 }
 
