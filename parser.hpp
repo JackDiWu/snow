@@ -2,7 +2,7 @@
  * @Author: Jack
  * @Date: 2023-10-30 11:12:37
  * @LastEditors: Jack
- * @LastEditTime: 2023-11-07 09:53:43
+ * @LastEditTime: 2023-11-07 09:58:32
  */
 #ifndef _SNOW_PARSER_HPP_
 #define _SNOW_PARSER_HPP_
@@ -48,7 +48,9 @@ namespace snow {
                 return yyparse(this);
             }
     };
-
+    
 }
+
+#define yylexer static_cast<snow::scanner*>(parser)->lexer
 
 #endif

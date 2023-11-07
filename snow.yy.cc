@@ -72,10 +72,8 @@
 
 #include "parser.hpp"
 
-#define lex_param static_cast<snow::scanner*>(parser)->lexer
 
-
-#line 79 "snow.yy.cc"
+#line 77 "snow.yy.cc"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -551,10 +549,10 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    37,    37,    44,    46,    53,    55,    62,    64,    71,
-      73,    80,    82,    89,    91,    93,   100,   102,   104,   106,
-     108,   115,   117,   119,   126,   128,   130,   137,   139,   141,
-     143,   150,   152,   154,   156,   158,   165,   172,   174,   176
+       0,    35,    35,    42,    44,    51,    53,    60,    62,    69,
+      71,    78,    80,    87,    89,    91,    98,   100,   102,   104,
+     106,   113,   115,   117,   124,   126,   128,   135,   137,   139,
+     141,   148,   150,   152,   154,   156,   163,   170,   172,   174
 };
 #endif
 
@@ -1079,7 +1077,7 @@ yybackup:
   if (yychar == YYEMPTY)
     {
       YYDPRINTF ((stderr, "Reading a token\n"));
-      yychar = yylex (&yylval, lex_param);
+      yychar = yylex (&yylval, yylexer);
     }
 
   if (yychar <= YYEOF)
@@ -1167,235 +1165,235 @@ yyreduce:
   switch (yyn)
     {
   case 2: /* expression: op_logic_or  */
-#line 37 "snow.y"
+#line 35 "snow.y"
             { yyval = yyvsp[0]; }
-#line 1173 "snow.yy.cc"
+#line 1171 "snow.yy.cc"
     break;
 
   case 3: /* op_logic_or: op_logic_and  */
-#line 44 "snow.y"
+#line 42 "snow.y"
              { yyval = yyvsp[0]; }
-#line 1179 "snow.yy.cc"
+#line 1177 "snow.yy.cc"
     break;
 
   case 4: /* op_logic_or: op_logic_or TOKEN_DOUBLE_OR op_logic_and  */
-#line 46 "snow.y"
+#line 44 "snow.y"
                                          { yyval = yyvsp[-2] || yyvsp[0]; printf("result: %ld = %ld || %ld\n", yyval, yyvsp[-2], yyvsp[0]); }
-#line 1185 "snow.yy.cc"
+#line 1183 "snow.yy.cc"
     break;
 
   case 5: /* op_logic_and: op_or  */
-#line 53 "snow.y"
+#line 51 "snow.y"
       { yyval = yyvsp[0]; }
-#line 1191 "snow.yy.cc"
+#line 1189 "snow.yy.cc"
     break;
 
   case 6: /* op_logic_and: op_logic_and TOKEN_DOUBLE_AND op_or  */
-#line 55 "snow.y"
+#line 53 "snow.y"
                                     { yyval = yyvsp[-2] && yyvsp[0]; printf("result: %ld = %ld && %ld\n", yyval, yyvsp[-2], yyvsp[0]); }
-#line 1197 "snow.yy.cc"
+#line 1195 "snow.yy.cc"
     break;
 
   case 7: /* op_or: op_xor  */
-#line 62 "snow.y"
+#line 60 "snow.y"
        { yyval = yyvsp[0]; }
-#line 1203 "snow.yy.cc"
+#line 1201 "snow.yy.cc"
     break;
 
   case 8: /* op_or: op_or TOKEN_OR op_xor  */
-#line 64 "snow.y"
+#line 62 "snow.y"
                       { yyval = yyvsp[-2] | yyvsp[0]; printf("result: %ld = %ld | %ld\n", yyval, yyvsp[-2], yyvsp[0]); }
-#line 1209 "snow.yy.cc"
+#line 1207 "snow.yy.cc"
     break;
 
   case 9: /* op_xor: op_and  */
-#line 71 "snow.y"
+#line 69 "snow.y"
        { yyval = yyvsp[0]; }
-#line 1215 "snow.yy.cc"
+#line 1213 "snow.yy.cc"
     break;
 
   case 10: /* op_xor: op_xor TOKEN_XOR op_and  */
-#line 73 "snow.y"
+#line 71 "snow.y"
                         { yyval = yyvsp[-2] ^ yyvsp[0]; printf("result: %ld = %ld ^ %ld\n", yyval, yyvsp[-2], yyvsp[0]); }
-#line 1221 "snow.yy.cc"
+#line 1219 "snow.yy.cc"
     break;
 
   case 11: /* op_and: op_equal  */
-#line 80 "snow.y"
+#line 78 "snow.y"
          { yyval = yyvsp[0]; }
-#line 1227 "snow.yy.cc"
+#line 1225 "snow.yy.cc"
     break;
 
   case 12: /* op_and: op_and TOKEN_AND op_equal  */
-#line 82 "snow.y"
+#line 80 "snow.y"
                           { yyval = yyvsp[-2] & yyvsp[0]; printf("result: %ld = %ld & %ld\n", yyval, yyvsp[-2], yyvsp[0]); }
-#line 1233 "snow.yy.cc"
+#line 1231 "snow.yy.cc"
     break;
 
   case 13: /* op_equal: op_relation  */
-#line 89 "snow.y"
+#line 87 "snow.y"
             { yyval = yyvsp[0]; }
-#line 1239 "snow.yy.cc"
+#line 1237 "snow.yy.cc"
     break;
 
   case 14: /* op_equal: op_equal TOKEN_DOUBLE_EQUAL op_relation  */
-#line 91 "snow.y"
+#line 89 "snow.y"
                                         { yyval = yyvsp[-2] == yyvsp[0]; printf("result: %ld = %ld == %ld\n", yyval, yyvsp[-2], yyvsp[0]); }
-#line 1245 "snow.yy.cc"
+#line 1243 "snow.yy.cc"
     break;
 
   case 15: /* op_equal: op_equal TOKEN_NOT_EQUAL op_relation  */
-#line 93 "snow.y"
+#line 91 "snow.y"
                                      { yyval = yyvsp[-2] != yyvsp[0]; printf("result: %ld = %ld != %ld\n", yyval, yyvsp[-2], yyvsp[0]); }
-#line 1251 "snow.yy.cc"
+#line 1249 "snow.yy.cc"
     break;
 
   case 16: /* op_relation: op_bit  */
-#line 100 "snow.y"
+#line 98 "snow.y"
        { yyval = yyvsp[0]; }
-#line 1257 "snow.yy.cc"
+#line 1255 "snow.yy.cc"
     break;
 
   case 17: /* op_relation: op_relation TOKEN_LA op_bit  */
-#line 102 "snow.y"
+#line 100 "snow.y"
                             { yyval = yyvsp[-2] < yyvsp[0]; printf("result: %ld = %ld < %ld\n", yyval, yyvsp[-2], yyvsp[0]); }
-#line 1263 "snow.yy.cc"
+#line 1261 "snow.yy.cc"
     break;
 
   case 18: /* op_relation: op_relation TOKEN_RA op_bit  */
-#line 104 "snow.y"
+#line 102 "snow.y"
                             { yyval = yyvsp[-2] > yyvsp[0]; printf("result: %ld = %ld > %ld\n", yyval, yyvsp[-2], yyvsp[0]); }
-#line 1269 "snow.yy.cc"
+#line 1267 "snow.yy.cc"
     break;
 
   case 19: /* op_relation: op_relation TOKEN_LA_EQUAL op_bit  */
-#line 106 "snow.y"
+#line 104 "snow.y"
                                   { yyval = yyvsp[-2] <= yyvsp[0]; printf("result: %ld = %ld <= %ld\n", yyval, yyvsp[-2], yyvsp[0]); }
-#line 1275 "snow.yy.cc"
+#line 1273 "snow.yy.cc"
     break;
 
   case 20: /* op_relation: op_relation TOKEN_RA_EQUAL op_bit  */
-#line 108 "snow.y"
+#line 106 "snow.y"
                                   { yyval = yyvsp[-2] >= yyvsp[0]; printf("result: %ld = %ld >= %ld\n", yyval, yyvsp[-2], yyvsp[0]); }
-#line 1281 "snow.yy.cc"
+#line 1279 "snow.yy.cc"
     break;
 
   case 21: /* op_bit: op_plus_sub  */
-#line 115 "snow.y"
+#line 113 "snow.y"
             { yyval = yyvsp[0]; }
-#line 1287 "snow.yy.cc"
+#line 1285 "snow.yy.cc"
     break;
 
   case 22: /* op_bit: op_bit TOKEN_DOUBLE_LA op_plus_sub  */
-#line 117 "snow.y"
+#line 115 "snow.y"
                                    { yyval = yyvsp[-2] << yyvsp[0]; printf("result: %ld = %ld << %ld\n", yyval, yyvsp[-2], yyvsp[0]); }
-#line 1293 "snow.yy.cc"
+#line 1291 "snow.yy.cc"
     break;
 
   case 23: /* op_bit: op_bit TOKEN_DOUBLE_RA op_plus_sub  */
-#line 119 "snow.y"
+#line 117 "snow.y"
                                    { yyval = yyvsp[-2] >> yyvsp[0]; printf("result: %ld = %ld >> %ld\n", yyval, yyvsp[-2], yyvsp[0]); }
-#line 1299 "snow.yy.cc"
+#line 1297 "snow.yy.cc"
     break;
 
   case 24: /* op_plus_sub: op_times_divide_mod  */
-#line 126 "snow.y"
+#line 124 "snow.y"
                     { yyval = yyvsp[0]; }
-#line 1305 "snow.yy.cc"
+#line 1303 "snow.yy.cc"
     break;
 
   case 25: /* op_plus_sub: op_plus_sub TOKEN_PLUS op_times_divide_mod  */
-#line 128 "snow.y"
+#line 126 "snow.y"
                                            { yyval = yyvsp[-2] + yyvsp[0]; printf("result: %ld = %ld + %ld\n", yyval, yyvsp[-2], yyvsp[0]); }
-#line 1311 "snow.yy.cc"
+#line 1309 "snow.yy.cc"
     break;
 
   case 26: /* op_plus_sub: op_plus_sub TOKEN_SUB op_times_divide_mod  */
-#line 130 "snow.y"
+#line 128 "snow.y"
                                           { yyval = yyvsp[-2] - yyvsp[0]; printf("result: %ld = %ld - %ld\n", yyval, yyvsp[-2], yyvsp[0]); }
-#line 1317 "snow.yy.cc"
+#line 1315 "snow.yy.cc"
     break;
 
   case 27: /* op_times_divide_mod: op_prefix  */
-#line 137 "snow.y"
+#line 135 "snow.y"
           { yyval = yyvsp[0]; }
-#line 1323 "snow.yy.cc"
+#line 1321 "snow.yy.cc"
     break;
 
   case 28: /* op_times_divide_mod: op_times_divide_mod TOKEN_TIMES op_prefix  */
-#line 139 "snow.y"
+#line 137 "snow.y"
                                           { yyval = yyvsp[-2] * yyvsp[0]; printf("result: %ld = %ld * %ld\n", yyval, yyvsp[-2], yyvsp[0]); }
-#line 1329 "snow.yy.cc"
+#line 1327 "snow.yy.cc"
     break;
 
   case 29: /* op_times_divide_mod: op_times_divide_mod TOKEN_DIVIDE op_prefix  */
-#line 141 "snow.y"
+#line 139 "snow.y"
                                            { yyval = yyvsp[-2] / yyvsp[0]; printf("result: %ld = %ld / %ld\n", yyval, yyvsp[-2], yyvsp[0]); }
-#line 1335 "snow.yy.cc"
+#line 1333 "snow.yy.cc"
     break;
 
   case 30: /* op_times_divide_mod: op_times_divide_mod TOKEN_PERCENT op_prefix  */
-#line 143 "snow.y"
+#line 141 "snow.y"
                                             { yyval = yyvsp[-2] % yyvsp[0]; printf("result: %ld = %ld mod %ld\n", yyval, yyvsp[-2], yyvsp[0]); }
-#line 1341 "snow.yy.cc"
+#line 1339 "snow.yy.cc"
     break;
 
   case 31: /* op_prefix: op_suffix  */
-#line 150 "snow.y"
+#line 148 "snow.y"
           { yyval = yyvsp[0]; }
-#line 1347 "snow.yy.cc"
+#line 1345 "snow.yy.cc"
     break;
 
   case 32: /* op_prefix: TOKEN_PLUS op_suffix  */
-#line 152 "snow.y"
+#line 150 "snow.y"
                      { yyval = +(yyvsp[0]); printf("result: %ld = + %ld\n", yyval, yyvsp[0]); }
-#line 1353 "snow.yy.cc"
+#line 1351 "snow.yy.cc"
     break;
 
   case 33: /* op_prefix: TOKEN_SUB op_suffix  */
-#line 154 "snow.y"
+#line 152 "snow.y"
                     { yyval = -(yyvsp[0]); printf("result: %ld = - %ld\n", yyval, yyvsp[0]); }
-#line 1359 "snow.yy.cc"
+#line 1357 "snow.yy.cc"
     break;
 
   case 34: /* op_prefix: TOKEN_EXCLAMATION op_suffix  */
-#line 156 "snow.y"
+#line 154 "snow.y"
                             { yyval = !(yyvsp[0]); printf("result: %ld = ! %ld\n", yyval, yyvsp[0]); }
-#line 1365 "snow.yy.cc"
+#line 1363 "snow.yy.cc"
     break;
 
   case 35: /* op_prefix: TOKEN_BROKEN_ISSUE op_suffix  */
-#line 158 "snow.y"
+#line 156 "snow.y"
                              { yyval = ~(yyvsp[0]); printf("result: %ld = ~ %ld\n", yyval, yyvsp[0]); }
-#line 1371 "snow.yy.cc"
+#line 1369 "snow.yy.cc"
     break;
 
   case 36: /* op_suffix: atom  */
-#line 165 "snow.y"
+#line 163 "snow.y"
      { yyval = yyvsp[0]; }
-#line 1377 "snow.yy.cc"
+#line 1375 "snow.yy.cc"
     break;
 
   case 37: /* atom: TOKEN_DEC  */
-#line 172 "snow.y"
-          { yyval = strtol(yyget_text(lex_param), NULL, 10); }
-#line 1383 "snow.yy.cc"
+#line 170 "snow.y"
+          { yyval = strtol(yyget_text(yylexer), NULL, 10); }
+#line 1381 "snow.yy.cc"
     break;
 
   case 38: /* atom: TOKEN_HEX  */
-#line 174 "snow.y"
-          { yyval = strtol(yyget_text(lex_param), NULL, 16); }
-#line 1389 "snow.yy.cc"
+#line 172 "snow.y"
+          { yyval = strtol(yyget_text(yylexer), NULL, 16); }
+#line 1387 "snow.yy.cc"
     break;
 
   case 39: /* atom: TOKEN_LP expression TOKEN_RP  */
-#line 176 "snow.y"
+#line 174 "snow.y"
                              { yyval = yyvsp[-1]; }
-#line 1395 "snow.yy.cc"
+#line 1393 "snow.yy.cc"
     break;
 
 
-#line 1399 "snow.yy.cc"
+#line 1397 "snow.yy.cc"
 
       default: break;
     }
@@ -1588,5 +1586,5 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 179 "snow.y"
+#line 177 "snow.y"
 
