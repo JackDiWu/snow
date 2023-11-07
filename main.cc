@@ -2,7 +2,7 @@
  * @Author: Jack
  * @Date: 2023-10-29 11:52:56
  * @LastEditors: Jack
- * @LastEditTime: 2023-11-07 14:35:45
+ * @LastEditTime: 2023-11-07 14:42:21
  */
 #include "defs.h"
 #include "parser.hpp"
@@ -31,7 +31,6 @@ void test_lexer() {
 }
 
 void test_parser() {
-    printf("--- %p\n", snow::symbols::shared().get());
     auto scanner = std::make_shared<snow::scanner>("main.cc", text.data(), text.size());
     scanner->resolve();
 }
