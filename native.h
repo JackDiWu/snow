@@ -1,36 +1,18 @@
 /*
  * @Author: Jack
- * @Date: 2023-10-29 14:22:23
+ * @Date: 2023-11-07 09:52:17
  * @LastEditors: Jack
- * @LastEditTime: 2023-11-07 09:23:26
+ * @LastEditTime: 2023-11-07 09:54:52
  */
-#ifndef _SNOW_NATIVE_H_
-#define _SNOW_NATIVE_H_
+#ifndef _SNOW_TYPES_H_
+#define _SNOW_TYPES_H_
 
-/**************** includes ****************/
-#include <stdio.h>
-
-#include "types.h"
-#include "snow.yy.hh"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-    
-#include "lex.yy.h"
-
-#ifdef __cplusplus
-}
-#endif
+/***************** types ******************/
+#define YYSTYPE        long
 
 
 
-/**************** defines ****************/
-#define yyprint()             printf("[lex] %s\n", yyget_text(yylexer))
-
-
-
-/**************** functions ****************/
+/***************** functions ******************/
 void yyerror (void *parser, char const *s);
 
 #endif

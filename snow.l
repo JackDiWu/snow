@@ -1,5 +1,5 @@
 %{
-
+    
 #include "snow.yy.hh"
 
 #define lex_set_line(n)            yyset_lineno(n, yyscanner)

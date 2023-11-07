@@ -1,6 +1,8 @@
 %{
 
-#include "native.h"
+#include "parser.hpp"
+
+#define lex_param static_cast<snow::scanner*>(parser)->lexer
 
 %}
 
@@ -167,9 +169,9 @@ atom { $$ = $1; }
 
 /**************** number expression ****************/
 atom:
-TOKEN_DEC { $$ = strtol(yyget_text(yylexer), NULL, 10); }
+TOKEN_DEC { $$ = strtol(yyget_text(lex_param), NULL, 10); }
 |
-TOKEN_HEX { $$ = strtol(yyget_text(yylexer), NULL, 16); }
+TOKEN_HEX { $$ = strtol(yyget_text(lex_param), NULL, 16); }
 |
 TOKEN_LP expression TOKEN_RP { $$ = $2; }
 ;

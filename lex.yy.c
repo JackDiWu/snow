@@ -480,7 +480,7 @@ static const flex_int16_t yy_chk[139] =
 #define YY_RESTORE_YY_MORE_OFFSET
 #line 1 "snow.l"
 #line 2 "snow.l"
-
+    
 #include "snow.yy.hh"
 
 #define lex_set_line(n)            yyset_lineno(n, yyscanner)
