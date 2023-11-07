@@ -11,6 +11,32 @@ namespace snow {
         EXPR_TYPE_UINT,
         EXPR_TYPE_FLOAT,
         EXPR_TYPE_STRING,
+
+        EXPR_BINARY_TIMES,
+        EXPR_BINARY_DIVIDE,
+        EXPR_BINARY_PERCENT,
+
+        EXPR_BINARY_PLUS,
+        EXPR_BINARY_SUB,
+
+        EXPR_BINARY_DOUBLE_LA,
+        EXPR_BINARY_DOUBLE_RA,
+
+        EXPR_BINARY_LA,
+        EXPR_BINARY_RA,
+        EXPR_BINARY_LA_EQUAL,
+        EXPR_BINARY_RA_EQUAL,
+
+        EXPR_BINARY_DOUBLE_EQUAL,
+        EXPR_BINARY_NOT_EQUAL,
+
+        EXPR_BINARY_AND,
+        EXPR_BINARY_XOR,
+        EXPR_BINARY_OR,
+
+        EXPR_BINARY_DOUBLE_AND,
+        EXPR_BINARY_DOUBLE_OR,
+
         EXPR_CALL_PARAMETER,
     } expr_type;
 
@@ -103,7 +129,7 @@ namespace snow {
             std::shared_ptr<expr> T;
 
         public:
-            expr_unary(expr_type tk, const char *str, expr *t) : expr(tk, str), T(t) {}
+            expr_unary(expr_type tk, const char *str, const std::shared_ptr<expr> &t) : expr(tk, str), T(t) {}
 
             virtual ~expr_unary() {}
     };
@@ -113,7 +139,7 @@ namespace snow {
             std::shared_ptr<expr> L, R;
 
         public:
-            expr_binary(expr_type tk, const char *str, expr *l, expr *r) : expr(tk, str), L(l), R(r) {}
+            expr_binary(expr_type tk, const char *str, const std::shared_ptr<expr> &l, const std::shared_ptr<expr> &r) : expr(tk, str), L(l), R(r) {}
 
             virtual ~expr_binary() {}
     };
@@ -123,14 +149,14 @@ namespace snow {
             std::vector<std::shared_ptr<expr>> list;
 
         public:
-            expr_parameters(expr * one) : expr(EXPR_CALL_PARAMETER, "call paramter") {
+            expr_parameters(const std::shared_ptr<expr> &one) : expr(EXPR_CALL_PARAMETER, "call paramter") {
                 push(one);
             }
 
             virtual ~expr_parameters() {}
 
         public:
-            void push(expr * one) {
+            void push(const std::shared_ptr<expr> &one) {
                 list.push_back(std::shared_ptr<expr>(one));
             }
     };
@@ -142,7 +168,7 @@ namespace snow {
             std::shared_ptr<expr_parameters> parameters;
 
         public:
-            expr_call(expr_type tk, const char *str, expr_parameters *p) : expr(tk, str), name(str), parameters(p) {
+            expr_call(expr_type tk, const char *str, const std::shared_ptr<expr_parameters> &p) : expr(tk, str), name(str), parameters(p) {
 
             }
 
@@ -152,6 +178,16 @@ namespace snow {
     template<typename T>
     std::shared_ptr<T> make_expr(expr_type tk, const char *str) {
         return std::make_shared<T>(tk, str);
+    }
+
+    template<typename T>
+    std::shared_ptr<T> make_expr(expr_type tk, const char *str, const std::shared_ptr<expr> &t) {
+        return std::make_shared<T>(tk, str, t);
+    }
+
+    template<typename T>
+    std::shared_ptr<T> make_expr(expr_type tk, const char *str, const std::shared_ptr<expr> &l, const std::shared_ptr<expr> &r) {
+        return std::make_shared<T>(tk, str, l, r);
     }
 }
 

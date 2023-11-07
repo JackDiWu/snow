@@ -1230,7 +1230,7 @@ yyreduce:
 
   case 10: /* op_logic_or: op_logic_and TOKEN_DOUBLE_OR op_logic_or  */
 #line 75 "snow.y"
-                                         {}
+                                         { yyval = snow::make_expr<snow::expr_binary>(snow::EXPR_BINARY_DOUBLE_OR, yyget_text(yylexer), yyvsp[-2], yyvsp[0]); }
 #line 1235 "snow.yy.cc"
     break;
 
@@ -1242,7 +1242,7 @@ yyreduce:
 
   case 12: /* op_logic_and: op_or TOKEN_DOUBLE_AND op_logic_and  */
 #line 84 "snow.y"
-                                    {}
+                                    { yyval = snow::make_expr<snow::expr_binary>(snow::EXPR_BINARY_DOUBLE_AND, yyget_text(yylexer), yyvsp[-2], yyvsp[0]); }
 #line 1247 "snow.yy.cc"
     break;
 
@@ -1254,7 +1254,7 @@ yyreduce:
 
   case 14: /* op_or: op_xor TOKEN_OR op_or  */
 #line 93 "snow.y"
-                      {}
+                      { yyval = snow::make_expr<snow::expr_binary>(snow::EXPR_BINARY_OR, yyget_text(yylexer), yyvsp[-2], yyvsp[0]); }
 #line 1259 "snow.yy.cc"
     break;
 
@@ -1266,7 +1266,7 @@ yyreduce:
 
   case 16: /* op_xor: op_and TOKEN_XOR op_xor  */
 #line 102 "snow.y"
-                        {}
+                        { yyval = snow::make_expr<snow::expr_binary>(snow::EXPR_BINARY_XOR, yyget_text(yylexer), yyvsp[-2], yyvsp[0]); }
 #line 1271 "snow.yy.cc"
     break;
 
@@ -1278,7 +1278,7 @@ yyreduce:
 
   case 18: /* op_and: op_equal TOKEN_AND op_and  */
 #line 111 "snow.y"
-                          {}
+                          { yyval = snow::make_expr<snow::expr_binary>(snow::EXPR_BINARY_AND, yyget_text(yylexer), yyvsp[-2], yyvsp[0]); }
 #line 1283 "snow.yy.cc"
     break;
 
@@ -1290,13 +1290,13 @@ yyreduce:
 
   case 20: /* op_equal: op_relation TOKEN_DOUBLE_EQUAL op_equal  */
 #line 120 "snow.y"
-                                        {}
+                                        { yyval = snow::make_expr<snow::expr_binary>(snow::EXPR_BINARY_DOUBLE_EQUAL, yyget_text(yylexer), yyvsp[-2], yyvsp[0]); }
 #line 1295 "snow.yy.cc"
     break;
 
   case 21: /* op_equal: op_relation TOKEN_NOT_EQUAL op_equal  */
 #line 122 "snow.y"
-                                     {}
+                                     { yyval = snow::make_expr<snow::expr_binary>(snow::EXPR_BINARY_NOT_EQUAL, yyget_text(yylexer), yyvsp[-2], yyvsp[0]); }
 #line 1301 "snow.yy.cc"
     break;
 
@@ -1308,25 +1308,25 @@ yyreduce:
 
   case 23: /* op_relation: op_bit TOKEN_LA op_relation  */
 #line 131 "snow.y"
-                            {}
+                            { yyval = snow::make_expr<snow::expr_binary>(snow::EXPR_BINARY_LA, yyget_text(yylexer), yyvsp[-2], yyvsp[0]); }
 #line 1313 "snow.yy.cc"
     break;
 
   case 24: /* op_relation: op_bit TOKEN_RA op_relation  */
 #line 133 "snow.y"
-                            { }
+                            { yyval = snow::make_expr<snow::expr_binary>(snow::EXPR_BINARY_RA, yyget_text(yylexer), yyvsp[-2], yyvsp[0]); }
 #line 1319 "snow.yy.cc"
     break;
 
   case 25: /* op_relation: op_bit TOKEN_LA_EQUAL op_relation  */
 #line 135 "snow.y"
-                                  {  }
+                                  { yyval = snow::make_expr<snow::expr_binary>(snow::EXPR_BINARY_LA_EQUAL, yyget_text(yylexer), yyvsp[-2], yyvsp[0]); }
 #line 1325 "snow.yy.cc"
     break;
 
   case 26: /* op_relation: op_bit TOKEN_RA_EQUAL op_relation  */
 #line 137 "snow.y"
-                                  { }
+                                  { yyval = snow::make_expr<snow::expr_binary>(snow::EXPR_BINARY_RA_EQUAL, yyget_text(yylexer), yyvsp[-2], yyvsp[0]); }
 #line 1331 "snow.yy.cc"
     break;
 
@@ -1338,13 +1338,13 @@ yyreduce:
 
   case 28: /* op_bit: op_plus_sub TOKEN_DOUBLE_LA op_bit  */
 #line 146 "snow.y"
-                                   {}
+                                   { yyval = snow::make_expr<snow::expr_binary>(snow::EXPR_BINARY_DOUBLE_LA, yyget_text(yylexer), yyvsp[-2], yyvsp[0]); }
 #line 1343 "snow.yy.cc"
     break;
 
   case 29: /* op_bit: op_plus_sub TOKEN_DOUBLE_RA op_bit  */
 #line 148 "snow.y"
-                                   { }
+                                   { yyval = snow::make_expr<snow::expr_binary>(snow::EXPR_BINARY_DOUBLE_RA, yyget_text(yylexer), yyvsp[-2], yyvsp[0]); }
 #line 1349 "snow.yy.cc"
     break;
 
@@ -1356,13 +1356,13 @@ yyreduce:
 
   case 31: /* op_plus_sub: op_times_divide_mod TOKEN_PLUS op_plus_sub  */
 #line 157 "snow.y"
-                                           {}
+                                           { yyval = snow::make_expr<snow::expr_binary>(snow::EXPR_BINARY_PLUS, yyget_text(yylexer), yyvsp[-2], yyvsp[0]); }
 #line 1361 "snow.yy.cc"
     break;
 
   case 32: /* op_plus_sub: op_times_divide_mod TOKEN_SUB op_plus_sub  */
 #line 159 "snow.y"
-                                          { }
+                                          { yyval = snow::make_expr<snow::expr_binary>(snow::EXPR_BINARY_SUB, yyget_text(yylexer), yyvsp[-2], yyvsp[0]); }
 #line 1367 "snow.yy.cc"
     break;
 
@@ -1374,25 +1374,25 @@ yyreduce:
 
   case 34: /* op_times_divide_mod: op_prefix TOKEN_TIMES op_times_divide_mod  */
 #line 168 "snow.y"
-                                          { }
+                                          { yyval = snow::make_expr<snow::expr_binary>(snow::EXPR_BINARY_TIMES, yyget_text(yylexer), yyvsp[-2], yyvsp[0]); }
 #line 1379 "snow.yy.cc"
     break;
 
   case 35: /* op_times_divide_mod: op_prefix TOKEN_DIVIDE op_times_divide_mod  */
 #line 170 "snow.y"
-                                           { }
+                                           { yyval = snow::make_expr<snow::expr_binary>(snow::EXPR_BINARY_DIVIDE, yyget_text(yylexer), yyvsp[-2], yyvsp[0]); }
 #line 1385 "snow.yy.cc"
     break;
 
   case 36: /* op_times_divide_mod: op_prefix TOKEN_PERCENT op_times_divide_mod  */
 #line 172 "snow.y"
-                                            { }
+                                            { yyval = snow::make_expr<snow::expr_binary>(snow::EXPR_BINARY_PERCENT, yyget_text(yylexer), yyvsp[-2], yyvsp[0]); }
 #line 1391 "snow.yy.cc"
     break;
 
   case 37: /* op_prefix: op_suffix  */
 #line 179 "snow.y"
-          { yyval = yyvsp[0]; }
+          { }
 #line 1397 "snow.yy.cc"
     break;
 
@@ -1446,19 +1446,19 @@ yyreduce:
 
   case 46: /* atom: TOKEN_LP expression TOKEN_RP  */
 #line 207 "snow.y"
-                             { yyval = yyvsp[-1]; }
+                             { }
 #line 1451 "snow.yy.cc"
     break;
 
   case 47: /* atom: variable  */
 #line 209 "snow.y"
-         { yyval = yyvsp[0]; }
+         { }
 #line 1457 "snow.yy.cc"
     break;
 
   case 48: /* atom: call  */
 #line 211 "snow.y"
-     { yyval = yyvsp[0]; }
+     { }
 #line 1463 "snow.yy.cc"
     break;
 
