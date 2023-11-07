@@ -21,8 +21,6 @@ namespace snow {
             std::string v_string;
 
         public:
-            data_string(yytoken_kind_t tk) : data(tk) {}
-
             data_string(yytoken_kind_t tk, const char *str) : data(tk), v_string(str) {}
 
             virtual ~data_string() {}
@@ -42,8 +40,6 @@ namespace snow {
             double v_float64;
 
         public:
-            data_number(yytoken_kind_t tk) : data_string(tk) {}
-
             data_number(yytoken_kind_t tk, const char *str) : data_string(tk, str) {
                 switch (token) {
                     case TOKEN_DEC: {
@@ -70,10 +66,8 @@ namespace snow {
             virtual ~data_number() {}
     };
 
-    class value : data_number {
+    class value : public data_number {
         public:
-            value(yytoken_kind_t tk) : data_number(tk) {}
-
             value(yytoken_kind_t tk, const char *str) : data_number(tk, str) {}
 
             virtual ~value() {}
@@ -83,8 +77,6 @@ namespace snow {
         public:
             snow::value value;
 
-            std::shared_ptr<expr> L, R, T;
-
         public:
             expr(yytoken_kind_t tk, const char *str) : value(tk, str) {}
 
@@ -92,6 +84,17 @@ namespace snow {
 
         public:
             virtual const char * text() = 0;
+    };
+
+    class expr_binary : public expr {
+        public:
+            std::shared_ptr<expr> L, R;
+
+        public:
+            expr_binary(
+                yytoken_kind_t tk, const char *str,
+                const std::shared_ptr<expr> &l, const std::shared_ptr<expr> &r
+            ) : expr(tk, str), L(l), R(r) {}
     };
 }
 
