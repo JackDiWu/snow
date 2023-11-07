@@ -30,22 +30,6 @@
 
 %%
 
-/**************** call parameters ****************/
-call_param:
-expression { printf("[call param] %ld\n", $1); }
-|
-call_param TOKEN_COMMA expression { printf("[call param] %ld\n", $3); }
-;
-
-
-
-/**************** call ****************/
-call:
-TOKEN_WORD TOKEN_LP call_param TOKEN_RP { printf("[call] %s\n", $1); }
-;
-
-
-
 /**************** expression ****************/
 expression:
 op_logic_or { $$ = $1; }
@@ -57,7 +41,7 @@ op_logic_or { $$ = $1; }
 op_logic_or:
 op_logic_and { $$ = $1; }
 |
-op_logic_or TOKEN_DOUBLE_OR op_logic_and { $$ = $1 || $3; printf("result: %ld = %ld || %ld\n", $$, $1, $3); }
+op_logic_and TOKEN_DOUBLE_OR op_logic_or { $$ = $1 || $3; printf("result: %ld = %ld || %ld\n", $$, $1, $3); }
 ;
 
 
@@ -66,7 +50,7 @@ op_logic_or TOKEN_DOUBLE_OR op_logic_and { $$ = $1 || $3; printf("result: %ld = 
 op_logic_and:
 op_or { $$ = $1; }
 |
-op_logic_and TOKEN_DOUBLE_AND op_or { $$ = $1 && $3; printf("result: %ld = %ld && %ld\n", $$, $1, $3); }
+op_or TOKEN_DOUBLE_AND op_logic_and { $$ = $1 && $3; printf("result: %ld = %ld && %ld\n", $$, $1, $3); }
 ;
 
 
@@ -75,7 +59,7 @@ op_logic_and TOKEN_DOUBLE_AND op_or { $$ = $1 && $3; printf("result: %ld = %ld &
 op_or:
 op_xor { $$ = $1; }
 |
-op_or TOKEN_OR op_xor { $$ = $1 | $3; printf("result: %ld = %ld | %ld\n", $$, $1, $3); }
+op_xor TOKEN_OR op_or { $$ = $1 | $3; printf("result: %ld = %ld | %ld\n", $$, $1, $3); }
 ;
 
 
@@ -84,7 +68,7 @@ op_or TOKEN_OR op_xor { $$ = $1 | $3; printf("result: %ld = %ld | %ld\n", $$, $1
 op_xor:
 op_and { $$ = $1; }
 |
-op_xor TOKEN_XOR op_and { $$ = $1 ^ $3; printf("result: %ld = %ld ^ %ld\n", $$, $1, $3); }
+op_and TOKEN_XOR op_xor { $$ = $1 ^ $3; printf("result: %ld = %ld ^ %ld\n", $$, $1, $3); }
 ;
 
 
@@ -93,7 +77,7 @@ op_xor TOKEN_XOR op_and { $$ = $1 ^ $3; printf("result: %ld = %ld ^ %ld\n", $$, 
 op_and:
 op_equal { $$ = $1; }
 |
-op_and TOKEN_AND op_equal { $$ = $1 & $3; printf("result: %ld = %ld & %ld\n", $$, $1, $3); }
+op_equal TOKEN_AND op_and { $$ = $1 & $3; printf("result: %ld = %ld & %ld\n", $$, $1, $3); }
 ;
 
 
@@ -102,9 +86,9 @@ op_and TOKEN_AND op_equal { $$ = $1 & $3; printf("result: %ld = %ld & %ld\n", $$
 op_equal:
 op_relation { $$ = $1; }
 |
-op_equal TOKEN_DOUBLE_EQUAL op_relation { $$ = $1 == $3; printf("result: %ld = %ld == %ld\n", $$, $1, $3); }
+op_relation TOKEN_DOUBLE_EQUAL op_equal { $$ = $1 == $3; printf("result: %ld = %ld == %ld\n", $$, $1, $3); }
 |
-op_equal TOKEN_NOT_EQUAL op_relation { $$ = $1 != $3; printf("result: %ld = %ld != %ld\n", $$, $1, $3); }
+op_relation TOKEN_NOT_EQUAL op_equal { $$ = $1 != $3; printf("result: %ld = %ld != %ld\n", $$, $1, $3); }
 ;
 
 
@@ -113,13 +97,13 @@ op_equal TOKEN_NOT_EQUAL op_relation { $$ = $1 != $3; printf("result: %ld = %ld 
 op_relation:
 op_bit { $$ = $1; }
 |
-op_relation TOKEN_LA op_bit { $$ = $1 < $3; printf("result: %ld = %ld < %ld\n", $$, $1, $3); }
+op_bit TOKEN_LA op_relation { $$ = $1 < $3; printf("result: %ld = %ld < %ld\n", $$, $1, $3); }
 |
-op_relation TOKEN_RA op_bit { $$ = $1 > $3; printf("result: %ld = %ld > %ld\n", $$, $1, $3); }
+op_bit TOKEN_RA op_relation { $$ = $1 > $3; printf("result: %ld = %ld > %ld\n", $$, $1, $3); }
 |
-op_relation TOKEN_LA_EQUAL op_bit { $$ = $1 <= $3; printf("result: %ld = %ld <= %ld\n", $$, $1, $3); }
+op_bit TOKEN_LA_EQUAL op_relation { $$ = $1 <= $3; printf("result: %ld = %ld <= %ld\n", $$, $1, $3); }
 |
-op_relation TOKEN_RA_EQUAL op_bit { $$ = $1 >= $3; printf("result: %ld = %ld >= %ld\n", $$, $1, $3); }
+op_bit TOKEN_RA_EQUAL op_relation { $$ = $1 >= $3; printf("result: %ld = %ld >= %ld\n", $$, $1, $3); }
 ;
 
 
@@ -128,9 +112,9 @@ op_relation TOKEN_RA_EQUAL op_bit { $$ = $1 >= $3; printf("result: %ld = %ld >= 
 op_bit:
 op_plus_sub { $$ = $1; }
 |
-op_bit TOKEN_DOUBLE_LA op_plus_sub { $$ = $1 << $3; printf("result: %ld = %ld << %ld\n", $$, $1, $3); }
+op_plus_sub TOKEN_DOUBLE_LA op_bit { $$ = $1 << $3; printf("result: %ld = %ld << %ld\n", $$, $1, $3); }
 |
-op_bit TOKEN_DOUBLE_RA op_plus_sub { $$ = $1 >> $3; printf("result: %ld = %ld >> %ld\n", $$, $1, $3); }
+op_plus_sub TOKEN_DOUBLE_RA op_bit { $$ = $1 >> $3; printf("result: %ld = %ld >> %ld\n", $$, $1, $3); }
 ;
 
 
@@ -139,9 +123,9 @@ op_bit TOKEN_DOUBLE_RA op_plus_sub { $$ = $1 >> $3; printf("result: %ld = %ld >>
 op_plus_sub:
 op_times_divide_mod { $$ = $1; }
 |
-op_plus_sub TOKEN_PLUS op_times_divide_mod { $$ = $1 + $3; printf("result: %ld = %ld + %ld\n", $$, $1, $3); }
+op_times_divide_mod TOKEN_PLUS op_plus_sub { $$ = $1 + $3; printf("result: %ld = %ld + %ld\n", $$, $1, $3); }
 |
-op_plus_sub TOKEN_SUB op_times_divide_mod { $$ = $1 - $3; printf("result: %ld = %ld - %ld\n", $$, $1, $3); }
+op_times_divide_mod TOKEN_SUB op_plus_sub { $$ = $1 - $3; printf("result: %ld = %ld - %ld\n", $$, $1, $3); }
 ;
 
 
@@ -150,11 +134,11 @@ op_plus_sub TOKEN_SUB op_times_divide_mod { $$ = $1 - $3; printf("result: %ld = 
 op_times_divide_mod:
 op_prefix { $$ = $1; }
 |
-op_times_divide_mod TOKEN_TIMES op_prefix { $$ = $1 * $3; printf("result: %ld = %ld * %ld\n", $$, $1, $3); }
+op_prefix TOKEN_TIMES op_times_divide_mod { $$ = $1 * $3; printf("result: %ld = %ld * %ld\n", $$, $1, $3); }
 |
-op_times_divide_mod TOKEN_DIVIDE op_prefix { $$ = $1 / $3; printf("result: %ld = %ld / %ld\n", $$, $1, $3); }
+op_prefix TOKEN_DIVIDE op_times_divide_mod { $$ = $1 / $3; printf("result: %ld = %ld / %ld\n", $$, $1, $3); }
 |
-op_times_divide_mod TOKEN_PERCENT op_prefix { $$ = $1 % $3; printf("result: %ld = %ld mod %ld\n", $$, $1, $3); }
+op_prefix TOKEN_PERCENT op_times_divide_mod { $$ = $1 % $3; printf("result: %ld = %ld mod %ld\n", $$, $1, $3); }
 ;
 
 
@@ -188,8 +172,6 @@ TOKEN_DEC { $$ = strtol(yyget_text(yylexer), NULL, 10); }
 TOKEN_HEX { $$ = strtol(yyget_text(yylexer), NULL, 16); }
 |
 TOKEN_LP expression TOKEN_RP { $$ = $2; }
-|
-call { $$ = $1; }
 ;
 
 %%
