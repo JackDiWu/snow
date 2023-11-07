@@ -130,15 +130,21 @@ namespace snow {
 
         public:
             template <typename T>
+            static value times(T l, T r) {
+                printf("[expr] %lld * %lld -> %lld\n", l, r, l * r);
+                return value(l * r);
+            }
+
+            template <typename T>
             static value plus(T l, T r) {
                 printf("[expr] %lld + %lld -> %lld\n", l, r, l + r);
                 return value(l + r);
             }
 
             template <typename T>
-            static value times(T l, T r) {
-                printf("[expr] %lld * %lld -> %lld\n", l, r, l * r);
-                return value(l * r);
+            static value sub(T l, T r) {
+                printf("[expr] %lld - %lld -> %lld\n", l, r, l + r);
+                return value(l - r);
             }
     };
 
@@ -269,13 +275,39 @@ namespace snow {
                 R->resolve();
 
                 switch (token) {
-                case EXPR_BINARY_PLUS:
-                    return plus();
                 case EXPR_BINARY_TIMES:
                     return times();
+                case EXPR_BINARY_PLUS:
+                    return plus();
+                case EXPR_BINARY_SUB:
+                    return sub();
                 default:
                     return 0;
                 }
+            }
+
+            virtual int times() {
+                if (L->is_value_type(EXPR_TYPE_INT) && R->is_value_type(EXPR_TYPE_INT)) {
+                    value = value::times<int64_t>(L->value.v_int64, R->value.v_int64);
+                    return 0;
+                }
+                
+                if (L->is_value_type(EXPR_TYPE_INT) || R->is_value_type(EXPR_TYPE_UINT)) {
+                    value = value::times<uint64_t>((uint64_t)L->value.v_int64, R->value.v_uint64);
+                    return 0;
+                }
+                
+                if (L->is_value_type(EXPR_TYPE_UINT) || R->is_value_type(EXPR_TYPE_INT)) {
+                    value = value::times<uint64_t>(L->value.v_uint64, (uint64_t)R->value.v_int64);
+                    return 0;
+                }
+
+                if (L->is_value_type(EXPR_TYPE_UINT) || R->is_value_type(EXPR_TYPE_UINT)) {
+                    value = value::times<uint64_t>(L->value.v_uint64, R->value.v_uint64);
+                    return 0;
+                }
+
+                return 0;
             }
 
             virtual int plus() {
@@ -302,24 +334,24 @@ namespace snow {
                 return 0;
             }
 
-            virtual int times() {
+            virtual int sub() {
                 if (L->is_value_type(EXPR_TYPE_INT) && R->is_value_type(EXPR_TYPE_INT)) {
-                    value = value::times<int64_t>(L->value.v_int64, R->value.v_int64);
+                    value = value::sub<int64_t>(L->value.v_int64, R->value.v_int64);
                     return 0;
                 }
                 
                 if (L->is_value_type(EXPR_TYPE_INT) || R->is_value_type(EXPR_TYPE_UINT)) {
-                    value = value::times<uint64_t>((uint64_t)L->value.v_int64, R->value.v_uint64);
+                    value = value::sub<uint64_t>((uint64_t)L->value.v_int64, R->value.v_uint64);
                     return 0;
                 }
                 
                 if (L->is_value_type(EXPR_TYPE_UINT) || R->is_value_type(EXPR_TYPE_INT)) {
-                    value = value::times<uint64_t>(L->value.v_uint64, (uint64_t)R->value.v_int64);
+                    value = value::sub<uint64_t>(L->value.v_uint64, (uint64_t)R->value.v_int64);
                     return 0;
                 }
 
                 if (L->is_value_type(EXPR_TYPE_UINT) || R->is_value_type(EXPR_TYPE_UINT)) {
-                    value = value::times<uint64_t>(L->value.v_uint64, R->value.v_uint64);
+                    value = value::sub<uint64_t>(L->value.v_uint64, R->value.v_uint64);
                     return 0;
                 }
 

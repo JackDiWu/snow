@@ -2,7 +2,7 @@
  * @Author: Jack
  * @Date: 2023-10-29 11:52:56
  * @LastEditors: Jack
- * @LastEditTime: 2023-11-07 20:44:56
+ * @LastEditTime: 2023-11-07 21:01:06
  */
 #include "defs.h"
 #include "parser.hpp"
@@ -10,7 +10,7 @@
 
 // std::string text = "I am storm + - * / () [] {} <>  .~!@#$%^&*;:?\\ &&  || << >> \"say\\\"something+-*/\" 123 0x232 0.15234 \"Hello\\\'\\\"world\" ";
 
-std::string text = " (3 + 5) * 2 ";
+std::string text = " 28 - (3 + 5) * 2 ";
 
 void test_lexer() {
     yyscan_t scan;
@@ -34,6 +34,16 @@ void test_parser() {
     auto scanner = std::make_shared<snow::scanner>("main.cc", text.data(), text.size());
     scanner->parse();
     scanner->resolve();
+    
+    if (scanner->top->is_value_type(snow::EXPR_TYPE_INT)) {
+        printf("[result] signed %lld\n", scanner->top->value.v_int64);
+        return;
+    }
+
+    if (scanner->top->is_value_type(snow::EXPR_TYPE_UINT)) {
+        printf("[result] unsigned %lld\n", scanner->top->value.v_uint64);
+        return;
+    }
 }
 
 class A {
