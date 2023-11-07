@@ -122,6 +122,57 @@ namespace snow {
             virtual const char * text() {
                 return value.text();
             }
+
+        public:
+            static const char * get_type_string(expr_type type) {
+                switch (type) {
+                    case EXPR_BINARY_TIMES:
+                        return "*";
+                    case EXPR_BINARY_DIVIDE:
+                        return "/";
+                    case EXPR_BINARY_PERCENT:
+                        return "%";
+
+                    case EXPR_BINARY_PLUS:
+                        return "+";
+                    case EXPR_BINARY_SUB:
+                        return "-";
+
+                    case EXPR_BINARY_DOUBLE_LA:
+                        return "<<";
+                    case EXPR_BINARY_DOUBLE_RA:
+                        return ">>";
+
+                    case EXPR_BINARY_LA:
+                        return "<";
+                    case EXPR_BINARY_RA:
+                        return ">";
+                    case EXPR_BINARY_LA_EQUAL:
+                        return "<=";
+                    case EXPR_BINARY_RA_EQUAL:
+                        return ">=";
+
+                    case EXPR_BINARY_DOUBLE_EQUAL:
+                        return "==";
+                    case EXPR_BINARY_NOT_EQUAL:
+                        return "!=";
+
+                    case EXPR_BINARY_AND:
+                        return "&";
+                    case EXPR_BINARY_XOR:
+                        return "^";
+                    case EXPR_BINARY_OR:
+                        return "|";
+
+                    case EXPR_BINARY_DOUBLE_AND:
+                        return "&&";
+                    case EXPR_BINARY_DOUBLE_OR:
+                        return "||"; 
+                    default: {
+                        return "unknow expr type";
+                    }
+                }
+            }
     };
 
     class expr_unary : public expr {
@@ -139,7 +190,9 @@ namespace snow {
             std::shared_ptr<expr> L, R;
 
         public:
-            expr_binary(expr_type tk, const char *str, const std::shared_ptr<expr> &l, const std::shared_ptr<expr> &r) : expr(tk, str), L(l), R(r) {}
+            expr_binary(expr_type tk, const char *str, const std::shared_ptr<expr> &l, const std::shared_ptr<expr> &r) : expr(tk, str), L(l), R(r) {
+                printf("[expr] %s %s %s\n", l->text(), get_type_string(token), r->text());
+            }
 
             virtual ~expr_binary() {}
     };
