@@ -94,7 +94,8 @@ extern int yydebug;
     TOKEN_XOR = 295,               /* TOKEN_XOR  */
     TOKEN_COLON = 296,             /* TOKEN_COLON  */
     TOKEN_SEMICOLON = 297,         /* TOKEN_SEMICOLON  */
-    TOKEN_BACKSLASH = 298          /* TOKEN_BACKSLASH  */
+    TOKEN_BACKSLASH = 298,         /* TOKEN_BACKSLASH  */
+    TOKEN_COMMA = 299              /* TOKEN_COMMA  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif

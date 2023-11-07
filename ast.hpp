@@ -12,6 +12,7 @@ namespace snow {
         ATOM_TYPE_UINT,
         ATOM_TYPE_FLOAT,
         ATOM_TYPE_STRING,
+        ATOM_TYPE_WORD,
     } atom_type;
 
     class atom {
@@ -132,6 +133,14 @@ namespace snow {
             virtual const char * text() {
                 return v_string.c_str();
             }
+    };
+
+    class expr_call : public atom {
+        public:
+            std::string name;
+
+        public:
+            expr_call(const char *s) : atom(ATOM_TYPE_WORD, TOKEN_WORD), name(s) { }
     };
 }
 

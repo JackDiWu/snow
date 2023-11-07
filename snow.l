@@ -90,6 +90,8 @@
 
 \\                           { lex_next_token(); lex_return(TOKEN_BACKSLASH); }
 
+\,                           { lex_next_token(); lex_return(TOKEN_COMMA); }
+
 \=\=                         { lex_next_token(); lex_return(TOKEN_DOUBLE_EQUAL); }
 
 \!\=                         { lex_next_token(); lex_return(TOKEN_NOT_EQUAL); }

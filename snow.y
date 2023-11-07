@@ -26,9 +26,25 @@
 
 %token TOKEN_LA_EQUAL TOKEN_RA_EQUAL TOKEN_NOT_EQUAL
 
-%token TOKEN_AND TOKEN_OR TOKEN_QUESTION TOKEN_POINT TOKEN_BROKEN_ISSUE TOKEN_EXCLAMATION TOKEN_AT TOKEN_HASHTAG TOKEN_DOLLAR TOKEN_PERCENT TOKEN_XOR TOKEN_COLON TOKEN_SEMICOLON TOKEN_BACKSLASH
+%token TOKEN_AND TOKEN_OR TOKEN_QUESTION TOKEN_POINT TOKEN_BROKEN_ISSUE TOKEN_EXCLAMATION TOKEN_AT TOKEN_HASHTAG TOKEN_DOLLAR TOKEN_PERCENT TOKEN_XOR TOKEN_COLON TOKEN_SEMICOLON TOKEN_BACKSLASH TOKEN_COMMA
 
 %%
+
+/**************** call parameters ****************/
+call_param:
+expression { printf("[call param] %ld\n", $1); }
+|
+call_param TOKEN_COMMA expression { printf("[call param] %ld\n", $3); }
+;
+
+
+
+/**************** call ****************/
+call:
+TOKEN_WORD TOKEN_LP call_param TOKEN_RP { printf("[call] %s\n", $1); }
+;
+
+
 
 /**************** expression ****************/
 expression:
@@ -165,13 +181,15 @@ atom { $$ = $1; }
 
 
 
-/**************** number expression ****************/
+/**************** atom ****************/
 atom:
 TOKEN_DEC { $$ = strtol(yyget_text(yylexer), NULL, 10); }
 |
 TOKEN_HEX { $$ = strtol(yyget_text(yylexer), NULL, 16); }
 |
 TOKEN_LP expression TOKEN_RP { $$ = $2; }
+|
+call { $$ = $1; }
 ;
 
 %%
