@@ -30,6 +30,29 @@
 
 %%
 
+/**************** call param ****************/
+call_param:
+expression { printf("[call param one] %ld\n", $1); }
+|
+expression TOKEN_COMMA call_param { printf("[call param some] %ld\n", $1); }
+;
+
+
+
+/**************** call name ****************/
+call_param:
+TOKEN_WORD { printf("[call name]\n"); }
+;
+
+
+
+/**************** call ****************/
+call:
+TOKEN_WORD TOKEN_LP call_param TOKEN_RP { printf("[call]\n"); }
+;
+
+
+
 /**************** expression ****************/
 expression:
 op_logic_or { $$ = $1; }
@@ -172,6 +195,8 @@ TOKEN_DEC { $$ = strtol(yyget_text(yylexer), NULL, 10); }
 TOKEN_HEX { $$ = strtol(yyget_text(yylexer), NULL, 16); }
 |
 TOKEN_LP expression TOKEN_RP { $$ = $2; }
+|
+call { $$ = $1; }
 ;
 
 %%
