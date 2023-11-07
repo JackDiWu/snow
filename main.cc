@@ -2,7 +2,7 @@
  * @Author: Jack
  * @Date: 2023-10-29 11:52:56
  * @LastEditors: Jack
- * @LastEditTime: 2023-11-07 21:40:33
+ * @LastEditTime: 2023-11-07 21:58:17
  */
 #include "defs.h"
 #include "parser.hpp"
@@ -10,7 +10,7 @@
 
 // std::string text = "I am storm + - * / () [] {} <>  .~!@#$%^&*;:?\\ &&  || << >> \"say\\\"something+-*/\" 123 0x232 0.15234 \"Hello\\\'\\\"world\" ";
 
-std::string text = "  (28 - (3 + 5) * 2 ) / 2  % 5   ";
+std::string text = "  (28 - (3 + 5) * 2 ) / 2  % 5 + 0x100   ";
 
 void test_lexer() {
     yyscan_t scan;
