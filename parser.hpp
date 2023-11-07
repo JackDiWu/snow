@@ -2,7 +2,7 @@
  * @Author: Jack
  * @Date: 2023-10-30 11:12:37
  * @LastEditors: Jack
- * @LastEditTime: 2023-11-07 10:00:20
+ * @LastEditTime: 2023-11-07 10:02:18
  */
 #ifndef _SNOW_PARSER_HPP_
 #define _SNOW_PARSER_HPP_
@@ -53,8 +53,8 @@ namespace snow {
 
 #define yyparser       static_cast<snow::scanner*>(parser)
 
-#define yyname         static_cast<snow::scanner*>(parser)->name
+#define yyname         yyparser->name
 
-#define yylexer        static_cast<snow::scanner*>(parser)->lexer
+#define yylexer        yyparser->lexer
 
 #endif
