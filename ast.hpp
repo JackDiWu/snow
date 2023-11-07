@@ -136,6 +136,18 @@ namespace snow {
             }
 
             template <typename T>
+            static value div(T l, T r) {
+                printf("[expr] %lld / %lld -> %lld\n", l, r, l / r);
+                return value(l / r);
+            }
+
+            template <typename T>
+            static value mod(T l, T r) {
+                 printf("[expr] %lld %% %lld -> %lld\n", l, r, l % r);
+                return value(l % r);
+            }
+
+            template <typename T>
             static value plus(T l, T r) {
                 printf("[expr] %lld + %lld -> %lld\n", l, r, l + r);
                 return value(l + r);
@@ -143,7 +155,7 @@ namespace snow {
 
             template <typename T>
             static value sub(T l, T r) {
-                printf("[expr] %lld - %lld -> %lld\n", l, r, l + r);
+                printf("[expr] %lld - %lld -> %lld\n", l, r, l - r);
                 return value(l - r);
             }
     };
@@ -277,6 +289,10 @@ namespace snow {
                 switch (token) {
                 case EXPR_BINARY_TIMES:
                     return times();
+                case EXPR_BINARY_DIVIDE:
+                    return div();
+                case EXPR_BINARY_PERCENT:
+                    return mod();
                 case EXPR_BINARY_PLUS:
                     return plus();
                 case EXPR_BINARY_SUB:
@@ -304,6 +320,54 @@ namespace snow {
 
                 if (L->is_value_type(EXPR_TYPE_UINT) || R->is_value_type(EXPR_TYPE_UINT)) {
                     value = value::times<uint64_t>(L->value.v_uint64, R->value.v_uint64);
+                    return 0;
+                }
+
+                return 0;
+            }
+
+            virtual int div() {
+                if (L->is_value_type(EXPR_TYPE_INT) && R->is_value_type(EXPR_TYPE_INT)) {
+                    value = value::div<int64_t>(L->value.v_int64, R->value.v_int64);
+                    return 0;
+                }
+                
+                if (L->is_value_type(EXPR_TYPE_INT) || R->is_value_type(EXPR_TYPE_UINT)) {
+                    value = value::div<uint64_t>((uint64_t)L->value.v_int64, R->value.v_uint64);
+                    return 0;
+                }
+                
+                if (L->is_value_type(EXPR_TYPE_UINT) || R->is_value_type(EXPR_TYPE_INT)) {
+                    value = value::div<uint64_t>(L->value.v_uint64, (uint64_t)R->value.v_int64);
+                    return 0;
+                }
+
+                if (L->is_value_type(EXPR_TYPE_UINT) || R->is_value_type(EXPR_TYPE_UINT)) {
+                    value = value::div<uint64_t>(L->value.v_uint64, R->value.v_uint64);
+                    return 0;
+                }
+
+                return 0;
+            }
+
+            virtual int mod() {
+                if (L->is_value_type(EXPR_TYPE_INT) && R->is_value_type(EXPR_TYPE_INT)) {
+                    value = value::mod<int64_t>(L->value.v_int64, R->value.v_int64);
+                    return 0;
+                }
+                
+                if (L->is_value_type(EXPR_TYPE_INT) || R->is_value_type(EXPR_TYPE_UINT)) {
+                    value = value::mod<uint64_t>((uint64_t)L->value.v_int64, R->value.v_uint64);
+                    return 0;
+                }
+                
+                if (L->is_value_type(EXPR_TYPE_UINT) || R->is_value_type(EXPR_TYPE_INT)) {
+                    value = value::mod<uint64_t>(L->value.v_uint64, (uint64_t)R->value.v_int64);
+                    return 0;
+                }
+
+                if (L->is_value_type(EXPR_TYPE_UINT) || R->is_value_type(EXPR_TYPE_UINT)) {
+                    value = value::mod<uint64_t>(L->value.v_uint64, R->value.v_uint64);
                     return 0;
                 }
 
