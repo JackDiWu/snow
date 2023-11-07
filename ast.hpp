@@ -540,6 +540,13 @@ namespace snow {
                 }
                 return buffer.c_str();
             }
+
+            virtual int resolve() {
+                for (auto it = list.begin(); it < list.end(); it++) {
+                    it->get()->resolve();
+                }
+                return 0;
+            }
     };
 
     class expr_call : public expr {
@@ -556,6 +563,13 @@ namespace snow {
             }
 
             virtual ~expr_call() {}
+
+        public:
+            virtual int resolve() {
+                parameters->resolve();
+
+                return 0;
+            }
     };
 
     template<typename T>
