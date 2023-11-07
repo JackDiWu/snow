@@ -33,19 +33,17 @@ namespace snow {
             virtual const char * text() = 0;
     };
 
-    class atom_sign : public atom {
+    class atom_binary : public atom {
         public:
-            atom_sign(yytoken_kind_t tp) : atom(ATOM_TYPE_SIGN, tp) {
+            atom_binary(yytoken_kind_t tp) : atom(ATOM_TYPE_SIGN, tp) {
 
             }
 
-            virtual ~atom_sign() {}
+            virtual ~atom_binary() {}
 
         public:
             virtual const char * text() {
                 switch (token_type) {
-                case TOKEN_EQUAL:
-                    return "=";
                 case TOKEN_PLUS:
                     return "+";
                 case TOKEN_SUB:
@@ -62,18 +60,16 @@ namespace snow {
                     return "&";
                 case TOKEN_OR:
                     return "|";
-                case TOKEN_BROKEN_ISSUE:
-                    return "~";
-                case TOKEN_EXCLAMATION:
-                    return "!";
                 case TOKEN_PERCENT:
                     return "%";
-                case TOKEN_XOR:
-                    return "^";
                 case TOKEN_LA_EQUAL:
                     return "<=";
                 case TOKEN_RA_EQUAL:
                     return ">=";
+                case TOKEN_DOUBLE_EQUAL:
+                    return "==";
+                case TOKEN_NOT_EQUAL:
+                    return "!=";
                 
                 default:
                     return "unknow sign";
