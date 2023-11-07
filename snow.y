@@ -10,7 +10,7 @@
 
 %define api.pure
 
-%lex-param {yylexer}
+%lex-param {yy_lexer}
 
 %parse-param {void *parser}
 
@@ -32,16 +32,14 @@
 
 /**************** statement ****************/
 statement:
-expression {}
-|
-expression TOKEN_SEMICOLON { printf("statement\n"); }
+expression { $$ = $1; }
 ;
 
 
 
 /**************** call param ****************/
 variable:
-TOKEN_WORD { printf("[variable] %s\n", yyget_text(yylexer)); }
+TOKEN_WORD { printf("[variable] %s\n", yyget_text(yy_lexer)); }
 
 
 
@@ -63,7 +61,7 @@ variable TOKEN_LP call_param TOKEN_RP { printf("[call]\n"); }
 
 /**************** expression ****************/
 expression:
-op_logic_or { $$ = $1; }
+op_logic_or { $$ = $1; yy_top = $$; }
 ;
 
 
@@ -198,11 +196,11 @@ atom { $$ = $1; }
 
 /**************** atom ****************/
 atom:
-TOKEN_DEC { $$ = snow::make_expr<snow::expr>(snow::EXPR_TYPE_INT, yyget_text(yylexer)); }
+TOKEN_DEC { $$ = snow::make_expr<snow::expr>(snow::EXPR_TYPE_INT, yyget_text(yy_lexer)); }
 |
-TOKEN_HEX { $$ = snow::make_expr<snow::expr>(snow::EXPR_TYPE_UINT, yyget_text(yylexer)); }
+TOKEN_HEX { $$ = snow::make_expr<snow::expr>(snow::EXPR_TYPE_UINT, yyget_text(yy_lexer)); }
 |
-TOKEN_STRING { $$ = snow::make_expr<snow::expr>(snow::EXPR_TYPE_STRING, yyget_text(yylexer)); }
+TOKEN_STRING { $$ = snow::make_expr<snow::expr>(snow::EXPR_TYPE_STRING, yyget_text(yy_lexer)); }
 |
 TOKEN_LP expression TOKEN_RP { $$ = $2; }
 |

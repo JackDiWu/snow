@@ -2,7 +2,7 @@
  * @Author: Jack
  * @Date: 2023-10-30 11:12:37
  * @LastEditors: Jack
- * @LastEditTime: 2023-11-07 10:02:18
+ * @LastEditTime: 2023-11-07 20:20:08
  */
 #ifndef _SNOW_PARSER_HPP_
 #define _SNOW_PARSER_HPP_
@@ -29,6 +29,8 @@ namespace snow {
 
             void *lexer;
 
+            std::shared_ptr<expr> top;
+
         public:
             scanner(const char *nm, const char *data, int size) : name(nm), lexer(nullptr) {
                 yylex_init(&lexer);
@@ -51,10 +53,12 @@ namespace snow {
     
 }
 
-#define yyparser       static_cast<snow::scanner*>(parser)
+#define yy_parser       static_cast<snow::scanner*>(parser)
 
-#define yyname         yyparser->name
+#define yy_name         yy_parser->name
 
-#define yylexer        yyparser->lexer
+#define yy_lexer        yy_parser->lexer
+
+#define yy_top          yy_parser->top
 
 #endif

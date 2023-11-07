@@ -116,11 +116,11 @@ namespace snow {
 
         public:
             expr(expr_type tk) : value(tk, ""), token(tk) {
-                printf("[expr] %s\n", get_type_string(token));
+                // printf("[expr] %s\n", get_type_string(token));
             }
 
             expr(expr_type tk, const char *str) : value(tk, str), token(tk) {
-                printf("[expr] %s %s\n", get_type_string(token), str);
+                // printf("[expr] %s %s\n", get_type_string(token), str);
             }
 
             virtual ~expr() {}
@@ -211,7 +211,7 @@ namespace snow {
 
         public:
             expr_binary(expr_type tk, const std::shared_ptr<expr> &l, const std::shared_ptr<expr> &r) : expr(tk), L(l), R(r) {
-                printf("[expr] %s %s %s\n", l->text(), get_type_string(token), r->text());
+                // printf("[expr] %s %s %s\n", l->text(), get_type_string(token), r->text());
             }
 
             virtual ~expr_binary() {}
