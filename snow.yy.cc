@@ -493,7 +493,7 @@ union yyalloc
 /* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  32
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   65
+#define YYLAST   66
 
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  46
@@ -600,7 +600,7 @@ yysymbol_name (yysymbol_kind_t yysymbol)
 }
 #endif
 
-#define YYPACT_NINF (-22)
+#define YYPACT_NINF (-20)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
@@ -614,14 +614,14 @@ yysymbol_name (yysymbol_kind_t yysymbol)
    STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
-      -4,   -22,   -22,   -22,   -22,    10,    10,    -4,    10,    10,
-      16,    -5,   -22,   -22,   -22,    20,    24,    18,    11,    22,
-       8,    -2,    15,    -6,    -1,   -22,   -22,   -22,   -22,    35,
-     -22,   -22,   -22,    -4,    -4,    -4,    -4,    -4,    -4,    -4,
+      -4,   -20,   -20,   -20,   -20,    10,    10,    -4,    10,    10,
+      16,    23,   -20,   -20,   -14,    26,    19,     9,    21,     3,
+       0,   -20,    -6,    -1,   -20,   -20,   -20,   -20,   -20,    37,
+     -20,   -20,   -20,    -4,    -4,    -4,    -4,    -4,    -4,    -4,
       -4,    -4,    -4,    -4,    -4,    -4,    -4,    -4,    -4,    -4,
-      -4,    -4,   -22,    38,    12,   -22,   -22,   -22,   -22,   -22,
-     -22,   -22,   -22,   -22,   -22,   -22,   -22,   -22,   -22,   -22,
-     -22,   -22,   -22,   -22,    -4,   -22
+      -4,    -4,   -20,    38,    11,    26,    19,     9,    21,     3,
+       0,     0,   -20,   -20,   -20,   -20,    -1,    -1,   -20,   -20,
+     -20,   -20,   -20,   -20,    -4,   -20
 };
 
 /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -635,15 +635,15 @@ static const yytype_int8 yydefact[] =
       40,    39,     1,     0,     0,     0,     0,     0,     0,     0,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
        0,     0,    45,     0,     4,     9,    11,    13,    15,    17,
-      19,    20,    22,    23,    24,    25,    27,    28,    30,    31,
+      19,    20,    22,    23,    24,    25,    30,    31,    27,    28,
       33,    34,    35,     6,     0,     5
 };
 
 /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-     -22,   -22,   -22,   -19,   -22,     2,    25,    21,    26,    23,
-      27,     3,   -20,     0,     1,   -21,   -22,    28,   -22
+     -20,   -20,   -20,   -19,   -20,     2,   -20,    24,    22,    25,
+      27,    28,     8,    -7,   -20,    -3,    -5,    18,   -20
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
@@ -658,24 +658,24 @@ static const yytype_int8 yydefgoto[] =
    number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int8 yytable[] =
 {
-       1,     2,    13,     3,     4,    47,    48,     5,     6,    29,
-      33,     7,    49,    50,     1,     2,    32,     3,     4,    41,
-      42,    62,    63,    64,    65,     7,    43,    44,    70,    71,
-      72,     8,     9,    27,    28,    39,    30,    31,    40,    51,
-      45,    46,    60,    61,    34,    66,    67,    35,    68,    69,
-      36,    52,    37,    38,    73,    75,    56,    74,     0,    55,
-      58,     0,    57,     0,     0,    59
+       1,     2,    13,     3,     4,    45,    46,     5,     6,    29,
+      34,     7,    49,    50,     1,     2,    32,     3,     4,    47,
+      48,    41,    42,    27,    28,     7,    30,    31,    43,    44,
+      39,     8,     9,    40,    62,    63,    64,    65,    33,    51,
+      68,    69,    66,    67,    70,    71,    72,    60,    61,    35,
+      37,    36,    38,    52,    73,    75,    74,    56,    55,     0,
+       0,    57,     0,     0,    58,     0,    59
 };
 
 static const yytype_int8 yycheck[] =
 {
        4,     5,     0,     7,     8,    11,    12,    11,    12,     7,
-      15,    15,    13,    14,     4,     5,     0,     7,     8,    21,
-      22,    41,    42,    43,    44,    15,    28,    29,    49,    50,
-      51,    35,    36,     5,     6,    27,     8,     9,    30,    40,
-      25,    26,    39,    40,    24,    45,    46,    23,    47,    48,
-      32,    16,    41,    31,    16,    74,    35,    45,    -1,    34,
-      37,    -1,    36,    -1,    -1,    38
+      24,    15,    13,    14,     4,     5,     0,     7,     8,    25,
+      26,    21,    22,     5,     6,    15,     8,     9,    28,    29,
+      27,    35,    36,    30,    41,    42,    43,    44,    15,    40,
+      47,    48,    45,    46,    49,    50,    51,    39,    40,    23,
+      41,    32,    31,    16,    16,    74,    45,    35,    34,    -1,
+      -1,    36,    -1,    -1,    37,    -1,    38
 };
 
 /* YYSTOS[STATE-NUM] -- The symbol kind of the accessing symbol of
@@ -686,10 +686,10 @@ static const yytype_int8 yystos[] =
       47,    48,    50,    51,    52,    53,    54,    55,    56,    57,
       58,    59,    60,    61,    62,    63,    64,    63,    63,    51,
       63,    63,     0,    15,    24,    23,    32,    41,    31,    27,
-      30,    21,    22,    28,    29,    25,    26,    11,    12,    13,
-      14,    40,    16,    49,    51,    52,    53,    54,    55,    56,
-      57,    57,    58,    58,    58,    58,    59,    59,    60,    60,
-      61,    61,    61,    16,    45,    49
+      30,    21,    22,    28,    29,    11,    12,    25,    26,    13,
+      14,    40,    16,    49,    51,    53,    54,    55,    56,    57,
+      58,    58,    59,    59,    59,    59,    61,    61,    59,    59,
+      62,    62,    62,    16,    45,    49
 };
 
 /* YYR1[RULE-NUM] -- Symbol kind of the left-hand side of rule RULE-NUM.  */
@@ -1222,7 +1222,7 @@ yyreduce:
 #line 1223 "snow.yy.cc"
     break;
 
-  case 9: /* op_logic_or: op_logic_and TOKEN_DOUBLE_OR op_logic_or  */
+  case 9: /* op_logic_or: op_logic_or TOKEN_DOUBLE_OR op_logic_and  */
 #line 73 "snow.y"
                                          { yyval = snow::make_expr<snow::expr_binary>(snow::EXPR_BINARY_DOUBLE_OR, yyvsp[-2], yyvsp[0]); }
 #line 1229 "snow.yy.cc"
@@ -1234,7 +1234,7 @@ yyreduce:
 #line 1235 "snow.yy.cc"
     break;
 
-  case 11: /* op_logic_and: op_or TOKEN_DOUBLE_AND op_logic_and  */
+  case 11: /* op_logic_and: op_logic_and TOKEN_DOUBLE_AND op_or  */
 #line 82 "snow.y"
                                     { yyval = snow::make_expr<snow::expr_binary>(snow::EXPR_BINARY_DOUBLE_AND, yyvsp[-2], yyvsp[0]); }
 #line 1241 "snow.yy.cc"
@@ -1246,7 +1246,7 @@ yyreduce:
 #line 1247 "snow.yy.cc"
     break;
 
-  case 13: /* op_or: op_xor TOKEN_OR op_or  */
+  case 13: /* op_or: op_or TOKEN_OR op_xor  */
 #line 91 "snow.y"
                       { yyval = snow::make_expr<snow::expr_binary>(snow::EXPR_BINARY_OR, yyvsp[-2], yyvsp[0]); }
 #line 1253 "snow.yy.cc"
@@ -1258,7 +1258,7 @@ yyreduce:
 #line 1259 "snow.yy.cc"
     break;
 
-  case 15: /* op_xor: op_and TOKEN_XOR op_xor  */
+  case 15: /* op_xor: op_xor TOKEN_XOR op_and  */
 #line 100 "snow.y"
                         { yyval = snow::make_expr<snow::expr_binary>(snow::EXPR_BINARY_XOR, yyvsp[-2], yyvsp[0]); }
 #line 1265 "snow.yy.cc"
@@ -1270,7 +1270,7 @@ yyreduce:
 #line 1271 "snow.yy.cc"
     break;
 
-  case 17: /* op_and: op_equal TOKEN_AND op_and  */
+  case 17: /* op_and: op_and TOKEN_AND op_equal  */
 #line 109 "snow.y"
                           { yyval = snow::make_expr<snow::expr_binary>(snow::EXPR_BINARY_AND, yyvsp[-2], yyvsp[0]); }
 #line 1277 "snow.yy.cc"
@@ -1282,13 +1282,13 @@ yyreduce:
 #line 1283 "snow.yy.cc"
     break;
 
-  case 19: /* op_equal: op_relation TOKEN_DOUBLE_EQUAL op_equal  */
+  case 19: /* op_equal: op_equal TOKEN_DOUBLE_EQUAL op_relation  */
 #line 118 "snow.y"
                                         { yyval = snow::make_expr<snow::expr_binary>(snow::EXPR_BINARY_DOUBLE_EQUAL, yyvsp[-2], yyvsp[0]); }
 #line 1289 "snow.yy.cc"
     break;
 
-  case 20: /* op_equal: op_relation TOKEN_NOT_EQUAL op_equal  */
+  case 20: /* op_equal: op_equal TOKEN_NOT_EQUAL op_relation  */
 #line 120 "snow.y"
                                      { yyval = snow::make_expr<snow::expr_binary>(snow::EXPR_BINARY_NOT_EQUAL, yyvsp[-2], yyvsp[0]); }
 #line 1295 "snow.yy.cc"
@@ -1300,25 +1300,25 @@ yyreduce:
 #line 1301 "snow.yy.cc"
     break;
 
-  case 22: /* op_relation: op_bit TOKEN_LA op_relation  */
+  case 22: /* op_relation: op_relation TOKEN_LA op_bit  */
 #line 129 "snow.y"
                             { yyval = snow::make_expr<snow::expr_binary>(snow::EXPR_BINARY_LA, yyvsp[-2], yyvsp[0]); }
 #line 1307 "snow.yy.cc"
     break;
 
-  case 23: /* op_relation: op_bit TOKEN_RA op_relation  */
+  case 23: /* op_relation: op_relation TOKEN_RA op_bit  */
 #line 131 "snow.y"
                             { yyval = snow::make_expr<snow::expr_binary>(snow::EXPR_BINARY_RA, yyvsp[-2], yyvsp[0]); }
 #line 1313 "snow.yy.cc"
     break;
 
-  case 24: /* op_relation: op_bit TOKEN_LA_EQUAL op_relation  */
+  case 24: /* op_relation: op_relation TOKEN_LA_EQUAL op_bit  */
 #line 133 "snow.y"
                                   { yyval = snow::make_expr<snow::expr_binary>(snow::EXPR_BINARY_LA_EQUAL, yyvsp[-2], yyvsp[0]); }
 #line 1319 "snow.yy.cc"
     break;
 
-  case 25: /* op_relation: op_bit TOKEN_RA_EQUAL op_relation  */
+  case 25: /* op_relation: op_relation TOKEN_RA_EQUAL op_bit  */
 #line 135 "snow.y"
                                   { yyval = snow::make_expr<snow::expr_binary>(snow::EXPR_BINARY_RA_EQUAL, yyvsp[-2], yyvsp[0]); }
 #line 1325 "snow.yy.cc"
@@ -1348,13 +1348,13 @@ yyreduce:
 #line 1349 "snow.yy.cc"
     break;
 
-  case 30: /* op_plus_sub: op_times_divide_mod TOKEN_PLUS op_plus_sub  */
+  case 30: /* op_plus_sub: op_plus_sub TOKEN_PLUS op_times_divide_mod  */
 #line 155 "snow.y"
                                            { yyval = snow::make_expr<snow::expr_binary>(snow::EXPR_BINARY_PLUS, yyvsp[-2], yyvsp[0]); }
 #line 1355 "snow.yy.cc"
     break;
 
-  case 31: /* op_plus_sub: op_times_divide_mod TOKEN_SUB op_plus_sub  */
+  case 31: /* op_plus_sub: op_plus_sub TOKEN_SUB op_times_divide_mod  */
 #line 157 "snow.y"
                                           { yyval = snow::make_expr<snow::expr_binary>(snow::EXPR_BINARY_SUB, yyvsp[-2], yyvsp[0]); }
 #line 1361 "snow.yy.cc"
@@ -1366,19 +1366,19 @@ yyreduce:
 #line 1367 "snow.yy.cc"
     break;
 
-  case 33: /* op_times_divide_mod: op_prefix TOKEN_TIMES op_times_divide_mod  */
+  case 33: /* op_times_divide_mod: op_times_divide_mod TOKEN_TIMES op_prefix  */
 #line 166 "snow.y"
                                           { yyval = snow::make_expr<snow::expr_binary>(snow::EXPR_BINARY_TIMES, yyvsp[-2], yyvsp[0]); }
 #line 1373 "snow.yy.cc"
     break;
 
-  case 34: /* op_times_divide_mod: op_prefix TOKEN_DIVIDE op_times_divide_mod  */
+  case 34: /* op_times_divide_mod: op_times_divide_mod TOKEN_DIVIDE op_prefix  */
 #line 168 "snow.y"
                                            { yyval = snow::make_expr<snow::expr_binary>(snow::EXPR_BINARY_DIVIDE, yyvsp[-2], yyvsp[0]); }
 #line 1379 "snow.yy.cc"
     break;
 
-  case 35: /* op_times_divide_mod: op_prefix TOKEN_PERCENT op_times_divide_mod  */
+  case 35: /* op_times_divide_mod: op_times_divide_mod TOKEN_PERCENT op_prefix  */
 #line 170 "snow.y"
                                             { yyval = snow::make_expr<snow::expr_binary>(snow::EXPR_BINARY_PERCENT, yyvsp[-2], yyvsp[0]); }
 #line 1385 "snow.yy.cc"

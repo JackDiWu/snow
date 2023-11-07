@@ -70,7 +70,7 @@ op_logic_or { $$ = $1; yy_top = $$; }
 op_logic_or:
 op_logic_and { $$ = $1; }
 |
-op_logic_and TOKEN_DOUBLE_OR op_logic_or { $$ = snow::make_expr<snow::expr_binary>(snow::EXPR_BINARY_DOUBLE_OR, $1, $3); }
+op_logic_or TOKEN_DOUBLE_OR op_logic_and { $$ = snow::make_expr<snow::expr_binary>(snow::EXPR_BINARY_DOUBLE_OR, $1, $3); }
 ;
 
 
@@ -79,7 +79,7 @@ op_logic_and TOKEN_DOUBLE_OR op_logic_or { $$ = snow::make_expr<snow::expr_binar
 op_logic_and:
 op_or { $$ = $1; }
 |
-op_or TOKEN_DOUBLE_AND op_logic_and { $$ = snow::make_expr<snow::expr_binary>(snow::EXPR_BINARY_DOUBLE_AND, $1, $3); }
+op_logic_and TOKEN_DOUBLE_AND op_or { $$ = snow::make_expr<snow::expr_binary>(snow::EXPR_BINARY_DOUBLE_AND, $1, $3); }
 ;
 
 
@@ -88,7 +88,7 @@ op_or TOKEN_DOUBLE_AND op_logic_and { $$ = snow::make_expr<snow::expr_binary>(sn
 op_or:
 op_xor { $$ = $1; }
 |
-op_xor TOKEN_OR op_or { $$ = snow::make_expr<snow::expr_binary>(snow::EXPR_BINARY_OR, $1, $3); }
+op_or TOKEN_OR op_xor { $$ = snow::make_expr<snow::expr_binary>(snow::EXPR_BINARY_OR, $1, $3); }
 ;
 
 
@@ -97,7 +97,7 @@ op_xor TOKEN_OR op_or { $$ = snow::make_expr<snow::expr_binary>(snow::EXPR_BINAR
 op_xor:
 op_and { $$ = $1; }
 |
-op_and TOKEN_XOR op_xor { $$ = snow::make_expr<snow::expr_binary>(snow::EXPR_BINARY_XOR, $1, $3); }
+op_xor TOKEN_XOR op_and { $$ = snow::make_expr<snow::expr_binary>(snow::EXPR_BINARY_XOR, $1, $3); }
 ;
 
 
@@ -106,7 +106,7 @@ op_and TOKEN_XOR op_xor { $$ = snow::make_expr<snow::expr_binary>(snow::EXPR_BIN
 op_and:
 op_equal { $$ = $1; }
 |
-op_equal TOKEN_AND op_and { $$ = snow::make_expr<snow::expr_binary>(snow::EXPR_BINARY_AND, $1, $3); }
+op_and TOKEN_AND op_equal { $$ = snow::make_expr<snow::expr_binary>(snow::EXPR_BINARY_AND, $1, $3); }
 ;
 
 
@@ -115,9 +115,9 @@ op_equal TOKEN_AND op_and { $$ = snow::make_expr<snow::expr_binary>(snow::EXPR_B
 op_equal:
 op_relation { $$ = $1; }
 |
-op_relation TOKEN_DOUBLE_EQUAL op_equal { $$ = snow::make_expr<snow::expr_binary>(snow::EXPR_BINARY_DOUBLE_EQUAL, $1, $3); }
+op_equal TOKEN_DOUBLE_EQUAL op_relation { $$ = snow::make_expr<snow::expr_binary>(snow::EXPR_BINARY_DOUBLE_EQUAL, $1, $3); }
 |
-op_relation TOKEN_NOT_EQUAL op_equal { $$ = snow::make_expr<snow::expr_binary>(snow::EXPR_BINARY_NOT_EQUAL, $1, $3); }
+op_equal TOKEN_NOT_EQUAL op_relation { $$ = snow::make_expr<snow::expr_binary>(snow::EXPR_BINARY_NOT_EQUAL, $1, $3); }
 ;
 
 
@@ -126,13 +126,13 @@ op_relation TOKEN_NOT_EQUAL op_equal { $$ = snow::make_expr<snow::expr_binary>(s
 op_relation:
 op_bit { $$ = $1; }
 |
-op_bit TOKEN_LA op_relation { $$ = snow::make_expr<snow::expr_binary>(snow::EXPR_BINARY_LA, $1, $3); }
+op_relation TOKEN_LA op_bit { $$ = snow::make_expr<snow::expr_binary>(snow::EXPR_BINARY_LA, $1, $3); }
 |
-op_bit TOKEN_RA op_relation { $$ = snow::make_expr<snow::expr_binary>(snow::EXPR_BINARY_RA, $1, $3); }
+op_relation TOKEN_RA op_bit { $$ = snow::make_expr<snow::expr_binary>(snow::EXPR_BINARY_RA, $1, $3); }
 |
-op_bit TOKEN_LA_EQUAL op_relation { $$ = snow::make_expr<snow::expr_binary>(snow::EXPR_BINARY_LA_EQUAL, $1, $3); }
+op_relation TOKEN_LA_EQUAL op_bit { $$ = snow::make_expr<snow::expr_binary>(snow::EXPR_BINARY_LA_EQUAL, $1, $3); }
 |
-op_bit TOKEN_RA_EQUAL op_relation { $$ = snow::make_expr<snow::expr_binary>(snow::EXPR_BINARY_RA_EQUAL, $1, $3); }
+op_relation TOKEN_RA_EQUAL op_bit { $$ = snow::make_expr<snow::expr_binary>(snow::EXPR_BINARY_RA_EQUAL, $1, $3); }
 ;
 
 
@@ -152,9 +152,9 @@ op_plus_sub TOKEN_DOUBLE_RA op_bit { $$ = snow::make_expr<snow::expr_binary>(sno
 op_plus_sub:
 op_times_divide_mod { $$ = $1; }
 |
-op_times_divide_mod TOKEN_PLUS op_plus_sub { $$ = snow::make_expr<snow::expr_binary>(snow::EXPR_BINARY_PLUS, $1, $3); }
+op_plus_sub TOKEN_PLUS op_times_divide_mod { $$ = snow::make_expr<snow::expr_binary>(snow::EXPR_BINARY_PLUS, $1, $3); }
 |
-op_times_divide_mod TOKEN_SUB op_plus_sub { $$ = snow::make_expr<snow::expr_binary>(snow::EXPR_BINARY_SUB, $1, $3); }
+op_plus_sub TOKEN_SUB op_times_divide_mod { $$ = snow::make_expr<snow::expr_binary>(snow::EXPR_BINARY_SUB, $1, $3); }
 ;
 
 
@@ -163,11 +163,11 @@ op_times_divide_mod TOKEN_SUB op_plus_sub { $$ = snow::make_expr<snow::expr_bina
 op_times_divide_mod:
 op_prefix { $$ = $1; }
 |
-op_prefix TOKEN_TIMES op_times_divide_mod { $$ = snow::make_expr<snow::expr_binary>(snow::EXPR_BINARY_TIMES, $1, $3); }
+op_times_divide_mod TOKEN_TIMES op_prefix { $$ = snow::make_expr<snow::expr_binary>(snow::EXPR_BINARY_TIMES, $1, $3); }
 |
-op_prefix TOKEN_DIVIDE op_times_divide_mod { $$ = snow::make_expr<snow::expr_binary>(snow::EXPR_BINARY_DIVIDE, $1, $3); }
+op_times_divide_mod TOKEN_DIVIDE op_prefix { $$ = snow::make_expr<snow::expr_binary>(snow::EXPR_BINARY_DIVIDE, $1, $3); }
 |
-op_prefix TOKEN_PERCENT op_times_divide_mod { $$ = snow::make_expr<snow::expr_binary>(snow::EXPR_BINARY_PERCENT, $1, $3); }
+op_times_divide_mod TOKEN_PERCENT op_prefix { $$ = snow::make_expr<snow::expr_binary>(snow::EXPR_BINARY_PERCENT, $1, $3); }
 ;
 
 
