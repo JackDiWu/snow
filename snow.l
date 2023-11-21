@@ -72,7 +72,7 @@
 
 \~                           { lex_next_token(); lex_return(TOKEN_BROKEN_ISSUE); }
 
-\!                           { lex_next_token(); lex_return(TOKEN_EXCLAMATION); }
+\!                           { lex_next_token(); lex_return(TOKEN_EXCLAM); }
 
 \@                           { lex_next_token(); lex_return(TOKEN_AT); }
 

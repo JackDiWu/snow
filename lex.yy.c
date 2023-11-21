@@ -964,7 +964,7 @@ YY_RULE_SETUP
 case 27:
 YY_RULE_SETUP
 #line 75 "snow.l"
-{ lex_next_token(); lex_return(TOKEN_EXCLAMATION); }
+{ lex_next_token(); lex_return(TOKEN_EXCLAM); }
 	YY_BREAK
 case 28:
 YY_RULE_SETUP

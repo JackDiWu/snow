@@ -87,7 +87,7 @@ extern int yydebug;
     TOKEN_QUESTION = 288,          /* TOKEN_QUESTION  */
     TOKEN_POINT = 289,             /* TOKEN_POINT  */
     TOKEN_BROKEN_ISSUE = 290,      /* TOKEN_BROKEN_ISSUE  */
-    TOKEN_EXCLAMATION = 291,       /* TOKEN_EXCLAMATION  */
+    TOKEN_EXCLAM = 291,            /* TOKEN_EXCLAM  */
     TOKEN_AT = 292,                /* TOKEN_AT  */
     TOKEN_HASHTAG = 293,           /* TOKEN_HASHTAG  */
     TOKEN_DOLLAR = 294,            /* TOKEN_DOLLAR  */

@@ -137,7 +137,7 @@ enum yysymbol_kind_t
   YYSYMBOL_TOKEN_QUESTION = 33,            /* TOKEN_QUESTION  */
   YYSYMBOL_TOKEN_POINT = 34,               /* TOKEN_POINT  */
   YYSYMBOL_TOKEN_BROKEN_ISSUE = 35,        /* TOKEN_BROKEN_ISSUE  */
-  YYSYMBOL_TOKEN_EXCLAMATION = 36,         /* TOKEN_EXCLAMATION  */
+  YYSYMBOL_TOKEN_EXCLAM = 36,              /* TOKEN_EXCLAM  */
   YYSYMBOL_TOKEN_AT = 37,                  /* TOKEN_AT  */
   YYSYMBOL_TOKEN_HASHTAG = 38,             /* TOKEN_HASHTAG  */
   YYSYMBOL_TOKEN_DOLLAR = 39,              /* TOKEN_DOLLAR  */
@@ -584,7 +584,7 @@ static const char *const yytname[] =
   "TOKEN_DOUBLE_OR", "TOKEN_DOUBLE_LA", "TOKEN_DOUBLE_RA",
   "TOKEN_DOUBLE_EQUAL", "TOKEN_LA_EQUAL", "TOKEN_RA_EQUAL",
   "TOKEN_NOT_EQUAL", "TOKEN_AND", "TOKEN_OR", "TOKEN_QUESTION",
-  "TOKEN_POINT", "TOKEN_BROKEN_ISSUE", "TOKEN_EXCLAMATION", "TOKEN_AT",
+  "TOKEN_POINT", "TOKEN_BROKEN_ISSUE", "TOKEN_EXCLAM", "TOKEN_AT",
   "TOKEN_HASHTAG", "TOKEN_DOLLAR", "TOKEN_PERCENT", "TOKEN_XOR",
   "TOKEN_COLON", "TOKEN_SEMICOLON", "TOKEN_BACKSLASH", "TOKEN_COMMA",
   "$accept", "statement", "variable", "call_param", "call", "expression",
@@ -1402,9 +1402,9 @@ yyreduce:
 #line 1403 "snow.yy.cc"
     break;
 
-  case 39: /* op_prefix: TOKEN_EXCLAMATION op_suffix  */
+  case 39: /* op_prefix: TOKEN_EXCLAM op_suffix  */
 #line 183 "snow.y"
-                            {  }
+                       {  }
 #line 1409 "snow.yy.cc"
     break;
 

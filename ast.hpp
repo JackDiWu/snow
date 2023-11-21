@@ -38,6 +38,11 @@ namespace snow {
         EXPR_BINARY_DOUBLE_AND,
         EXPR_BINARY_DOUBLE_OR,
 
+        EXPR_PREFIX_PLUS,
+        EXPR_PREFIX_SUB,
+        EXPR_PREFIX_EXCLAM,
+        EXPR_PREFIX_BROKEN_ISSUE,
+
         EXPR_CALL_PARAMETER,
         EXPR_CALL_FUNCTION,
     } expr_type;
@@ -283,16 +288,18 @@ namespace snow {
 
     class expr {
         public:
+            int status;
+
             snow::value value;
 
             expr_type token;
 
         public:
-            expr(expr_type tk) : value(tk, ""), token(tk) {
+            expr(expr_type tk) : status(UNI_STATUS_OK), value(tk, ""), token(tk) {
                 // dbg_printf("[expr] %s\n", get_type_string(token));
             }
 
-            expr(expr_type tk, const char *str) : value(tk, str), token(tk) {
+            expr(expr_type tk, const char *str) : status(UNI_STATUS_OK), value(tk, str), token(tk) {
                 // dbg_printf("[expr] %s %s\n", get_type_string(token), str);
             }
 
@@ -380,34 +387,73 @@ namespace snow {
             }
     };
 
-    class expr_unary : public expr {
+    class expr_prefix : public expr {
         public:
             std::shared_ptr<expr> T;
 
         public:
-            expr_unary(expr_type tk, const std::shared_ptr<expr> &t) : expr(tk), T(t) {}
+            expr_prefix(expr_type tk, const std::shared_ptr<expr> &t) : expr(tk), T(t) {}
 
-            virtual ~expr_unary() {}
+            virtual ~expr_prefix() {}
+        
+        public:
+            virtual int resolve() {
+                if (is_status_fail(T->resolve())) {
+                    return status;
+                }
+
+                switch (token) {
+                    case EXPR_PREFIX_PLUS: 
+                        return plus();
+                    case EXPR_PREFIX_SUB: 
+                        return sub();
+                    case EXPR_PREFIX_EXCLAM: 
+                        return exclam();
+                    case EXPR_PREFIX_BROKEN_ISSUE: 
+                        return broken();
+                    default: {
+                        return UNI_STATUS_INVALID_UNARY;
+                    }
+                }
+
+                return status;
+            }
+
+            virtual int plus() {
+                return 0;
+            }
+
+            virtual int sub() {
+                return 0;
+            }
+
+            virtual int exclam() {
+                return 0;
+            }
+
+            virtual int broken() {
+                return 0;
+            }
     };
 
     #define expr_binary_format(op) \
                 if (L->is_value_type(EXPR_TYPE_INT) && R->is_value_type(EXPR_TYPE_INT)) {\
                     expr::value = value::op<int64_t>(L->value.v_int64, R->value.v_int64);\
-                    return 0;\
+                    return UNI_STATUS_OK;\
                 }\
                 if (L->is_value_type(EXPR_TYPE_INT) || R->is_value_type(EXPR_TYPE_UINT)) {\
                     expr::value = value::op<uint64_t>((uint64_t)L->value.v_int64, R->value.v_uint64);\
-                    return 0;\
+                    return UNI_STATUS_OK;\
                 }\
                 if (L->is_value_type(EXPR_TYPE_UINT) || R->is_value_type(EXPR_TYPE_INT)) {\
                     expr::value = value::op<uint64_t>(L->value.v_uint64, (uint64_t)R->value.v_int64);\
-                    return 0;\
+                    return UNI_STATUS_OK;\
                 }\
                 if (L->is_value_type(EXPR_TYPE_UINT) || R->is_value_type(EXPR_TYPE_UINT)) {\
                     expr::value = value::op<uint64_t>(L->value.v_uint64, R->value.v_uint64);\
-                    return 0;\
+                    return UNI_STATUS_OK;\
                 }\
-                return 0;
+                return UNI_STATUS_OK;
 
     class expr_binary : public expr {
         public:
@@ -422,9 +468,13 @@ namespace snow {
 
         public:
             virtual int resolve() {
-                L->resolve();
+                if (is_status_fail(L->resolve())) {
+                    return status;
+                }
 
-                R->resolve();
+                if (is_status_fail(R->resolve())) {
+                    return status;
+                }
 
                 switch (token) {
                 case EXPR_BINARY_TIMES:
@@ -469,7 +519,7 @@ namespace snow {
                     return logic_or_or();
 
                 default:
-                    return 0;
+                    return UNI_STATUS_INVALID_BINARY;
                 }
             }
 
