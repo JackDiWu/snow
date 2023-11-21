@@ -141,6 +141,8 @@ namespace snow {
 
     class value : public data_number {
         public:
+            value(bool v) : data_number((int64_t)v) {}
+
             value(int64_t v) : data_number(v) {}
 
             value(uint64_t v) : data_number(v) {}
@@ -205,42 +207,42 @@ namespace snow {
             static value less(T l, T r) {
                 auto v = l < r;
                 dbg_printf("[expr] %lld < %lld -> %d\n", l, r, v);
-                return value((int64_t)(v));
+                return value(v);
             }
             
             template <typename T>
             static value more(T l, T r) {
                 auto v = l > r;
                 dbg_printf("[expr] %lld > %lld -> %d\n", l, r, v);
-                return value((int64_t)(v));
+                return value(v);
             }
             
             template <typename T>
             static value less_equal(T l, T r) {
                 auto v = l <= r;
                 dbg_printf("[expr] %lld <= %lld -> %d\n", l, r, v);
-                return value((int64_t)(v));
+                return value(v);
             }
             
             template <typename T>
             static value more_equal(T l, T r) {
                 auto v = l >= r;
                 dbg_printf("[expr] %lld >= %lld -> %d\n", l, r, v);
-                return value((int64_t)(v));
+                return value(v);
             }
 
             template <typename T>
             static value equal(T l, T r) {
                 auto v = l == r;
                 dbg_printf("[expr] %lld == %lld -> %d\n", l, r, v);
-                return value((int64_t)(v));
+                return value(v);
             }
             
             template <typename T>
             static value not_equal(T l, T r) {
                 auto v = l != r;
                 dbg_printf("[expr] %lld != %lld -> %d\n", l, r, v);
-                return value((int64_t)(v));
+                return value(v);
             }
 
             template <typename T>
@@ -268,14 +270,14 @@ namespace snow {
             static value logic_and_and(T l, T r) {
                 auto v = l && r;
                 dbg_printf("[expr] %lld && %lld -> %d\n", l, r, v);
-                return value((int64_t)(v));
+                return value(v);
             }
             
             template <typename T>
             static value logic_or_or(T l, T r) {
                 auto v = l || r;
                 dbg_printf("[expr] %lld || %lld -> %d\n", l, r, v);
-                return value((int64_t)(v));
+                return value(v);
             }
     };
 
