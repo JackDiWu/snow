@@ -154,110 +154,128 @@ namespace snow {
         public:
             template <typename T>
             static value times(T l, T r) {
-                dbg_printf("[expr] %lld * %lld -> %lld\n", l, r, l * r);
-                return value(l * r);
+                auto v = l * r;
+                dbg_printf("[expr] %lld * %lld -> %lld\n", l, r, v);
+                return value(v);
             }
 
             template <typename T>
             static value div(T l, T r) {
-                dbg_printf("[expr] %lld / %lld -> %lld\n", l, r, l / r);
-                return value(l / r);
+                auto v = l / r;
+                dbg_printf("[expr] %lld / %lld -> %lld\n", l, r, v);
+                return value(v);
             }
 
             template <typename T>
             static value mod(T l, T r) {
-                 dbg_printf("[expr] %lld %% %lld -> %lld\n", l, r, l % r);
-                return value(l % r);
+                auto v = l % r;
+                dbg_printf("[expr] %lld %% %lld -> %lld\n", l, r, v);
+                return value(v);
             }
 
             template <typename T>
             static value plus(T l, T r) {
-                dbg_printf("[expr] %lld + %lld -> %lld\n", l, r, l + r);
-                return value(l + r);
+                auto v = l + r;
+                dbg_printf("[expr] %lld + %lld -> %lld\n", l, r, v);
+                return value(v);
             }
 
             template <typename T>
             static value sub(T l, T r) {
-                dbg_printf("[expr] %lld - %lld -> %lld\n", l, r, l - r);
-                return value(l - r);
+                auto v = l - r;
+                dbg_printf("[expr] %lld - %lld -> %lld\n", l, r, v);
+                return value(v);
             }
 
             template <typename T>
             static value move_l(T l, T r) {
-                dbg_printf("[expr] %lld << %lld -> %lld\n", l, r, l << r);
-                return value(l << r);
+                auto v = l << r;
+                dbg_printf("[expr] %lld << %lld -> %lld\n", l, r, v);
+                return value(v);
             }
 
             template <typename T>
             static value move_r(T l, T r) {
-                dbg_printf("[expr] %lld >> %lld -> %lld\n", l, r, l >> r);
-                return value(l >> r);
+                auto v = l >> r;
+                dbg_printf("[expr] %lld >> %lld -> %lld\n", l, r, v);
+                return value(v);
             }
 
             template <typename T>
             static value less(T l, T r) {
-                dbg_printf("[expr] %lld < %lld -> %d\n", l, r, l < r);
-                return value((int64_t)(l < r));
+                auto v = l < r;
+                dbg_printf("[expr] %lld < %lld -> %d\n", l, r, v);
+                return value((int64_t)(v));
             }
             
             template <typename T>
             static value more(T l, T r) {
-                dbg_printf("[expr] %lld > %lld -> %d\n", l, r, l > r);
-                return value((int64_t)(l > r));
+                auto v = l > r;
+                dbg_printf("[expr] %lld > %lld -> %d\n", l, r, v);
+                return value((int64_t)(v));
             }
             
             template <typename T>
             static value less_equal(T l, T r) {
-                dbg_printf("[expr] %lld <= %lld -> %d\n", l, r, l <= r);
-                return value((int64_t)(l <= r));
+                auto v = l <= r;
+                dbg_printf("[expr] %lld <= %lld -> %d\n", l, r, v);
+                return value((int64_t)(v));
             }
             
             template <typename T>
             static value more_equal(T l, T r) {
-                dbg_printf("[expr] %lld >= %lld -> %d\n", l, r, l >= r);
-                return value((int64_t)(l >= r));
+                auto v = l >= r;
+                dbg_printf("[expr] %lld >= %lld -> %d\n", l, r, v);
+                return value((int64_t)(v));
             }
 
             template <typename T>
             static value equal(T l, T r) {
-                dbg_printf("[expr] %lld == %lld -> %d\n", l, r, l == r);
-                return value((int64_t)(l == r));
+                auto v = l == r;
+                dbg_printf("[expr] %lld == %lld -> %d\n", l, r, v);
+                return value((int64_t)(v));
             }
             
             template <typename T>
             static value not_equal(T l, T r) {
-                dbg_printf("[expr] %lld != %lld -> %d\n", l, r, l != r);
-                return value((int64_t)(l != r));
+                auto v = l != r;
+                dbg_printf("[expr] %lld != %lld -> %d\n", l, r, v);
+                return value((int64_t)(v));
             }
 
             template <typename T>
             static value logic_and(T l, T r) {
-                dbg_printf("[expr] %lld & %lld -> %lld\n", l, r, l & r);
-                return value(l & r);
+                auto v = l & r;
+                dbg_printf("[expr] %lld & %lld -> %lld\n", l, r, v);
+                return value(v);
             }
             
             template <typename T>
             static value logic_xor(T l, T r) {
-                dbg_printf("[expr] %lld ^ %lld -> %lld\n", l, r, l ^ r);
-                return value(l ^ r);
+                auto v = l ^ r;
+                dbg_printf("[expr] %lld ^ %lld -> %lld\n", l, r, v);
+                return value(v);
             }
             
             template <typename T>
             static value logic_or(T l, T r) {
-                dbg_printf("[expr] %lld | %lld -> %lld\n", l, r, l | r);
-                return value(l | r);
+                auto v = l | r;
+                dbg_printf("[expr] %lld | %lld -> %lld\n", l, r, v);
+                return value(v);
             }
 
             template <typename T>
             static value logic_and_and(T l, T r) {
-                dbg_printf("[expr] %lld && %lld -> %d\n", l, r, l && r);
-                return value((int64_t)(l && r));
+                auto v = l && r;
+                dbg_printf("[expr] %lld && %lld -> %d\n", l, r, v);
+                return value((int64_t)(v));
             }
             
             template <typename T>
             static value logic_or_or(T l, T r) {
-                dbg_printf("[expr] %lld || %lld -> %d\n", l, r, l || r);
-                return value((int64_t)(l || r));
+                auto v = l || r;
+                dbg_printf("[expr] %lld || %lld -> %d\n", l, r, v);
+                return value((int64_t)(v));
             }
     };
 
