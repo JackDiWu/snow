@@ -295,7 +295,7 @@ namespace snow {
             template <typename T>
             static value broken(T t) {
                 auto v = ~t;
-                dbg_printf("[expr] ~%lld -> %d\n", t, v);
+                dbg_printf("[expr] ~%lld -> %lld\n", t, v);
                 return value(v);
             }
     };
