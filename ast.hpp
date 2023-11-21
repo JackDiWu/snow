@@ -284,6 +284,20 @@ namespace snow {
                 dbg_printf("[expr] %lld || %lld -> %d\n", l, r, v);
                 return value(v);
             }
+
+            template <typename T>
+            static value exclam(T t) {
+                auto v = !t;
+                dbg_printf("[expr] !%lld -> %d\n", t, v);
+                return value(v);
+            }
+
+            template <typename T>
+            static value broken(T t) {
+                auto v = ~t;
+                dbg_printf("[expr] ~%lld -> %d\n", t, v);
+                return value(v);
+            }
     };
 
     class expr {
@@ -412,27 +426,49 @@ namespace snow {
                     case EXPR_PREFIX_BROKEN_ISSUE: 
                         return broken();
                     default: {
-                        return UNI_STATUS_INVALID_UNARY;
+                        return UNI_STATUS_INVALID_PREFIX;
                     }
                 }
-
-                return status;
             }
 
             virtual int plus() {
-                return 0;
+                if (T->value.is_type(EXPR_TYPE_INT)) {
+                    expr::value = value::plus<int64_t>(0, T->value.v_int64);
+                }
+                if (T->value.is_type(EXPR_TYPE_UINT)) {
+                    expr::value = value::plus<uint64_t>(0, T->value.v_uint64);
+                }
+                return UNI_STATUS_INVALID_PREFIX;
             }
 
             virtual int sub() {
-                return 0;
+                if (T->value.is_type(EXPR_TYPE_INT)) {
+                    expr::value = value::sub<int64_t>(0, T->value.v_int64);
+                }
+                if (T->value.is_type(EXPR_TYPE_UINT)) {
+                    expr::value = value::sub<uint64_t>(0, T->value.v_uint64);
+                }
+                return UNI_STATUS_INVALID_PREFIX;
             }
 
             virtual int exclam() {
-                return 0;
+                if (T->value.is_type(EXPR_TYPE_INT)) {
+                    expr::value = value::exclam<int64_t>(T->value.v_int64);
+                }
+                if (T->value.is_type(EXPR_TYPE_UINT)) {
+                    expr::value = value::exclam<uint64_t>(T->value.v_uint64);
+                }
+                return UNI_STATUS_INVALID_PREFIX;
             }
 
             virtual int broken() {
-                return 0;
+                if (T->value.is_type(EXPR_TYPE_INT)) {
+                    expr::value = value::broken<int64_t>(T->value.v_int64);
+                }
+                if (T->value.is_type(EXPR_TYPE_UINT)) {
+                    expr::value = value::broken<uint64_t>(T->value.v_uint64);
+                }
+                return UNI_STATUS_INVALID_PREFIX;
             }
     };
 
@@ -453,7 +489,7 @@ namespace snow {
                     expr::value = value::op<uint64_t>(L->value.v_uint64, R->value.v_uint64);\
                     return UNI_STATUS_OK;\
                 }\
-                return UNI_STATUS_OK;
+                return UNI_STATUS_INVALID_BINARY;
 
     class expr_binary : public expr {
         public:

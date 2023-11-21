@@ -2,7 +2,7 @@
  * @Author: Jack
  * @Date: 2023-10-29 11:55:21
  * @LastEditors: Jack
- * @LastEditTime: 2023-11-21 10:27:08
+ * @LastEditTime: 2023-11-21 10:43:16
  */
 #ifndef _SNOW_DEFS_H_
 #define _SNOW_DEFS_H_
@@ -17,7 +17,7 @@
 
 #define UNI_STATUS_OK                       0
 #define UNI_STATUS_INVALID_BINARY           1001
-#define UNI_STATUS_INVALID_UNARY            1002
+#define UNI_STATUS_INVALID_PREFIX           1002
 
 #define dbg_printf                          printf
 
